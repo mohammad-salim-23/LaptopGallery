@@ -1,40 +1,65 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
-    return (
+  return (
+    <footer className="bg-gray-800 text-white pt-10 pb-5 my-24">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+        
+        {/* Company Section */}
         <div>
-            <footer class="flex flex-col space-y-10 justify-center m-10">
+          <h2 className="font-bold text-lg mb-4">Company</h2>
+          <ul>
+            <li><Link to="/about">About Us</Link></li>
+           
+            <li><Link to="/delivery">Delivery Policy</Link></li>
 
-                <nav class="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
-                    <a class="hover:text-gray-900" href="#">Home</a>
-                    <a class="hover:text-gray-900" href="#">About</a>
-                    <a class="hover:text-gray-900" href="#">Services</a>
-                    <a class="hover:text-gray-900" href="#">Media</a>
-                    <a class="hover:text-gray-900" href="#">Gallery</a>
-                    <a class="hover:text-gray-900" href="#">Contact</a>
-                </nav>
-
-                <div class="flex justify-center space-x-5">
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                        <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" />
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                        <img src="https://img.icons8.com/fluent/30/000000/linkedin-2.png" />
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                        <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
-                    </a>
-                    <a href="https://messenger.com" target="_blank" rel="noopener noreferrer">
-                        <img src="https://img.icons8.com/fluent/30/000000/facebook-messenger--v2.png" />
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                        <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
-                    </a>
-                </div>
-                <p class="text-center text-gray-700 font-medium">&copy; 2022 Company Ltd. All rights reservered.</p>
-            </footer>
-
+            <li><Link to="/terms">Terms & Conditions</Link></li>
+          </ul>
         </div>
-    );
+
+        {/* Customer Service Section */}
+        <div>
+          <h2 className="font-bold text-lg mb-4">Customer Service</h2>
+          <ul>
+            <li><Link to="/support">Support Center</Link></li>
+            <li><Link to="/faq">FAQ</Link></li>
+            <li><Link to="/returns">Return Policy</Link></li>
+          </ul>
+        </div>
+
+        {/* My Account Section */}
+        <div>
+          <h2 className="font-bold text-lg mb-4">My Account</h2>
+          <ul>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register">Register</Link></li>
+            <li><Link to="/orders">My Orders</Link></li>
+          </ul>
+        </div>
+
+        {/* Follow Us Section */}
+        <div>
+          <h2 className="font-bold text-lg mb-4">Follow Us</h2>
+          <div className="flex space-x-4">
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+             
+            </a>
+            <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+              <img src="/icons/twitter.png" alt="Twitter" />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+              <img src="/icons/instagram.png" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+        
+      </div>
+      <div className="text-center text-gray-500 mt-8">
+        © 2024 Your Company Name. All Rights Reserved.
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
