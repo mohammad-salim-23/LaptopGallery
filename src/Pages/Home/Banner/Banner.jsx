@@ -18,10 +18,7 @@ const slidesData = [
     {
         image: "https://img.freepik.com/free-photo/female-hand-typing-keyboard-laptop_1150-15742.jpg?t=st=1729861804~exp=1729865404~hmac=21c5ffd06bb3982c69d5a7b4d17a4b39dc67f7b80a6b37c711d5d019d74dc965&w=1380",
     }
-    ,
-    {
-        image: "https://img.freepik.com/free-photo/businesswoman-working-office-with-smile-while-sitting_1150-14793.jpg?t=st=1729861837~exp=1729865437~hmac=62185f3e360155042a5bd01187437eb8dbe64453a2fa6cfcbc6d765fb8eb2c59&w=1380",
-    }
+
 
 ];
 
