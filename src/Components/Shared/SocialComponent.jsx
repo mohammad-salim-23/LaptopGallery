@@ -1,4 +1,4 @@
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 import { useNavigate } from "react-router-dom";
 
@@ -33,8 +33,8 @@ const SocialComponent = () => {
               <div className="divider ">OR</div> 
 
             <button onClick={handleGoogleSignIn} className="btn 
-            btn-active ">
-                <FaGoogle></FaGoogle>
+            btn-active bg-red-00">
+                <FcGoogle />
                 GOOGLE</button>
         </div>
     );

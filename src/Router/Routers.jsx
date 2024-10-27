@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Dashboard from "../Admin/Dashboard/Dashboard";
 import SignUp from "../Pages/SignUp";
+import SignIn from "../Pages/SignIn";
 
 
 export const router = createBrowserRouter([
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
             {
                 path:"/signup",
                 element:<SignUp></SignUp>
+            },
+            {
+                path:"/signin",
+                element:<SignIn></SignIn>
             }
         ]
     },
@@ -30,7 +35,26 @@ export const router = createBrowserRouter([
          </PrivateRoute>
         ),
         children:[
-              
+            //  {
+            //     path:"addLaptop",
+            //     element:
+            //  } ,
+            //  {
+            //     path:"addMobile",
+            //     element:
+            //  },
+            //  {
+            //     path:"allMobile",
+            //     element:
+            //  },
+            //  {
+            //     path:"allLaptop",
+            //     element:
+            //  },
+            //  {
+            //  path:"users",
+            //  element:
+            //  }
         ]
     }
 ]); 

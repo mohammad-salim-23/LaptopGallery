@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
 import { AuthContext } from "../Components/Shared/AuthContext/AuthProvider";
 
 const axiosSecure = axios.create({
@@ -40,4 +42,4 @@ const useAxiosSecure=()=>{
      );
      return axiosSecure;
 }
-export default useAxiosSecure();
+export default useAxiosSecure;

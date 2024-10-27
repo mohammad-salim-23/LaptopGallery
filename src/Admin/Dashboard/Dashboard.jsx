@@ -1,7 +1,8 @@
 import { useContext } from "react"
 import { AuthContext } from "../../Components/Shared/AuthContext/AuthProvider"
-import useAdmin from "../../hooks/useAdmin";
+
 import {  FaHome,  FaUser } from "react-icons/fa";
+import useAdmin from "../../hooks/useAdmin";
 const Dashboard=()=>{
      const [isAdmin] = useAdmin();
     const {user} = useContext(AuthContext);
@@ -12,12 +13,7 @@ const Dashboard=()=>{
      {
       isAdmin ?
       <>
-         <li>
-         <NavLink to="/dashboard/adminHome">
-          <FaHome></FaHome>
-          Admin Home
-        </NavLink>
-        </li>
+         
         <li>
         <NavLink to="/dashboard/addLaptop">
           Add Laptop
@@ -43,7 +39,7 @@ const Dashboard=()=>{
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/allLaptops">
+        <NavLink to="/dashboard/allLaptop">
         All Laptop
         </NavLink>
       </li>

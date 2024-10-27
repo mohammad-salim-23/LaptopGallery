@@ -6,7 +6,6 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 import { AuthContext } from "../Components/Shared/AuthContext/AuthProvider";
 import SocialComponent from "../Components/Shared/SocialComponent";
 
-
 const SignUp = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -26,17 +25,13 @@ const SignUp = () => {
         if (loggedUser) {
           console.log(loggedUser);
           const profile = {
-            displayName: data?.name,
-            photoURL: data?.photoURL,
+            displayName: data.name,
           };
           updateUserProfile(profile)
             .then(() => {
-              // Create user entry in the database
               const userInfo = {
                 name: data.name,
                 email: data.email,
-                phone: data.phone,
-                image: data.photoURL,
               };
               axiosPublic.post('/users', userInfo)
                 .then((res) => {
@@ -46,7 +41,7 @@ const SignUp = () => {
                     Swal.fire({
                       position: "top-end",
                       icon: "success",
-                      title: "Your work has been saved",
+                      title: "Welcome to the Laptop Gallery",
                       showConfirmButton: false,
                       timer: 1500,
                     });
@@ -66,7 +61,7 @@ const SignUp = () => {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col">
           <div className="text-center">
-            <h1 className="text-5xl font-bold">SignUp now!</h1>
+            <h1 className="text-5xl font-bold">SignUp Now!</h1>
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -83,32 +78,6 @@ const SignUp = () => {
                 />
                 {errors.name && (
                   <span className="text-red-600">Name is required</span>
-                )}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">PhotoURL</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("photoURL", { required: true })}
-                  placeholder="PhotoURL"
-                  className="input input-bordered"
-                />
-                {errors.photoURL && (
-                  <span className="text-red-600">Photo URL is required</span>
-                )}
-                <label className="label">
-                  <span className="label-text">Phone Number</span>
-                </label>
-                <input
-                  type="number"
-                  {...register("phone", { required: true })}
-                  placeholder="Phone"
-                  className="input input-bordered"
-                />
-                {errors.phone && (
-                  <span className="text-red-600">Phone number is required</span>
                 )}
               </div>
               <div className="form-control">
@@ -146,11 +115,7 @@ const SignUp = () => {
                 {errors.password?.type === "minLength" && (
                   <p className="text-red-600">Password must be at least 6 characters</p>
                 )}
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+                
               </div>
               <div className="form-control mt-6">
                 <input
@@ -160,10 +125,10 @@ const SignUp = () => {
                 />
               </div>
             </form>
-            <p className="text-center mb-2">
+            <p className="text-center ">
               Already have an account? Go <Link className="font-bold" to="/signin">Login Page</Link>
             </p>
-            <SocialComponent></SocialComponent>
+            <SocialComponent />
           </div>
         </div>
       </div>
