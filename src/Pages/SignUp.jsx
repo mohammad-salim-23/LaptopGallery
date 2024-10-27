@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import SocialComponent from "../../Component/SocialComponent";
-import { AuthContext } from "../../Component/AuthContext/AuthProvider";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { AuthContext } from "../Components/Shared/AuthContext/AuthProvider";
+import SocialComponent from "../Components/Shared/SocialComponent";
+
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -162,7 +163,7 @@ const SignUp = () => {
             <p className="text-center mb-2">
               Already have an account? Go <Link className="font-bold" to="/signin">Login Page</Link>
             </p>
-            <SocialComponent />
+            <SocialComponent></SocialComponent>
           </div>
         </div>
       </div>
