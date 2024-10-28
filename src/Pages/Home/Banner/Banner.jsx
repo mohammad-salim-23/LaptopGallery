@@ -1,20 +1,127 @@
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import './styles.css';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Link } from 'react-router-dom';
+
+
+const slidesData = [
+    {
+        image: "https://www.startech.com.bd/image/cache/catalog/home/queue-banner-home-service-982x500.png",
+    },
+    {
+        image: "https://www.startech.com.bd/image/cache/catalog/home/happy-hour-june-982x500.webp",
+    },
+    {
+        image: "https://img.freepik.com/free-photo/female-hand-typing-keyboard-laptop_1150-15742.jpg?t=st=1729861804~exp=1729865404~hmac=21c5ffd06bb3982c69d5a7b4d17a4b39dc67f7b80a6b37c711d5d019d74dc965&w=1380",
+    }
+
+
+];
 
 const Banner = () => {
     return (
-        <div>
-            <div class="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden">
-                <div class="absolute inset-0">
-                    <img src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxjb2RlfGVufDB8MHx8fDE2OTQwOTg0MTZ8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Background Image" class="object-cover object-center w-full h-full" />
-                    <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div className="container mx-auto">
+            {/*  */}
+            <div className="flex mt-10">
+
+                <div className="mr-6 w-[25%]">
+
+                    <div className='h-[53%] bg-[#FFE8A1] pt-6'>
+                        <h1 className='font-semibold text-center'>Compare Products</h1>
+                        <p className='mt-1 opacity-60 text-center'>Choose Two Products to Compare</p>
+
+                        <div className=' p-4 rounded-md'>
+                            {/* Search 1 */}
+                            <div className='relative items-center mb-4 ml-4 cursor-pointer'>
+                                <input
+                                    type='text'
+                                    placeholder='Search and Select Product'
+                                    className='w-72 p-3 pl-4 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white'
+                                />
+                                <span className='absolute right-3 top-3 text-gray-400 mr-8'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
+                                        <path
+                                            fillRule='evenodd'
+                                            d='M12.9 14.32a8 8 0 111.414-1.414l3.025 3.025a1 1 0 11-1.414 1.414l-3.025-3.025zM8 14A6 6 0 108 2a6 6 0 000 12z'
+                                            clipRule='evenodd'
+                                        />
+                                    </svg>
+                                </span>
+                            </div>
+
+
+                            <div className='relative items-center mb-4 ml-4 cursor-pointer'>
+                                <input
+                                    type='text'
+                                    placeholder='Search and Select Product'
+                                    className='w-72 p-3 pl-4 rounded-md shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white'
+                                />
+                                <span className='absolute right-3 top-3 text-gray-400 mr-8'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
+                                        <path
+                                            fillRule='evenodd'
+                                            d='M12.9 14.32a8 8 0 111.414-1.414l3.025 3.025a1 1 0 11-1.414 1.414l-3.025-3.025zM8 14A6 6 0 108 2a6 6 0 000 12z'
+                                            clipRule='evenodd'
+                                        />
+                                    </svg>
+                                </span>
+                            </div>
+
+
+
+                            {/* Button */}
+                            <button className='w-72 ml-4 p-3 bg-white text-blue-600 font-semibold border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-colors'>
+                                View Comparison
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div className=' mt-6 h-[47%]'>
+                        <Link>
+                            <img src={"https://www.startech.com.bd/image/catalog/home/banner/small/Shape-Your-Career-with-Us.png1.webp"} alt="" className='  w-full' />
+                        </Link>
+                    </div>
+
                 </div>
 
-                <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
-                    <h1 class="text-5xl font-bold leading-tight mb-4">Welcome to Our Laptop Gallery</h1>
-                    <p class="text-lg text-gray-300 mb-8">Discover amazing features and services that await you.</p>
-                    <a href="#" class="bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">Get Started</a>
+
+
+
+                <div className=" w-[75%]">
+                    <Swiper
+                        slidesPerView={1}
+                        spaceBetween={30}
+                        loop={true}
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        }}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        navigation={true}
+                        modules={[Autoplay, Pagination, Navigation]}
+                        className="mySwiper"
+                    >
+                        {slidesData.map((slide, index) => (
+                            <SwiperSlide key={index}>
+                                <div
+                                    className="w-full bg-center bg-cover h-[34rem]  object-cover "
+                                    style={{
+                                        backgroundImage: `url("${slide.image}")`,
+                                    }}
+                                >
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
             </div>
-
         </div>
     );
 };
