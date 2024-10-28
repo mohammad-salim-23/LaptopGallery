@@ -10,7 +10,8 @@ const SignIn = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
    
-    const { signIn } = useContext(AuthContext);
+    const { user,signIn } = useContext(AuthContext);
+    console.log(user);
 
    
 

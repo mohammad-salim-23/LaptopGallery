@@ -3,6 +3,7 @@ import { AuthContext } from "../../Components/Shared/AuthContext/AuthProvider"
 
 import {  FaHome,  FaUser } from "react-icons/fa";
 import useAdmin from "../../hooks/useAdmin";
+import { NavLink, Outlet } from "react-router-dom";
 const Dashboard=()=>{
      const [isAdmin] = useAdmin();
     const {user} = useContext(AuthContext);

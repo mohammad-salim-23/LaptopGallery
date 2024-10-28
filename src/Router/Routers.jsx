@@ -5,6 +5,8 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Dashboard from "../Admin/Dashboard/Dashboard";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
+import AddLaptop from "../Admin/Laptop/AddLaptop";
+import AddMobile from "../Admin/Mobile/AddMobile";
 
 
 export const router = createBrowserRouter([
@@ -30,19 +32,19 @@ export const router = createBrowserRouter([
     { 
         path:"dashboard",
         element:(
-         <PrivateRoute>
+        
             <Dashboard></Dashboard>
-         </PrivateRoute>
+     
         ),
         children:[
-            //  {
-            //     path:"addLaptop",
-            //     element:
-            //  } ,
-            //  {
-            //     path:"addMobile",
-            //     element:
-            //  },
+             {
+                path:"addLaptop",
+                element:<AddLaptop></AddLaptop>
+             } ,
+             {
+                path:"addMobile",
+                element:<AddMobile></AddMobile>
+             }
             //  {
             //     path:"allMobile",
             //     element:
