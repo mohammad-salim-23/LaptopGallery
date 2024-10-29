@@ -3,6 +3,7 @@ import Main from "../Layout/Main/Main";
 import Home from "../Pages/Home/Home";
 import Error from "../Pages/Error/Error";
 import Laptops from "../Pages/Laptops/Laptops";
+import ProductsDetails from "../Components/ProductDetails/ProductsDetails";
 
 
 
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
             {
                 path: '/laptop',
                 element:<Laptops></Laptops>
+            },
+            {
+                path: '/productDetails/:id',
+                element:<ProductsDetails></ProductsDetails>
             }
         ]
     },

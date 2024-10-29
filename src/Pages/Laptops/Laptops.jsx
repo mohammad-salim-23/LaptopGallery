@@ -1,10 +1,12 @@
 import React from 'react';
 import ShopLayout from '../../Components/Shared/ShopLayout/ShopLayout';
-import useLaptops from '../../hooks/useLaptops';
+
+import useProducts from '../../hooks/useProducts';
 
 const Laptops = () => {
-    const [laptops,refetch] = useLaptops();
-    console.log(laptops)
+    const [products,refetch] = useProducts();
+    console.log(products);
+    const laptops = products.filter(item => item.type === "laptop")
     return (
         <div>
             <ShopLayout  items={laptops} title="laptop"></ShopLayout>
