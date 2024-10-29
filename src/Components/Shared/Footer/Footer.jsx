@@ -106,7 +106,7 @@ const Footer = () => {
           
           <p className='my-2'> <span className='text-red-600 font-semibold flex'><IoLocationOutline />Shylet OutLet:</span> 
           <a 
-    href="https://www.google.com/maps?q=শপ+নং:+২৩/২,+২য়+তলা,+কুদরতুল্লাহ+মারকেট,+বন্দরবাজার,+সিলেট" 
+    href="https://maps.app.goo.gl/iMQSgiUeieT959G39" 
     target="_blank" 
     rel="noopener noreferrer"
     className="hover:underline"
