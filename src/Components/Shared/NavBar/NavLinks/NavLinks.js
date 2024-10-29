@@ -1,6 +1,6 @@
 export const Navlinks = [
     {
-      name: "Features",
+      name: "Laptop",
       subMenu: [
         {
           name: "Design",
@@ -8,11 +8,12 @@ export const Navlinks = [
         },
         {
           name: "Management",
-          link: 'https://management.com'
+          link: '/management'
         },
         {
           name: "Navigation",
-          link: 'https://navigation.com'
+          link: 'https://navigation.com',
+          link: '/navigation'
         },
         {
           name: "CMS",
@@ -23,7 +24,7 @@ export const Navlinks = [
       gridCols: 2,
     },
     {
-      name: "Resources",
+      name: "Accessories",
       subMenu: [
         {
           name: "Marketplace",
@@ -61,7 +62,7 @@ export const Navlinks = [
       gridCols: 3,
     },
     {
-      name: "Support",
+      name: "Phone Accessories",
       subMenu: [
         {
           name: "Help",

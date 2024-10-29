@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function DesktopMenu({ menu }) {
   const [isHover, toggleHover] = useState(false);
@@ -55,10 +56,10 @@ export default function DesktopMenu({ menu }) {
         >
           <div
             className={`grid gap-7 ${menu.gridCols === 3
-                ? "grid-cols-3"
-                : menu.gridCols === 2
-                  ? "grid-cols-2"
-                  : "grid-cols-1"
+              ? "grid-cols-3"
+              : menu.gridCols === 2
+                ? "grid-cols-2"
+                : "grid-cols-1"
               }`}
           >
             {hasSubMenu &&
@@ -66,12 +67,11 @@ export default function DesktopMenu({ menu }) {
                 <div className="relative cursor-pointer" key={i}>
                   <div className="flex-center gap-x-4 group/menubox">
                     <div>
-                      <a
-                        href={submenu.link}
-                        className="font-semibold"
-                      >
+
+                      <Link className="font-semibold" to={submenu.link}>
                         {submenu.name}
-                      </a>
+                      </Link>
+
                     </div>
                   </div>
                 </div>
