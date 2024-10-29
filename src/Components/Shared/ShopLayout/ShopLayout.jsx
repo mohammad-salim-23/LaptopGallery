@@ -57,7 +57,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                <p className="text-gray-700">Graphics: {data.graphics}</p>
                <p className="text-gray-700">OS: {data.os}</p>
                <p className="text-xl font-semibold mt-4">{data.price}</p>
-               <button className="btn btn-primary mt-4 w-full">View Details</button>
+              
              </div>
            </div></Link>
             ))}
