@@ -1,12 +1,11 @@
 import {createBrowserRouter,} from "react-router-dom";
 import Main from "../Layout/Main/Main";
 import Home from "../Pages/Home/Home";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import Dashboard from "../Admin/Dashboard/Dashboard";
-import SignUp from "../Pages/SignUp";
-import SignIn from "../Pages/SignIn";
-import AddLaptop from "../Admin/Laptop/AddLaptop";
-import AddMobile from "../Admin/Mobile/AddMobile";
+import Error from "../Pages/Error/Error";
+import Laptops from "../Pages/Laptops/Laptops";
+
+
+
 
 
 export const router = createBrowserRouter([
@@ -20,44 +19,9 @@ export const router = createBrowserRouter([
                 element:<Home></Home>
             },
             {
-                path:"/signup",
-                element:<SignUp></SignUp>
-            },
-            {
-                path:"/signin",
-                element:<SignIn></SignIn>
+                path: '/laptop',
+                element:<Laptops></Laptops>
             }
         ]
     },
-    // admin routes
-    { 
-        path:"dashboard",
-        element:(
-        
-            <Dashboard></Dashboard>
-     
-        ),
-        children:[
-             {
-                path:"addLaptop",
-                element:<AddLaptop></AddLaptop>
-             } ,
-             {
-                path:"addMobile",
-                element:<AddMobile></AddMobile>
-             }
-            //  {
-            //     path:"allMobile",
-            //     element:
-            //  },
-            //  {
-            //     path:"allLaptop",
-            //     element:
-            //  },
-            //  {
-            //  path:"users",
-            //  element:
-            //  }
-        ]
-    }
 ]); 
