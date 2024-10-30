@@ -1,13 +1,24 @@
 import { useContext } from "react";
-import { AuthContext } from "../AuthContext/AuthProvider";
+import { AuthContext } from "../../../Auth/Provider/AuthProvider";
+import Swal from "sweetalert2";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
-    const {logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
+    // console.log(isAdmin)
+
     const handleLogOut = () => {
         logOut()
-          .then(() => {})
-          .catch((error) => console.log(error));
-      };
+            .then(() => {
+                Swal.fire({
+                    title: "Logout Success!",
+                    text: "You clicked the button!",
+                    icon: "success"
+                });
+            })
+            .catch((error) => console.log(error));
+    };
     return (
         <div>
 
@@ -17,8 +28,8 @@ const NavBar = () => {
                     <div class="flex items-center justify-between">
                         <div class="flex shrink-0">
                             <a aria-current="page" class="flex items-center" href="/">
-                                <img class="h-7 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt=""/>
-                                    <p class="sr-only">Website Title</p>
+                                <img class="h-7 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="" />
+                                <p class="sr-only">Website Title</p>
                             </a>
                         </div>
                         <div class="hidden md:flex md:items-center md:justify-center md:gap-5">
@@ -29,12 +40,30 @@ const NavBar = () => {
                                 href="#">Pricing</a>
                         </div>
                         <div class="flex items-center justify-end gap-3">
-                            <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
-                                href="/login">Sign in</a>
-                            <a class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                                href="/login">Login</a>
+
+                            {
+                                isAdmin ?
+                                    <>
+                                        <a class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                                            href="/dashboard/adminPanel">Dashboard</a>
+                                    </> :
+                                    <>
+                                    </>
+                            }
                         </div>
-                       <button onClick={handleLogOut()}>LogOut</button>
+                        {
+                            user ? <>
+                                <button onClick={handleLogOut} className="btn">LogOut</button>
+                            </>
+                                :
+                                <>
+                                    <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
+                                        href="/registration">Registration</a>
+                                    <a class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                                        href="/login">Login</a>
+                                </>
+                        }
+
 
                     </div>
                 </div>

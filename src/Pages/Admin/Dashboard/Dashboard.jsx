@@ -9,6 +9,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Auth/Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { IoHome } from "react-icons/io5";
+import AdminPanel from "./AdminPanel/AdminPanel";
 
 
 
@@ -56,7 +57,7 @@ const Dashboard = () => {
 
           <nav className="flex-1 px-2 py-4 bg-gray-800">
             {/* Dashboard */}
-            <Link className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
+            <Link to={"/dashboard/adminPanel"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
               <MdOutlineDashboardCustomize className="h-6 w-6 mr-2" />
               Dashboard
             </Link>
@@ -153,6 +154,7 @@ const Dashboard = () => {
         {/* Content */}
         <div className="p-4">
           <Outlet></Outlet>
+
         </div>
       </div>
     </div>
