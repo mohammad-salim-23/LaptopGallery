@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaLaptopCode } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
