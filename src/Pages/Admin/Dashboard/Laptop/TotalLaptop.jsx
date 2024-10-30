@@ -2,7 +2,7 @@
 const TotalLaptop = () => {
     return (
         <div>
-            <h1>Total Laptop</h1>
+            <h1>Laptop </h1>
         </div>
     );
 };
