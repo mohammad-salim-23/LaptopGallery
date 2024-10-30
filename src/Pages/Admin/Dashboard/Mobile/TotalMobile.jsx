@@ -2,7 +2,7 @@
 const TotalMobile = () => {
     return (
         <div>
-            <h1>total Mobile</h1>
+            <h1>Mobile Total</h1>
         </div>
     );
 };
