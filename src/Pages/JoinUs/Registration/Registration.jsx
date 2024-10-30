@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import SocialComponent from "../SocialSocialComponent/SocialSocialComponent";
 import { AuthContext } from "../../../Auth/Provider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialComponent from "../SocialComponent/SocialComponent";
 
 
 
