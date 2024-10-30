@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Auth/Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAdmin from "../../../hooks/useAdmin";
+import { IoIosLogOut } from "react-icons/io";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -53,7 +54,23 @@ const NavBar = () => {
                         </div>
                         {
                             user ? <>
-                                <button onClick={handleLogOut} className="btn">LogOut</button>
+                                {/* User Profile */}
+                                <div className="dropdown dropdown-start lg:dropdown-end">
+                                    <div tabIndex={0} role="button" className=" btn-circle avatar tooltip tooltip-right lg:tooltip-left" data-tip={user?.displayName} >
+                                        <div className="w-10 rounded-full " >
+                                            <img alt="Tailwind CSS Navbar component" src={user?.photoUrl || 'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1730209706~exp=1730213306~hmac=275a4f7190f0c069c53dc29ab35ca3919adf0cab2a689c3d4da629b884d55a18&w=1380'} />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul tabIndex={0} className="dropdown-content z-auto menu p-2 shadow bg-base-100 rounded-box w-52">
+
+                                    <button className=" border btn " onClick={handleLogOut}>
+                                        LogOut
+                                        <IoIosLogOut></IoIosLogOut>
+                                    </button>
+                                </ul>
                             </>
                                 :
                                 <>
@@ -67,9 +84,9 @@ const NavBar = () => {
 
                     </div>
                 </div>
-            </header>
+            </header >
 
-        </div>
+        </div >
     );
 };
 
