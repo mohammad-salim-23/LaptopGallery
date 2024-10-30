@@ -1,9 +1,17 @@
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext/AuthProvider";
 import { Navlinks } from "./Navlinks/Navlinks";
 import MobMenu from "./Responsive/MobMenu/MobMenu";
 import "./NavBar"
 import DesktopMenu from "./Responsive/DesktopMenu/DesktopMenu";
 
 const NavBar = () => {
+    const {logOut} = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+          .then(() => {})
+          .catch((error) => console.log(error));
+      };
     return (
         <div>
             
@@ -29,6 +37,8 @@ const NavBar = () => {
                         <div className="lg:hidden">
                             <MobMenu Menus={Navlinks} />
                         </div>
+                       <button onClick={handleLogOut()}>LogOut</button>
+
                     </div>
                 </nav>
             </header>

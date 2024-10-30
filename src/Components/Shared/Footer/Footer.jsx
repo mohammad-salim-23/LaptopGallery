@@ -7,9 +7,15 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
+<<<<<<< HEAD
     <footer className="bg-primary text-white pt-10 pb-5 my-24 ">
       <div className="container mx-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
       <div>
+=======
+    <footer className="bg-gray-800 text-white pt-10 pb-5 my-24 ">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm ">
+      <div className=''>
+>>>>>>> 6330e06681eb6d0fc0c7e60c7514fcd1ce6dfbc7
         <h2 className="font-bold text-lg mb-4"> Support</h2>
             <div className='border border-red-600 rounded-s-full rounded-e-full flex p-4 gap-2 my-4'>
                 <div className='text-2xl flex justify-center items-center'>
@@ -106,7 +112,7 @@ const Footer = () => {
           
           <p className='my-2'> <span className='text-red-600 font-semibold flex'><IoLocationOutline />Shylet OutLet:</span> 
           <a 
-    href="https://www.google.com/maps?q=শপ+নং:+২৩/২,+২য়+তলা,+কুদরতুল্লাহ+মারকেট,+বন্দরবাজার,+সিলেট" 
+    href="https://maps.app.goo.gl/iMQSgiUeieT959G39" 
     target="_blank" 
     rel="noopener noreferrer"
     className="hover:underline"
