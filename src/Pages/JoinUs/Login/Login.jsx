@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Auth/Provider/AuthProvider';
-import SocialComponent from '../SocialSocialComponent/SocialSocialComponent';
 import Swal from 'sweetalert2';
+import SocialComponent from '../SocialComponent/SocialComponent';
 
 
 const Login = () => {
