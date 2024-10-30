@@ -24,22 +24,22 @@ const useAxiosSecure=()=>{
     //     }
     // );
      //  interceptors 401 and 403 status
-     axiosSecure.interceptors.response.use(
-        function(response){
-            return response;
-        },
-        async(error)=>{
-            const status = error.response.status;
-            console.log("status error in the interceptors", error);
-            // for 401 or 403 logOut the user and move the user to the login page
-            if(status==401 || status==403){
-                await logOut();
-                navigate("signin");
+    //  axiosSecure.interceptors.response.use(
+    //     function(response){
+    //         return response;
+    //     },
+    //     async(error)=>{
+    //         const status = error.response.status;
+    //         console.log("status error in the interceptors", error);
+    //         // for 401 or 403 logOut the user and move the user to the login page
+    //         if(status==401 || status==403){
+    //             await logOut();
+    //             navigate("signin");
 
-            }
-            return Promise.reject(error);
-        }
-     );
+    //         }
+    //         return Promise.reject(error);
+    //     }
+    //  );
      return axiosSecure;
 }
 export default useAxiosSecure;
