@@ -178,7 +178,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                <p className="text-gray-700">Processor: {data.processor}</p>
                <p className="text-gray-700">RAM: {data.ram}</p>
                <p className="text-gray-700">Storage: {data.storage}</p>
-               <p className="text-gray-700">Graphics: {data.graphics}</p>
+               
                <p className="text-gray-700">OS: {data.os}</p>
                <div className='border border-gray-300 my-4'></div>
                <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price}</p>
