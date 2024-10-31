@@ -11,7 +11,7 @@ const Error = () => {
     >
       <div className="text-center">
         <Link to="/">
-          <button className="btn btn-wide bg-amber-400 border border-yellow-500 text-white">
+          <button className="btn btn-wide bg-amber-400  text-black  border border-black">
            Go Home
           </button>
         </Link>

@@ -1,15 +1,22 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { AuthContext } from "../../../Auth/Provider/AuthProvider";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../hooks/useAxiosPublic";
-import { AuthContext } from "../Components/Shared/AuthContext/AuthProvider";
-import SocialComponent from "../Components/Shared/SocialComponent";
+import SocialComponent from "../SocialComponent/SocialComponent";
 
-const SignUp = () => {
+
+
+
+const Registration = () => {
+
+
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  // console.log(user)
+
   const {
     register,
     handleSubmit,
@@ -17,44 +24,59 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+
   const onSubmit = (data) => {
-    console.log(data);
-    createUser(data.email, data.password)
-      .then((result) => {
-        const loggedUser = result.user;
-        if (loggedUser) {
-          console.log(loggedUser);
-          const profile = {
-            displayName: data.name,
-          };
-          updateUserProfile(profile)
-            .then(() => {
-              const userInfo = {
-                name: data.name,
-                email: data.email,
-              };
-              axiosPublic.post('/users',userInfo)
-                .then((res) => {
-                  if (res.data.insertedId) {
-                    console.log("User added to the database");
-                    reset();
-                    Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: "Welcome to the Laptop Gallery",
-                      showConfirmButton: false,
-                      timer: 1500,
-                    });
-                  }
-                });
-              navigate('/'); 
-            })
-            .catch((error) => {
-              console.log(error);
+
+    // User create
+    createUser(data.email, data.password, data.name)
+      .then(result => {
+        // console.log(result.user)
+
+        updateUserProfile(data.name)
+          .then(() => {
+            // create user save Data in MongoDB
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              password: data.password
+            }
+            axiosPublic.post('/users', userInfo)
+              .then(res => {
+                console.log(res.data)
+                if (res.data.insertedId) {
+
+                }
+              })
+            Swal.fire({
+              title: "Registration Success!",
+              text: "You clicked the button!",
+              icon: "success"
             });
-        }
-      });
+            navigate('/')
+
+
+          })
+          .catch((error) => {
+            // console.log(error)
+          })
+
+
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+
+        // console.error(error)
+      })
+
+
   };
+
+
+
 
   return (
     <div>
@@ -115,7 +137,7 @@ const SignUp = () => {
                 {errors.password?.type === "minLength" && (
                   <p className="text-red-600">Password must be at least 6 characters</p>
                 )}
-                
+
               </div>
               <div className="form-control mt-6">
                 <input
@@ -126,7 +148,7 @@ const SignUp = () => {
               </div>
             </form>
             <p className="text-center ">
-              Already have an account? Go <Link className="font-bold" to="/signin">Login Page</Link>
+              Already have an account? Go <Link className="font-bold" to="/login">Login Page</Link>
             </p>
             <SocialComponent />
           </div>
@@ -136,4 +158,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Registration;
