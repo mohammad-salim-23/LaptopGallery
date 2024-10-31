@@ -3,159 +3,135 @@ import { Link } from 'react-router-dom';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
   const [sortOrder, setSortOrder] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState([]);
+  const [selectedRam, setSelectedRam] = useState([]);
+  const [selectedStorage, setSelectedStorage] = useState([]);
+  const [selectedOs, setSelectedOs] = useState([]);
+  const [selectedProcessor, setSelectedProcessor] = useState([]);
+  const [inStockOnly, setInStockOnly] = useState(false);
 
-  // Function to handle sorting based on selected order
-  const sortedItems = [...items].sort((a, b) => {
-    if (sortOrder === "lowToHigh") {
-      return parseInt(a.price) - parseInt(b.price);
-    } else if (sortOrder === "highToLow") {
-      return parseInt(b.price) - parseInt(a.price);
-    }
-    return 0;
-  });
-  const brands = [...new Set(items?.map(item => item.brand))];
-  const ram = [...new Set(items?.map(item => item.ram))];
-  const storage = [...new Set(items?.map(item => item.storage))];
+  // Sorting and filtering function
+  const sortedItems = [...items]
+    .filter(item => 
+      (!inStockOnly || item.stock) &&
+      (selectedBrand.length === 0 || selectedBrand.includes(item.brand)) &&
+      (selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
+      (selectedStorage.length === 0 || selectedStorage.includes(item.storage)) &&
+      (selectedOs.length === 0 || selectedOs.includes(item.os)) &&
+      (selectedProcessor.length === 0 || selectedProcessor.includes(item.processor))
+    )
+    .sort((a, b) => {
+      if (sortOrder === "lowToHigh") return a.price - b.price;
+      if (sortOrder === "highToLow") return b.price - a.price;
+      return 0;
+    });
 
-  // just for laptops
-  const os = [...new Set(items?.map(item => item.os))];
-  const processor = [...new Set(items?.map(item => item.processor))];
-  // console.log(brands)
-  // console.log(processor)
+  const toggleFilter = (setter, value) => {
+    setter(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
+  };
+
+  const brands = [...new Set(items.map(item => item.brand))];
+  const ram = [...new Set(items.map(item => item.ram))];
+  const storage = [...new Set(items.map(item => item.storage))];
+  const os = [...new Set(items.map(item => item.os))];
+  const processor = [...new Set(items.map(item => item.processor))];
+
   return (
-    <div className='p-6 bg-base-200 my-10'>
+    <div className="p-6 bg-base-200 my-10">
       <div className="flex">
-        {/* Sidebar menu */}
-        {/*Availability  content */}
-        <div className="w-64  min-h-screen p-4 bg-white rounded-lg flex flex-col">
-
-          <div className=" p-4 ">
-            <div tabIndex={0} role="button" className="cursor-pointer">Availability</div>
-            <div className="divider"></div>
-            <ul tabIndex={0} className=" p-2">
-              <div className="flex  items-center gap-4">
-                <div className=""><input type="checkbox" name="Instock" />
-                </div>
-                <div>
-                  <span>In Stock</span>
-                </div>
-              </div>
-
-              <div className="flex  items-center gap-2">
-                <div className="gap-2"><input type="checkbox" name="Outstock" />
-                </div> <div>
-                  <span>Out Of Stock</span>
-                </div>
-              </div>
-
-            </ul>
-          </div>
-
-          {/*Brand  content */}
-          <div className=" p-4">
-            <div tabIndex={0} role="button" className="cursor-pointer">Brand</div>
-            <div className="divider"></div>
-
-            <ul tabIndex={0} className=" p-2  gap-4">
-              {brands.map((item, index) => (
-                <div className="flex items-center gap-4" key={index}>
-                  <div className="">
-                    <input type="checkbox" name={item} />
-                  </div>
-                  <div>
-                    <span>{item}</span>
-                  </div>
-                </div>
-              ))}
-            </ul>
-
-          </div>
-          {/*ram  content */}
-          <div className=" p-4">
-            <div tabIndex={0} role="button" className="cursor-pointer">Ram</div>
-            <div className="divider"></div>
-
-            <ul tabIndex={0} className=" p-2  gap-4">
-              {ram.map((item, index) => (
-                <div className="flex items-center gap-4" key={index}>
-                  <div className="">
-                    <input type="checkbox" name={item} />
-                  </div>
-                  <div>
-                    <span>{item}</span>
-                  </div>
-                </div>
-              ))}
-            </ul>
-
-          </div>
-          {/*storage  content */}
-          <div className=" p-4">
-            <div tabIndex={0} role="button" className="cursor-pointer">Storage</div>
-            <div className="divider"></div>
-
-            <ul tabIndex={0} className=" p-2  gap-4">
-              {storage.map((item, index) => (
-                <div className="flex items-center gap-4" key={index}>
-                  <div className="">
-                    <input type="checkbox" name={item} />
-                  </div>
-                  <div>
-                    <span>{item}</span>
-                  </div>
-                </div>
-              ))}
-            </ul>
-
-          </div>
-          {/*  OS and Processor  */}
-
+        <div className="w-64 min-h-screen p-4 bg-white rounded-lg">
+          {/* Availability Filter */}
           <div className="p-4">
-            <div tabIndex={0} role="button" className="cursor-pointer">Operating System</div>
-            <div className="divider"></div>
-            <ul tabIndex={0} className="p-2 gap-4">
-              {os.map((item, index) => (
-                <div className="flex items-center gap-4" key={index}>
-                  <div className="">
-                    <input type="checkbox" name={item} />
-                  </div>
-                  <div>
-                    <span>{item}</span>
-                  </div>
-                </div>
-              ))}
-            </ul>
+            <h2>Availability</h2>
+            <input 
+              type="checkbox" 
+              checked={inStockOnly} 
+              onChange={() => setInStockOnly(prev => !prev)} 
+            />
+            <label>In Stock</label>
           </div>
-
+          
+          {/* Brand Filter */}
           <div className="p-4">
-            <div tabIndex={0} role="button" className="cursor-pointer">Processor</div>
-            <div className="divider"></div>
-            <ul tabIndex={0} className="p-2 gap-4">
-              {processor.map((item, index) => (
-                <div className="flex items-center gap-4" key={index}>
-                  <div className="">
-                    <input type="checkbox" name={item} />
-                  </div>
-                  <div>
-                    <span>{item}</span>
-                  </div>
-                </div>
-              ))}
-            </ul>
+            <h2>Brand</h2>
+            {brands.map((brand, index) => (
+              <div key={index}>
+                <input 
+                  type="checkbox" 
+                  onChange={() => toggleFilter(setSelectedBrand, brand)} 
+                  checked={selectedBrand.includes(brand)}
+                />
+                <label>{brand}</label>
+              </div>
+            ))}
           </div>
 
+          {/* RAM Filter */}
+          <div className="p-4">
+            <h2>RAM</h2>
+            {ram.map((ramOption, index) => (
+              <div key={index}>
+                <input 
+                  type="checkbox" 
+                  onChange={() => toggleFilter(setSelectedRam, ramOption)} 
+                  checked={selectedRam.includes(ramOption)}
+                />
+                <label>{ramOption}</label>
+              </div>
+            ))}
+          </div>
 
+          {/* Storage Filter */}
+          <div className="p-4">
+            <h2>Storage</h2>
+            {storage.map((storageOption, index) => (
+              <div key={index}>
+                <input 
+                  type="checkbox" 
+                  onChange={() => toggleFilter(setSelectedStorage, storageOption)} 
+                  checked={selectedStorage.includes(storageOption)}
+                />
+                <label>{storageOption}</label>
+              </div>
+            ))}
+          </div>
+
+          {/* OS Filter */}
+          <div className="p-4">
+            <h2>Operating System</h2>
+            {os.map((osOption, index) => (
+              <div key={index}>
+                <input 
+                  type="checkbox" 
+                  onChange={() => toggleFilter(setSelectedOs, osOption)} 
+                  checked={selectedOs.includes(osOption)}
+                />
+                <label>{osOption}</label>
+              </div>
+            ))}
+          </div>
+
+          {/* Processor Filter */}
+          <div className="p-4">
+            <h2>Processor</h2>
+            {processor.map((processorOption, index) => (
+              <div key={index}>
+                <input 
+                  type="checkbox" 
+                  onChange={() => toggleFilter(setSelectedProcessor, processorOption)} 
+                  checked={selectedProcessor.includes(processorOption)}
+                />
+                <label>{processorOption}</label>
+              </div>
+            ))}
+          </div>
         </div>
 
-
-        <div className="flex-1 px-4 ">
-          {/* Sorting Navbar */}
+        <div className="flex-1 px-4">
           <div className="navbar flex flex-col md:flex-row gap-2 bg-base-100 rounded-lg md:p-4 justify-between">
-            <div>
-              <p className='text-xl'>{title}</p>
-            </div>
+            <p className='text-xl'>{title}</p>
             <div className='flex-row gap-2'>
-              <p className='text-xl'>Sort By:</p>
+              <p>Sort By:</p>
               <select
                 className="select select-ghost w-1/2 max-w-xs border border-gray-400"
                 value={sortOrder}
@@ -168,6 +144,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             </div>
           </div>
 
+          
           {/* Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {sortedItems?.map((data) => (
@@ -181,7 +158,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                
                <p className="text-gray-700">OS: {data.os}</p>
                <div className='border border-gray-300 my-4'></div>
-               <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price}</p>
+               <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
                <div className='border border-gray-300 my-4'></div>
              </div>
            </div></Link>
