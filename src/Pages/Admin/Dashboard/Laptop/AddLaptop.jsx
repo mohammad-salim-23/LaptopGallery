@@ -51,8 +51,10 @@ const AddLaptop = () => {
       // console.log(res);
 
       if (res.data.success) {
+        const randomNumber = Math.floor(1000 + Math.random() * 9000);
         const productsInfo = {
           brand: data.brand,
+          subCategory: "laptop",
           model: data.model,
           processor: data.processor,
           ram: data.ram,
@@ -65,8 +67,9 @@ const AddLaptop = () => {
           image: res.data.data.display_url,
           status: data.status,
           type: "laptop",
-
+          productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`
         };
+        // console.log(productsInfo)
 
         // Store the laptop data in MongoDB
         const response = await axiosSecure.post("/products", productsInfo);
@@ -131,7 +134,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Brand Name"
+                      placeholder="Dell"
                       {...register("brand", { required: true })}
                     />
                     {errors.brand && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -145,7 +148,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Model Name"
+                      placeholder="Latitude 3190 X360"
                       {...register("model", { required: true })}
                     />
                     {errors.model && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -163,7 +166,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Processor"
+                      placeholder="Intel Pentium CPU N4200"
                       {...register("processor", { required: true })}
                     />
                     {errors.processor && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -177,7 +180,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Ram"
+                      placeholder="8GB"
                       {...register("ram", { required: true })}
                     />
                     {errors.ram && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -195,7 +198,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Storage"
+                      placeholder="128GB SSD"
                       {...register("storage", { required: true })}
                     />
                     {errors.storage && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -209,7 +212,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Graphics"
+                      placeholder="4GB UHD GPU 605"
                       {...register("graphics", { required: true })}
                     />
                     {errors.graphics && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -226,7 +229,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Display"
+                      placeholder="11.6'HD"
                       {...register("display", { required: true })}
                     />
                     {errors.display && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -240,7 +243,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Color"
+                      placeholder="Black"
                       {...register("color", { required: true })}
                     />
                     {errors.color && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -257,7 +260,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Operating System"
+                      placeholder="Windows 10 Pro"
                       {...register("operating_System", { required: true })}
                     />
                     {errors.operating_System && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -271,7 +274,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Price BDT"
+                      placeholder="17500 BDT"
                       {...register("price", { required: true })}
                     />
                     {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
