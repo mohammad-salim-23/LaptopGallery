@@ -14,9 +14,9 @@ import TotalUsers from "../Pages/Admin/Dashboard/TotalUsers/TotalUsers";
 import AdminPanel from "../Pages/Admin/Dashboard/AdminPanel/AdminPanel";
 import UpdateProductLaptop from "../Layout/UpdateProductLaptop/UpdateProductLaptop";
 
-
-
-
+import Laptops from "../Pages/Laptops/Laptops";
+import Phone from "../Pages/Phone/Phone";
+import Brand from "../Components/Shared/Brands/Brand";
 
 export const router = createBrowserRouter([
     {
@@ -37,14 +37,27 @@ export const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path: 'registration',
+                path: '/registration',
                 element: <Registration></Registration>
             },
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            }
+            ,
+            {
 
+                path: '/laptop',
+                element: <Laptops></Laptops>
+            },
+            {
+                path: '/phone',
+                element: <Phone></Phone>
+            },
+            {
+                path: '/products/:brand',
+                element: <Brand></Brand>
             }
         ]
     },
