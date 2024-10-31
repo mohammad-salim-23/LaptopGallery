@@ -71,7 +71,7 @@ export default function DesktopMenu({ menu }) {
                   <div className="flex-center gap-x-4 group/menubox">
                     <div>
 
-                      <Link className="font-semibold" to={submenu.link}>
+                      <Link className="font-semibold" to={`/products/${submenu.link}`}>
                         {submenu.name}
                       </Link>
 

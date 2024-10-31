@@ -98,7 +98,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
               {storage.map((item, index) => (
                 <div className="flex items-center gap-4" key={index}>
                   <div className="">
-                    <input type="checkbox" name={item.brand} />
+                    <input type="checkbox" name={item} />
                   </div>
                   <div>
                     <span>{item}</span>
@@ -150,11 +150,11 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
         <div className="flex-1 px-4 ">
           {/* Sorting Navbar */}
-          <div className="navbar bg-base-100 rounded-lg p-4 justify-between">
+          <div className="navbar flex flex-col md:flex-row gap-2 bg-base-100 rounded-lg md:p-4 justify-between">
             <div>
               <p className='text-xl'>{title}</p>
             </div>
-            <div className='flex gap-2'>
+            <div className='flex-row gap-2'>
               <p className='text-xl'>Sort By:</p>
               <select
                 className="select select-ghost w-1/2 max-w-xs border border-gray-400"

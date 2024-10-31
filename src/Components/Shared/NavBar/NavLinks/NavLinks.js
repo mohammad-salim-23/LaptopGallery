@@ -5,68 +5,68 @@ export const Navlinks = [
     subMenu: [
       {
         name: "Dell",
-        link: '/link'
+        link: 'link'
       },
       {
         name: "Asus",
-        link: '/asus'
+        link: 'asus'
       },
       {
         name: "MSI",
-        link: '/msi'
+        link: 'msi'
       },
       {
         name: "Hp",
-        link: '/hp'
+        link: 'hp'
       },
       {
         name: "Acer",
-        link: '/acer'
+        link: 'acer'
 
       },
       {
         name: "Avita",
-        link: '/avita'
+        link: 'avita'
 
       },
       {
         name: "MacBook",
-        link: '/macbook'
+        link: 'macbook'
 
       },
       {
         name: "Microsoft",
-        link: '/microsoft'
+        link: 'microsoft'
 
       },
       {
         name: "Infinix",
-        link: '/infinix'
+        link: 'infinix'
 
       },
       {
         name: "Chuwi",
-        link: '/chuwi'
+        link: 'chuwi'
 
       },
       {
         name: "Gigabyte",
-        link: '/gigabyte'
+        link: 'gigabyte'
 
       },
       {
         name: "Thunderobot",
-        link: '/thunderobot'
+        link: 'thunderobot'
 
       },
       {
         name: "Huawei",
-        link: '/huawei'
+        link: 'huawei'
 
       },
       {
         name: "Walton",
-        link: '/walton'
+        link: 'walton'
 
       },
     ],
@@ -78,51 +78,51 @@ export const Navlinks = [
     subMenu: [
       {
         name: "Mouse",
-        link: '/mouse'
+        link: 'mouse'
       },
       {
         name: "Keyboard",
-        link: '/keyboard'
+        link: 'keyboard'
       },
       {
         name: "Laptop Cooler",
-        link: '/laptop-cooler'
+        link: 'laptop-cooler'
       },
       {
         name: "Laptop Desk",
-        link: '/laptop-desk'
+        link: 'laptop-desk'
       },
       {
         name: "Laptop Stand",
-        link: '/laptop-stand'
+        link: 'laptop-stand'
       },
       {
         name: "Laptop Battery",
-        link: '/laptop-battery'
+        link: 'laptop-battery'
       },
       {
         name: "Laptop Charger",
-        link: '/laptop-charger'
+        link: 'laptop-charger'
       },
       {
         name: "Display",
-        link: '/display'
+        link: 'display'
       },
       {
         name: "Caddy",
-        link: '/caddy'
+        link: 'caddy'
       },
       {
         name: "Laptop Locker",
-        link: '/laptop-locker'
+        link: 'laptop-locker'
       },
       {
         name: "Ram (Laptop)",
-        link: '/laptop-ram'
+        link: 'laptop-ram'
       },
       {
         name: "SSD (Laptop)",
-        link: '/laptop-ssd'
+        link: 'laptop-ssd'
       },
     
     ],
@@ -134,51 +134,51 @@ export const Navlinks = [
     subMenu: [
       {
         name: "Samsung",
-        link: '/samsung'
+        link: 'samsung'
       },
       {
         name: "Apple",
-        link: '/apple'
+        link: 'apple'
       },
       {
         name: "Xiaomi",
-        link: '/xiaomi'
+        link: 'xiaomi'
       },
       {
         name: "Honor",
-        link: '/honor'
+        link: 'honor'
       },
       {
         name: "OnePlus",
-        link: '/oneplus'
+        link: 'oneplus'
       },
       {
         name: "Oppo",
-        link: '/oppo'  
+        link: 'oppo'  
       },
       {
         name: "Vivo",
-        link: '/vivo'  
+        link: 'vivo'  
       },
       {
         name: "Realme",
-        link: '/realme'  
+        link: 'realme'  
       },
       {
         name: "Infinix",
-        link: '/infinix'  
+        link: 'infinix'  
       },
       {
         name: "Techno",
-        link: '/techno'  
+        link: 'techno'  
       },
       {
         name: "Asus",
-        link: '/asus'  
+        link: 'asus'  
       },
       {
         name: "Walton",
-        link: '/walton'
+        link: 'walton'
       },
     ],
     gridCols: 2,
@@ -189,19 +189,19 @@ export const Navlinks = [
     subMenu: [
       {
         name: "Phone Cover",
-        link: '/phone-cover'
+        link: 'phone-cover'
       },
       {
         name: "Battery",
-        link: '/battery'
+        link: 'battery'
       },
       {
         name: "Display",
-        link: '/display'
+        link: 'display'
       },
       {
         name: "Charger",
-        link: '/charger'
+        link: 'charger'
       },
     ],
     gridCols: 2,
