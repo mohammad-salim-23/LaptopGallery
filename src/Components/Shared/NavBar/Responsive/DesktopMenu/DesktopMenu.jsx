@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function DesktopMenu({ menu }) {
+
   const [isHover, toggleHover] = useState(false);
   const toggleHoverMenu = () => {
     toggleHover(!isHover);
@@ -41,12 +42,14 @@ export default function DesktopMenu({ menu }) {
       onHoverEnd={toggleHoverMenu}
       key={menu.name}
     >
-      <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
-        {menu.name}
-        {hasSubMenu && (
-          <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
-        )}
-      </span>
+      <Link to={`${menu.link}`}>
+        <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
+          {menu.name}
+          {hasSubMenu && (
+            <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
+          )}
+        </span>
+      </Link>
       {hasSubMenu && (
         <motion.div
           className="sub-menu"

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function MobMenu({ Menus }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -62,13 +63,13 @@ export default function MobMenu({ Menus }) {
                                                 className="p-2 flex-center hover:bg-white/5 rounded-md gap-x-2 cursor-pointer"
                                             >
                                                 {link ? (
-                                                    <a
-                                                        href={link}
+                                                    <Link
+                                                        to={link}
                                                         className="text-black"
                                                         rel="noopener noreferrer"
                                                     >
                                                         {name}
-                                                    </a>
+                                                    </Link>
                                                 ) : (
                                                     <span>{name}</span>
                                                 )}

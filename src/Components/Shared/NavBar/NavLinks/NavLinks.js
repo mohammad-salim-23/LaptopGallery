@@ -1,113 +1,213 @@
 export const Navlinks = [
-    {
-      name: "Laptop",
-      subMenu: [
-        {
-          name: "Design",
-          link: 'https://facebook.com'
-        },
-        {
-          name: "Management",
-          link: '/management'
-        },
-        {
-          name: "Navigation",
-          link: 'https://navigation.com',
-          link: '/navigation'
-        },
-        {
-          name: "CMS",
-          link: 'https://cms.com',
-          
-        },
-      ],
-      gridCols: 2,
-    },
-    {
-      name: "Accessories",
-      subMenu: [
-        {
-          name: "Marketplace",
-          link: 'https://marketplace.com'
-        },
-        {
-          name: "Meetups",
-          link: 'https://meetups.com'
-        },
-        {
-          name: "Updates",
-          link: 'https://updates.com'
-        },
-        {
-          name: "Academy",
-          link: 'https://academy.com'
-        },
-        {
-          name: "Blog",
-          link: 'https://blog.com'
-        },
-        {
-          name: "Figma",
-          link: 'https://figma.com'
-        },
-        {
-          name: "Experts",
-          link: 'https://experts.com'
-        },
-        {
-          name: "Gallery",
-          link: 'https://gallery.com'
-        },
-      ],
-      gridCols: 3,
-    },
-    {
-      name: "Phone Accessories",
-      subMenu: [
-        {
-          name: "Help",
-          link: 'https://help.com'
-        },
-        {
-          name: "Community",
-          link: 'https://community.com'
-        },
-        {
-          name: "Emergency",
-          link: 'https://emergency.com'
-        },
-      ],
-      gridCols: 1,
-    },
-    {
-      name: "Enterprise",
-      subMenu: [
-        {
-          name: "Enterprise",
-          link: 'https://enterprise.com'
-        },
-        {
-          name: "Collaboration",
-          link: 'https://collaboration.com'
-        },
-        {
-          name: "Customers",
-          link: 'https://customers.com'
-        },
-        {
-          name: "Security",
-          link: 'https://security.com'
-        },
-      ],
-      gridCols: 2,
-    },
-    {
-      name: "Pricing",
-      link: 'https://pricing.com'
-    },
-    {
-      name: "Contact",
-      link: 'https://contact.com'
-    },
-  ];
-  
+  {
+    name: "Laptop",
+    link: "/laptop",
+    subMenu: [
+      {
+        name: "Dell",
+        link: '/link'
+      },
+      {
+        name: "Asus",
+        link: '/asus'
+      },
+      {
+        name: "MSI",
+        link: '/msi'
+      },
+      {
+        name: "Hp",
+        link: '/hp'
+      },
+      {
+        name: "Acer",
+        link: '/acer'
+
+      },
+      {
+        name: "Avita",
+        link: '/avita'
+
+      },
+      {
+        name: "MacBook",
+        link: '/macbook'
+
+      },
+      {
+        name: "Microsoft",
+        link: '/microsoft'
+
+      },
+      {
+        name: "Infinix",
+        link: '/infinix'
+
+      },
+      {
+        name: "Chuwi",
+        link: '/chuwi'
+
+      },
+      {
+        name: "Gigabyte",
+        link: '/gigabyte'
+
+      },
+      {
+        name: "Thunderobot",
+        link: '/thunderobot'
+
+      },
+      {
+        name: "Huawei",
+        link: '/huawei'
+
+      },
+      {
+        name: "Walton",
+        link: '/walton'
+
+      },
+    ],
+    gridCols: 2,
+  },
+  {
+    name: "Accessories",
+    link: '/laptop-accessories',
+    subMenu: [
+      {
+        name: "Mouse",
+        link: '/mouse'
+      },
+      {
+        name: "Keyboard",
+        link: '/keyboard'
+      },
+      {
+        name: "Laptop Cooler",
+        link: '/laptop-cooler'
+      },
+      {
+        name: "Laptop Desk",
+        link: '/laptop-desk'
+      },
+      {
+        name: "Laptop Stand",
+        link: '/laptop-stand'
+      },
+      {
+        name: "Laptop Battery",
+        link: '/laptop-battery'
+      },
+      {
+        name: "Laptop Charger",
+        link: '/laptop-charger'
+      },
+      {
+        name: "Display",
+        link: '/display'
+      },
+      {
+        name: "Caddy",
+        link: '/caddy'
+      },
+      {
+        name: "Laptop Locker",
+        link: '/laptop-locker'
+      },
+      {
+        name: "Ram (Laptop)",
+        link: '/laptop-ram'
+      },
+      {
+        name: "SSD (Laptop)",
+        link: '/laptop-ssd'
+      },
+    
+    ],
+    gridCols: 3,
+  },
+  {
+    name: "Phone",
+    link: '/phone',
+    subMenu: [
+      {
+        name: "Samsung",
+        link: '/samsung'
+      },
+      {
+        name: "Apple",
+        link: '/apple'
+      },
+      {
+        name: "Xiaomi",
+        link: '/xiaomi'
+      },
+      {
+        name: "Honor",
+        link: '/honor'
+      },
+      {
+        name: "OnePlus",
+        link: '/oneplus'
+      },
+      {
+        name: "Oppo",
+        link: '/oppo'  
+      },
+      {
+        name: "Vivo",
+        link: '/vivo'  
+      },
+      {
+        name: "Realme",
+        link: '/realme'  
+      },
+      {
+        name: "Infinix",
+        link: '/infinix'  
+      },
+      {
+        name: "Techno",
+        link: '/techno'  
+      },
+      {
+        name: "Asus",
+        link: '/asus'  
+      },
+      {
+        name: "Walton",
+        link: '/walton'
+      },
+    ],
+    gridCols: 2,
+  },
+  {
+    name: "Phone Accessories",
+    link: 'phone-accessories',
+    subMenu: [
+      {
+        name: "Phone Cover",
+        link: '/phone-cover'
+      },
+      {
+        name: "Battery",
+        link: '/battery'
+      },
+      {
+        name: "Display",
+        link: '/display'
+      },
+      {
+        name: "Charger",
+        link: '/charger'
+      },
+    ],
+    gridCols: 2,
+  },
+  {
+    name: "Contact",
+    link: '/contact'
+  },
+];

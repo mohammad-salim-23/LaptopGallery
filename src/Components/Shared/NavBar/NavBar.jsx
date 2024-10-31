@@ -1,21 +1,14 @@
-import { useContext } from "react";
-import { AuthContext } from "../AuthContext/AuthProvider";
 import { Navlinks } from "./Navlinks/Navlinks";
 import MobMenu from "./Responsive/MobMenu/MobMenu";
 import "./NavBar"
 import DesktopMenu from "./Responsive/DesktopMenu/DesktopMenu";
 
 const NavBar = () => {
-    const {logOut} = useContext(AuthContext);
-    const handleLogOut = () => {
-        logOut()
-          .then(() => {})
-          .catch((error) => console.log(error));
-      };
+
     return (
         <div>
-            
-            <header className="h-16 text-[15px] fixed inset-0 flex-center text-white bg-primary">
+
+            <header className="h-16 text-[15px] fixed z-50 inset-0 flex-center text-white bg-[#2C3E50]">
                 <nav className=" px-3.5 flex-center-between w-full max-w-7xl mx-auto">
                     <div className="flex-center gap-x-3 z-[999] relative">
                         {/* <img src={Logo} alt="" className="size-8" /> */}
@@ -37,8 +30,6 @@ const NavBar = () => {
                         <div className="lg:hidden">
                             <MobMenu Menus={Navlinks} />
                         </div>
-                       <button onClick={handleLogOut()}>LogOut</button>
-
                     </div>
                 </nav>
             </header>
