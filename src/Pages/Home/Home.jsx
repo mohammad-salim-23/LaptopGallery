@@ -1,3 +1,4 @@
+import NavBar from "../../Components/Shared/NavBar/NavBar";
 import Find from "../Find/Find";
 import Banner from "./Banner/Banner";
 // import Category from "./Category/Category";
@@ -5,6 +6,9 @@ import Banner from "./Banner/Banner";
 const Home = () => {
     return (
         <div>
+            <div className="mb-24">
+                <NavBar></NavBar>
+            </div>
             <Banner></Banner>
             <Find></Find>
             {/* <Category></Category> */}
