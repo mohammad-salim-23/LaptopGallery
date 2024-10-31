@@ -13,6 +13,8 @@ import TotalMobile from "../Pages/Admin/Dashboard/Mobile/TotalMobile";
 import TotalUsers from "../Pages/Admin/Dashboard/TotalUsers/TotalUsers";
 import AdminPanel from "../Pages/Admin/Dashboard/AdminPanel/AdminPanel";
 import Page from "../Components/Shared/ShopLayout/Page";
+import Laptops from "../Pages/Laptops/Laptops";
+import Phone from "../Pages/Phone/Phone";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
             {
                 path: 'registration',
                 element: <Registration></Registration>
+            },
+            {
+                path: '/laptop',
+                element: <Laptops></Laptops>
+            },
+            {
+                path: '/phone',
+                element: <Phone></Phone>
             },
             {
                 path: 'products',
