@@ -17,6 +17,9 @@ import UpdateProductLaptop from "../Layout/UpdateProductLaptop/UpdateProductLapt
 import Laptops from "../Pages/Laptops/Laptops";
 import Phone from "../Pages/Phone/Phone";
 import Brand from "../Components/Shared/Brands/Brand";
+import UpdateProductMobile from "../Layout/UpdateProductMobile/UpdateProductMobile";
+import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
+import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +46,12 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            }
+            ,
+            {
+                path: '/dashboard/totalMobile/:id',
+                element: <UpdateProductMobile></UpdateProductMobile>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
             }
             ,
@@ -79,12 +88,21 @@ export const router = createBrowserRouter([
                 element: <AddMobile></AddMobile>,
             },
             {
+                path: 'accessories',
+                element: <Accessories></Accessories>,
+            },
+            {
                 path: 'totalLaptop',
                 element: <TotalLaptop></TotalLaptop>
             },
             {
                 path: 'totalMobile',
                 element: <TotalMobile></TotalMobile>
+            }
+            ,
+            {
+                path: 'totalAccessories',
+                element: <TotalAccessories></TotalAccessories>
             }
             ,
             {
