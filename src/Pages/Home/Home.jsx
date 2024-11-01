@@ -1,3 +1,4 @@
+import CartButton from "../../Components/ReUseComponents/CartButton";
 import NavBar from "../../Components/Shared/NavBar/NavBar";
 import Find from "../Find/Find";
 import Banner from "./Banner/Banner";
