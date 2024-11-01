@@ -4,12 +4,13 @@ import { FaBarsStaggered, FaMobileScreenButton } from "react-icons/fa6";
 import { HiUserGroup } from "react-icons/hi";
 import { ImCancelCircle } from "react-icons/im";
 import { IoIosLogOut } from "react-icons/io";
-import { MdMobileFriendly, MdOutlineDashboardCustomize } from "react-icons/md";
+import { MdMobileFriendly, MdOutlineCandlestickChart, MdOutlineDashboardCustomize } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Auth/Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { IoHome } from "react-icons/io5";
 import AdminPanel from "./AdminPanel/AdminPanel";
+import { TiBatteryCharge } from "react-icons/ti";
 
 
 
@@ -71,6 +72,11 @@ const Dashboard = () => {
               <MdMobileFriendly className="h-6 w-6 mr-2" />
               Add Mobile
             </Link>
+            {/* Add Accessories  */}
+            <Link to={"/dashboard/accessories"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
+              <TiBatteryCharge className="h-6 w-6 mr-2" />
+              Add Accessories
+            </Link>
             {/* Add Laptop */}
             <Link to={"/dashboard/totalLaptop"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
               <FaLaptopHouse className="h-6 w-6 mr-2" />
@@ -80,6 +86,11 @@ const Dashboard = () => {
             <Link to={"/dashboard/totalMobile"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
               <FaMobileScreenButton className="h-6 w-6 mr-2" />
               Total Mobile
+            </Link>
+            {/* Total Accessories */}
+            <Link to={"/dashboard/totalAccessories"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
+              <MdOutlineCandlestickChart className="h-6 w-6 mr-2" />
+              Total Accessories
             </Link>
             {/* Total Users */}
             <Link to={"/dashboard/totalUsers"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">

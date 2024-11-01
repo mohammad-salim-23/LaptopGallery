@@ -95,7 +95,7 @@ const TotalMobile = () => {
                                     <td className="font-semibold">{productsType.status}</td>
                                     <td className="font-semibold">{productsType.price}</td>
                                     <th className="">
-                                        <Link to={`/dashboard/totalLaptop/${productsType._id}`}>
+                                        <Link to={`/dashboard/totalMobile/${productsType._id}`}>
                                             <FaRegEdit className="text-2xl cursor-pointer" />
                                         </Link>
                                     </th>
