@@ -20,6 +20,7 @@ import Brand from "../Components/Shared/Brands/Brand";
 import UpdateProductMobile from "../Layout/UpdateProductMobile/UpdateProductMobile";
 import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
 import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
+import Cart from "../Pages/Cart/Cart";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
             {
                 path: '/products/:brand',
                 element: <Brand></Brand>
+            },
+            {
+                path: '/cart',
+                element: <Cart></Cart>
             }
         ]
     },
