@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useProducts from '../../hooks/useProducts';
 import { div } from 'framer-motion/client';
+import { MdCompareArrows } from 'react-icons/md';
+import CartButton from '../ReUseComponents/CartButton';
 
 const ProductsDetails = () => {
     const { id } = useParams();
@@ -35,12 +37,26 @@ const ProductsDetails = () => {
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {product.processor}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {product.ram}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {product.storage}</p>
-                  
+                    {product.camera && (
+                        <p className="text-gray-600 mb-2">
+                            <span className="font-semibold">Camera:</span> {product.camera}
+                        </p>
+                    )}
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {product.display}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Color:</span> {product.color}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Operating System:</span> {product.os}</p>
                     <p className="text-gray-600 mb-4"><span className="font-semibold">Status:</span> {product.status}</p>
                     <p className="text-xl font-semibold text-blue-600">Price: {product.price}</p>
+                   
+                        <div className='flex justify-between'>
+                        <div className='my-4  '><CartButton  prodId={product._id} ></CartButton></div>
+                        <div className='my-4'>  <button className=' bg-gray-800 text-white rounded-lg p-2 flex justify-center items-center' > <span><MdCompareArrows /> </span>Compare</button></div>
+                        </div>
+                       
+             
+           
+                       
+                       
                 </div>
             </div>
         </div>
