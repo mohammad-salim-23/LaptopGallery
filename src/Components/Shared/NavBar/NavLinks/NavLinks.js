@@ -207,7 +207,7 @@ export const Navlinks = [
     gridCols: 2,
   },
   {
-    name: "Contact",
-    link: '/contact'
+    name: "Cart",
+    link: '/cart'
   },
 ];
