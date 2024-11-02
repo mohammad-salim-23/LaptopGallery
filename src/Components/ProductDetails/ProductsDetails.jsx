@@ -37,7 +37,11 @@ const ProductsDetails = () => {
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {product.processor}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {product.ram}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {product.storage}</p>
-                  
+                    {product.camera && (
+                        <p className="text-gray-600 mb-2">
+                            <span className="font-semibold">Camera:</span> {product.camera}
+                        </p>
+                    )}
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {product.display}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Color:</span> {product.color}</p>
                     <p className="text-gray-600 mb-2"><span className="font-semibold">Operating System:</span> {product.os}</p>
