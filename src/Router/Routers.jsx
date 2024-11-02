@@ -1,4 +1,4 @@
-import {createBrowserRouter,} from "react-router-dom";
+import { createBrowserRouter, } from "react-router-dom";
 import Main from "../Layout/Main/Main";
 import Home from "../Pages/Home/Home";
 import Error from "../Pages/Error/Error";
@@ -21,20 +21,21 @@ import UpdateProductMobile from "../Layout/UpdateProductMobile/UpdateProductMobi
 import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
 import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
 import Cart from "../Pages/Cart/Cart";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
-        errorElement:<Error></Error>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
-                element:<Home></Home>
+                element: <Home></Home>
             },
             {
                 path: '/productDetails/:id',
-                element:<ProductsDetails></ProductsDetails>
+                element: <ProductsDetails></ProductsDetails>
             },
             {
                 path: '/login',
@@ -47,13 +48,13 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
             }
             ,
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
             }
             ,
             {
@@ -71,7 +72,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/cart',
-                element: <Cart></Cart>
+                element: <PrivateRoute><Cart></Cart></PrivateRoute>
             }
         ]
     },
