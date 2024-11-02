@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useProducts from '../../../hooks/useProducts';
-import ShopLayout from '../ShopLayout/ShopLayout';
+import ShopLayout from '../../ReUseComponents/ShopLayout/ShopLayout';
+
 
 const Brand = () => {
     const { brand } = useParams();

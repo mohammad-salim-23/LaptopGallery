@@ -1,7 +1,8 @@
 import React from 'react';
-import ShopLayout from '../../Components/Shared/ShopLayout/ShopLayout';
+
 
 import useProducts from '../../hooks/useProducts';
+import ShopLayout from '../../Components/ReUseComponents/ShopLayout/ShopLayout';
 
 const Phone = () => {
     const [products,refetch] = useProducts();
