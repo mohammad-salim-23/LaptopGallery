@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import { MdShoppingCartCheckout } from 'react-icons/md';
 
 const CartButton = ({ prodId }) => {
     // prodId sending on which components are call this components.
@@ -44,8 +45,9 @@ const CartButton = ({ prodId }) => {
     };
 
     return (
-        <div>
-            <button onClick={handleAddToCart}>Add to cart</button>
+        <div className='flex justify-center items-center'>
+           
+            <button className='btn-wide bg-gray-800 text-white rounded-lg p-2 flex justify-center items-center' onClick={handleAddToCart}> <span><MdShoppingCartCheckout /> </span>Add to cart</button>
         </div>
     );
 };
