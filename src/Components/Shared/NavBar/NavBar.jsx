@@ -2,8 +2,10 @@ import { Navlinks } from "./Navlinks/Navlinks";
 import MobMenu from "./Responsive/MobMenu/MobMenu";
 import "./NavBar"
 import DesktopMenu from "./Responsive/DesktopMenu/DesktopMenu";
+import useAuth from "../../../hooks/useAuth";
 
 const NavBar = () => {
+    const { user } = useAuth();
 
     return (
         <div>
@@ -21,12 +23,22 @@ const NavBar = () => {
                         ))}
                     </ul>
                     <div className="flex-center gap-x-5">
-                        <button
-                            aria-label="sign-in"
-                            className="bg-white/5 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center"
-                        >
-                            Sign In
-                        </button>
+
+                        {
+                            user ? <>
+                                    user ache
+                            </> :
+
+                                <>
+                                    <button
+                                        aria-label="sign-in"
+                                        className="bg-white/5 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center"
+                                    >
+                                        Sign In
+                                    </button>
+                                </>
+                        }
+
                         <div className="lg:hidden">
                             <MobMenu Menus={Navlinks} />
                         </div>

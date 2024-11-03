@@ -43,7 +43,8 @@ export default function DesktopMenu({ menu }) {
     >
       <Link to={`${menu.link}`}>
         <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
-          {menu.name}
+          {menu.name} 
+         
           {hasSubMenu && (
             <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
           )}
