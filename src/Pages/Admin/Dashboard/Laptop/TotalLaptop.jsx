@@ -47,7 +47,7 @@ const TotalLaptop = () => {
 
   return (
     <div className="mx-auto container">
-      <h1 className="text-center text-2xl  font-semibold">Total Laptop {productsTypes.length}</h1>
+      <h1 className="text-center text-3xl  font-bold my-10">Total Laptop {productsTypes.length}</h1>
 
       <div className="overflow-x-auto">
         <table className="table">
