@@ -4,6 +4,10 @@ import useProducts from '../../hooks/useProducts';
 import { div } from 'framer-motion/client';
 import { MdCompareArrows } from 'react-icons/md';
 import CartButton from '../ReUseComponents/CartButton';
+import DetailsTab from './DetailsTab';
+import { Toaster } from 'react-hot-toast';
+import useReview from '../../hooks/useReview';
+
 
 const ProductsDetails = () => {
     const { id } = useParams();
@@ -19,6 +23,8 @@ const ProductsDetails = () => {
 
     return (
        <div className='my-10'>
+          <div><Toaster
+             position="top-right"/></div>
          <div className="max-w-4xl mx-auto p-4 ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-lg mt-10">
                 {/* Product Image */}
@@ -60,6 +66,10 @@ const ProductsDetails = () => {
                 </div>
             </div>
         </div>
+        <div>
+            <DetailsTab  reviewId ={product._id} productDescription = {product.description}></DetailsTab>
+        </div>
+       
        </div>
     );
 };
