@@ -5,14 +5,14 @@ import useAxiosSecure from "./useAxiosSecure";
 const useReview = () => {
     const axiosSecure = useAxiosSecure();
 
-    const {isLoading,refetch,data:review=[]}=useQuery({
-        queryKey:['review'],
+    const {isLoading,refetch,data:reviews=[]}=useQuery({
+        queryKey:['reviews'],
         queryFn:   async () => {
             const res = await axiosSecure.get('/review');
             return res.data;
           }
     })
-    return [review, isLoading, refetch];
+    return [reviews, isLoading, refetch];
   
 };
 

@@ -5,21 +5,23 @@ import Rating from 'react-rating-stars-component';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
 
+import { toast, Toaster } from 'react-hot-toast';
+import useReview from '../../hooks/useReview';
 
-import {toast, Toaster } from 'react-hot-toast';
-
-const DetailsTab = ( {productDescription,reviewId} ) => {
+const DetailsTab = ({ productDescription, reviewId }) => {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('');
-    const  {user} = useAuth();
+    const { user } = useAuth();
     const date = new Date();
     const image = user?.photoURL;
     const userName = user?.displayName;
-    
+    const [reviews] = useReview();
+    const productReview = reviews?.filter(r => String(r.productId) === String(reviewId));
+
     const reviewDate = date.toLocaleDateString();
-     console.log( productDescription,reviewId,user,image)
-const time = date.toLocaleTimeString();
-       const axiosPublic = useAxiosPublic();
+    const time = date.toLocaleTimeString();
+    const axiosPublic = useAxiosPublic();
+
     const handleRatingChange = (newRating) => {
         setRating(newRating);
     };
@@ -27,45 +29,46 @@ const time = date.toLocaleTimeString();
     const handleReviewChange = (e) => {
         setReview(e.target.value);
     };
-// console.log(reviewDate,time)
+
     const handleSubmit = (e) => {
-        e.preventDefault();  
+        e.preventDefault();
         const info = {
-         rating,
-         review,
-         reviewerEmail: user?.email,
-         reviewerImg:image,
-         reviewerName:userName,
-         productId:reviewId,
-        reviewDate ,
-         time 
-        }
-        console.log(info)
-      
-          axiosPublic.post("/review", info)
-        
-          .then(res => {
-            console.log(res.status); 
-            if (res.status === 200) {
-                toast.success("Thanks For Your Review"); 
-            } else {
-                toast.error("Failed to submit review");
-            }
-        })
-       
-        
+            rating,
+            review,
+            reviewerEmail: user?.email,
+            reviewerImg: image,
+            reviewerName: userName,
+            productId: reviewId,
+            reviewDate,
+            time
+        };
+
+        axiosPublic.post("/review", info)
+            .then(res => {
+                if (res.status === 200) {
+                    toast.success("Thanks For Your Review");
+                } else {
+                    toast.error("Failed to submit review");
+                }
+            });
     };
 
+    // Sort product reviews by date and time (latest first)
+    const sortedProductReview = productReview?.sort((a, b) => {
+        const dateA = new Date(`${a.reviewDate} ${a.time}`);
+        const dateB = new Date(`${b.reviewDate} ${b.time}`);
+        return dateB - dateA; // Sort in descending order
+    });
+
     return (
-        <div className=' p-24'>
-            <div><Toaster
-             position="top-right"/></div>
+        <div className='p-24'>
+            <div><Toaster position="top-right" /></div>
             <Tabs>
                 <TabList>
                     <Tab>Description</Tab>
                     <Tab>Review</Tab>
                 </TabList>
-{/* description pannel */}
+                {/* Description panel */}
                 <TabPanel>
                     {productDescription ? (
                         <p>{productDescription}</p>
@@ -75,10 +78,46 @@ const time = date.toLocaleTimeString();
                         </p>
                     )}
                 </TabPanel>
-{/* review Pannel */}
+                {/* Review panel */}
                 <TabPanel>
-                    <h2 className=" flex justify-center items-center text-lg font-semibold mb-4">Add a review</h2>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <h2 className="flex justify-center items-center text-lg font-semibold mb-4 text-gray-800">Product Reviews</h2>
+                    {sortedProductReview && sortedProductReview.length > 0 ? (
+                        sortedProductReview.map((review, index) => (
+                            <div key={index} className="mb-4 flex items-start space-x-4">
+                                {/* Reviewer's Image */}
+                                <img
+                                    src={review.reviewerImg}
+                                    alt={review.reviewerName}
+                                    className="w-12 h-12 rounded-full"
+                                />
+
+                                {/* Reviewer's Information and Content */}
+                                <div>
+                                    <p className="font-semibold">{review.reviewerName}</p>
+                                    <p className="text-sm text-gray-500">{review.reviewDate} at {review.time}</p>
+
+                                    {/* Rating Display */}
+                                    <Rating
+                                        count={5}
+                                        value={review.rating}
+                                        edit={false}
+                                        size={20}
+                                        activeColor="#ffd700"
+                                    />
+
+                                    {/* Review Text */}
+                                    <p className="mt-2">{review.review}</p>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No reviews available for this product.</p>
+                    )}
+
+                    {/* Review Submission Form */}
+                    <div className='border border-gray-300 my-4'></div>
+                    <h2 className="flex justify-center items-center text-lg font-semibold mb-4 text-gray-800">Add a review</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4 mt-4">
                         <div>
                             <label className="block font-medium mb-1">Your Rating *</label>
                             <Rating
@@ -108,8 +147,7 @@ const time = date.toLocaleTimeString();
                         </button>
                     </form>
                 </TabPanel>
-            </Tabs> 
-        
+            </Tabs>
         </div>
     );
 };

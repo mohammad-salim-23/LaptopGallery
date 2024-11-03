@@ -16,8 +16,7 @@ const ProductsDetails = () => {
    
     const product = products.find(p => p._id === id);
 
-   const reviews = useReview();
-   console.log(reviews)
+   
     if (!product) {
         return <div>Product not found.</div>;
     }
