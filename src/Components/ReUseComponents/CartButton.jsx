@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
@@ -9,9 +9,10 @@ import Swal from 'sweetalert2';
 const CartButton = ({ prodId }) => {
     const [productInfo, setProductInfo] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [cartItems, setCartItems] = useState([]);
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -20,13 +21,27 @@ const CartButton = ({ prodId }) => {
                 setProductInfo(response.data);
             } catch (error) {
                 console.log(error);
+                toast.error("Failed to fetch product information");
             } finally {
                 setLoading(false);
             }
         };
 
+        const fetchCartItems = async () => {
+            if (user) {
+                try {
+                    const response = await axiosPublic.get(`/cart?email=${user.email}`);
+                    setCartItems(response.data);
+                } catch (error) {
+                    console.log(error);
+                    toast.error("Failed to fetch cart items");
+                }
+            }
+        };
+
         fetchProduct();
-    }, [axiosPublic, prodId]);
+        fetchCartItems();
+    }, [axiosPublic, prodId, user]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -34,30 +49,40 @@ const CartButton = ({ prodId }) => {
 
     const { email, displayName } = user || {};
     const { brand, price, image, model, productId, color } = productInfo || {};
-    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color};
+    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color };
 
     const handleAddToCart = async () => {
         if (!user) {
-            // If the user is not signed in, navigate to the login page
+            
             navigate('/login');
             Swal.fire({
                 icon: "error",
-                title: "Uhh",
-                text: "First login then add product to the cart",
+                title: "Authentication Required",
+                text: "Please log in to add products to the cart.",
                 footer: '<a href="#">Why do I have this issue?</a>'
             });
             return;
         }
 
-        // If the user is signed in, proceed to add to cart
+        
+        const isProductInCart = cartItems.some(item => item.productId === productId);
+        if (isProductInCart) {
+            toast.error(`${model} is already in your cart.`);
+            return;
+        }
+
+        
         try {
             const res = await axiosPublic.post("/cart", cartInfo);
             if (res.status === 200) {
                 toast.success(`${model} added to the cart`);
+               
+                setCartItems(prevItems => [...prevItems, cartInfo]);
             } else {
                 toast.error("Failed to add to cart");
             }
         } catch (error) {
+            console.log(error);
             toast.error("Error adding to cart");
         }
     };
