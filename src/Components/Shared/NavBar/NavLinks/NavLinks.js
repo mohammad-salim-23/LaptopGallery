@@ -74,58 +74,7 @@ export const Navlinks = [
   },
   {
     name: "Accessories",
-    link: '/laptop-accessories',
-    subMenu: [
-      {
-        name: "Mouse",
-        link: 'mouse'
-      },
-      {
-        name: "Keyboard",
-        link: 'keyboard'
-      },
-      {
-        name: "Laptop Cooler",
-        link: 'laptop-cooler'
-      },
-      {
-        name: "Laptop Desk",
-        link: 'laptop-desk'
-      },
-      {
-        name: "Laptop Stand",
-        link: 'laptop-stand'
-      },
-      {
-        name: "Laptop Battery",
-        link: 'laptop-battery'
-      },
-      {
-        name: "Laptop Charger",
-        link: 'laptop-charger'
-      },
-      {
-        name: "Display",
-        link: 'display'
-      },
-      {
-        name: "Caddy",
-        link: 'caddy'
-      },
-      {
-        name: "Laptop Locker",
-        link: 'laptop-locker'
-      },
-      {
-        name: "Ram (Laptop)",
-        link: 'laptop-ram'
-      },
-      {
-        name: "SSD (Laptop)",
-        link: 'laptop-ssd'
-      },
-    
-    ],
+    link: 'accessories',
     gridCols: 3,
   },
   {
@@ -179,29 +128,6 @@ export const Navlinks = [
       {
         name: "Walton",
         link: 'walton'
-      },
-    ],
-    gridCols: 2,
-  },
-  {
-    name: "Phone Accessories",
-    link: 'phone-accessories',
-    subMenu: [
-      {
-        name: "Phone Cover",
-        link: 'phone-cover'
-      },
-      {
-        name: "Battery",
-        link: 'battery'
-      },
-      {
-        name: "Display",
-        link: 'display'
-      },
-      {
-        name: "Charger",
-        link: 'charger'
       },
     ],
     gridCols: 2,
