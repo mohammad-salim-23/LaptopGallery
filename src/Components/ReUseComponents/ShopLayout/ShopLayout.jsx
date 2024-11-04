@@ -41,8 +41,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
   return (
     <div className="p-6 bg-base-200 my-10">
-        <div><Toaster
-             position="top-right"/></div>
+       
       <div className="flex">
         <div className="w-64 min-h-screen p-4 bg-white rounded-lg">
           {/* Availability Filter */}
