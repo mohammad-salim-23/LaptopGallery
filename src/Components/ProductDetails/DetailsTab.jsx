@@ -15,7 +15,7 @@ const DetailsTab = ({ productDescription, reviewId }) => {
     const date = new Date();
     const image = user?.photoURL;
     const userName = user?.displayName;
-    const [reviews] = useReview();
+    const [reviews,refetch] = useReview();
     const productReview = reviews?.filter(r => String(r.productId) === String(reviewId));
 
     const reviewDate = date.toLocaleDateString();
@@ -31,6 +31,7 @@ const DetailsTab = ({ productDescription, reviewId }) => {
     };
 
     const handleSubmit = (e) => {
+      
         e.preventDefault();
         const info = {
             rating,
@@ -47,10 +48,13 @@ const DetailsTab = ({ productDescription, reviewId }) => {
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Thanks For Your Review");
+                    refetch();
                 } else {
                     toast.error("Failed to submit review");
                 }
             });
+          
+          
     };
 
     // Sort product reviews by date and time (latest first)
@@ -58,11 +62,11 @@ const DetailsTab = ({ productDescription, reviewId }) => {
         const dateA = new Date(`${a.reviewDate} ${a.time}`);
         const dateB = new Date(`${b.reviewDate} ${b.time}`);
         return dateB - dateA; // Sort in descending order
-    });
-
+        });
+        
     return (
         <div className='p-24'>
-            <div><Toaster position="top-right" /></div>
+          
             <Tabs>
                 <TabList>
                     <Tab>Description</Tab>
@@ -82,37 +86,41 @@ const DetailsTab = ({ productDescription, reviewId }) => {
                 <TabPanel>
                     <h2 className="flex justify-center items-center text-lg font-semibold mb-4 text-gray-800">Product Reviews</h2>
                     {sortedProductReview && sortedProductReview.length > 0 ? (
-                        sortedProductReview.map((review, index) => (
-                            <div key={index} className="mb-4 flex items-start space-x-4">
-                                {/* Reviewer's Image */}
-                                <img
-                                    src={review.reviewerImg}
-                                    alt={review.reviewerName}
-                                    className="w-12 h-12 rounded-full"
-                                />
+    sortedProductReview.map((review, index) => (
+        <div key={index} className="mb-4 flex items-start space-x-4">
+            {/* Reviewer's Image */}
+            <img
+                src={review.reviewerImg || "https://i.ibb.co/2nMDYtg/blank-profile-picture-973460-1280.png"}
+                alt={review.reviewerName || "Reviewer"}
+                onError={(e) => {
+                    e.target.onerror = null; 
+                    e.target.src = "https://i.ibb.co/2nMDYtg/blank-profile-picture-973460-1280.png";
+                }}
+                className="w-12 h-12 rounded-full object-cover"
+            />
 
-                                {/* Reviewer's Information and Content */}
-                                <div>
-                                    <p className="font-semibold">{review.reviewerName}</p>
-                                    <p className="text-sm text-gray-500">{review.reviewDate} at {review.time}</p>
+            {/* Reviewer's Information and Content */}
+            <div>
+                <p className="font-semibold">{review.reviewerName}</p>
+                <p className="text-sm text-gray-500">{review.reviewDate} at {review.time}</p>
 
-                                    {/* Rating Display */}
-                                    <Rating
-                                        count={5}
-                                        value={review.rating}
-                                        edit={false}
-                                        size={20}
-                                        activeColor="#ffd700"
-                                    />
+                {/* Rating Display */}
+                <Rating
+                    count={5}
+                    value={review.rating}
+                    edit={false}
+                    size={20}
+                    activeColor="#ffd700"
+                />
 
-                                    {/* Review Text */}
-                                    <p className="mt-2">{review.review}</p>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No reviews available for this product.</p>
-                    )}
+                {/* Review Text */}
+                <p className="mt-2">{review.review}</p>
+            </div>
+        </div>
+    ))
+) : (
+    <p>No reviews available for this product.</p>
+)}
 
                     {/* Review Submission Form */}
                     <div className='border border-gray-300 my-4'></div>

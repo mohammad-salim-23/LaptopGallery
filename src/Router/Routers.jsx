@@ -22,6 +22,7 @@ import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
 import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
 import Cart from "../Pages/Cart/Cart";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Compare from "../Pages/Compare/Compare";
 
 export const router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
             {
                 path: '/products/:brand',
                 element: <Brand></Brand>
+            },
+            {
+                path: '/compare',
+                element: <Compare></Compare>
             },
             {
                 path: '/cart',
