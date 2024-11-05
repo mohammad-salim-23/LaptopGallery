@@ -14,7 +14,7 @@ export default function DesktopMenu({ menu }) {
       opacity: 1,
       rotateX: 0,
       transition: {
-        duration: 0.3,
+        duration: 0.1,
       },
       display: "block",
     },
@@ -45,9 +45,6 @@ export default function DesktopMenu({ menu }) {
         <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
           {menu.name} 
          
-          {hasSubMenu && (
-            <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
-          )}
         </span>
       </Link>
       {hasSubMenu && (
@@ -67,7 +64,7 @@ export default function DesktopMenu({ menu }) {
           >
             {hasSubMenu &&
               menu.subMenu.map((submenu, i) => (
-                <div className="relative cursor-pointer" key={i}>
+                <div className="relative cursor-pointer hover:bg-primary" key={i}>
                   <div className="flex-center gap-x-4 group/menubox">
                     <div>
 
