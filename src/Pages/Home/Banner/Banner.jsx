@@ -22,7 +22,7 @@ const slidesData = [
 const Banner = () => {
     return (
         <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row mt-10 space-y-6 lg:space-y-0 lg:space-x-6">
+            <div className="flex flex-col lg:flex-row mt-4 space-y-6 lg:space-y-0 lg:space-x-6">
                 <div className="lg:w-1/4 w-full">
                     <div className="bg-yellow-200 pt-6   rounded-md shadow-md mb-6 lg:mb-0">
                         <h1 className="font-semibold text-center text-lg text-black">Compare Products</h1>

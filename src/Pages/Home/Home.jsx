@@ -1,5 +1,3 @@
-import CartButton from "../../Components/ReUseComponents/CartButton";
-import NavBar from "../../Components/Shared/NavBar/NavBar";
 import Find from "../Find/Find";
 import Banner from "./Banner/Banner";
 import Faq from "./Faq/Faq";
@@ -9,9 +7,6 @@ import FeaturedCard from "./FeaturedCard/FeaturedCard";
 const Home = () => {
     return (
         <div>
-            <div className="mb-24">
-                <NavBar></NavBar>
-            </div>
             <Banner></Banner>
             <FeaturedCard></FeaturedCard>
             <Faq></Faq>
