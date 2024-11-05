@@ -4,11 +4,31 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import "./NavBar"
 import DesktopMenu from "./Responsive/DesktopMenu/DesktopMenu";
 import useAuth from "../../../hooks/useAuth";
+import { IoIosLogOut } from "react-icons/io";
+import { AuthContext } from "../../../Auth/Provider/AuthProvider";
+import { useContext } from "react";
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 
 const NavBar = () => {
     const { user } = useAuth();
+    const { logOut } = useContext(AuthContext);
+
+    // Handel Logout
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    title: "Logout Success!",
+                    text: "Logout !",
+                    icon: "success"
+                });
+                navigation('/')
+            })
+            .catch(error => console.log(error))
+
+    }
 
     return (
         <>

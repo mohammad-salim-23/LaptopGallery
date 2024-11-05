@@ -9,6 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import useReview from '../../hooks/useReview';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
+import useCompare from '../../hooks/useCompare';
 
 
 const ProductsDetails = () => {
@@ -20,6 +21,7 @@ const ProductsDetails = () => {
      const date = new Date();
      const compareDate = date.toLocaleDateString();
      const time = date.toLocaleTimeString();
+     const [compare] = useCompare();
     if (!product) {
         return <div>Product not found.</div>;
     }
@@ -34,15 +36,20 @@ const ProductsDetails = () => {
 
         };
         
-        axiosSecure.post('/compare',info)
+        if (compare?.length > 4) {
+            toast.error('You have reached the limit for adding items to Compare. Remove one to add another.');
+        }
+        else{
+            axiosSecure.post('/compare',info)
         .then(res => {
             if (res.status === 200) {
-                toast.success("Go To your Profile For See Compared Product");
+                toast.success("Go to your profile to view the compared product.");
                 refetch();
             } else {
-                toast.error("Failed to submit review");
+                toast.error("Failed to add item to Compare");
             }
         });
+        }
      }
     return (
        <div className='my-10'>
