@@ -13,7 +13,6 @@ import TotalMobile from "../Pages/Admin/Dashboard/Mobile/TotalMobile";
 import TotalUsers from "../Pages/Admin/Dashboard/TotalUsers/TotalUsers";
 import AdminPanel from "../Pages/Admin/Dashboard/AdminPanel/AdminPanel";
 import UpdateProductLaptop from "../Layout/UpdateProductLaptop/UpdateProductLaptop";
-
 import Laptops from "../Pages/Laptops/Laptops";
 import Phone from "../Pages/Phone/Phone";
 import Brand from "../Components/Shared/Brands/Brand";
@@ -21,10 +20,9 @@ import UpdateProductMobile from "../Layout/UpdateProductMobile/UpdateProductMobi
 import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
 import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
 import Cart from "../Pages/Cart/Cart";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import Checkout from "../Pages/Checkout/Checkout";
 import PaymentSuccess from "../Pages/Checkout/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/Checkout/PaymentFail/PaymentFail";
+import Compare from "../Pages/Compare/Compare";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +70,10 @@ export const router = createBrowserRouter([
             {
                 path: '/products/:brand',
                 element: <Brand></Brand>
+            },
+            {
+                path: '/compare',
+                element: <Compare></Compare>
             },
             {
                 path: '/cart',

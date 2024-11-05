@@ -4,21 +4,49 @@ import useProducts from '../../hooks/useProducts';
 import { div } from 'framer-motion/client';
 import { MdCompareArrows } from 'react-icons/md';
 import CartButton from '../ReUseComponents/CartButton';
+import DetailsTab from './DetailsTab';
+import toast, { Toaster } from 'react-hot-toast';
+import useReview from '../../hooks/useReview';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAuth from '../../hooks/useAuth';
+
 
 const ProductsDetails = () => {
     const { id } = useParams();
     const [products, refetch] = useProducts();
-
-   
+    const {user} = useAuth();   
     const product = products.find(p => p._id === id);
-
-   
+     const axiosSecure = useAxiosSecure();
+     const date = new Date();
+     const compareDate = date.toLocaleDateString();
+     const time = date.toLocaleTimeString();
     if (!product) {
         return <div>Product not found.</div>;
     }
 
+     const handleCompare = ()=>{
+        const info = {
+            ...product ,
+            userEmail:user?.email, 
+           date: compareDate,
+           time,
+          prodId:id,
+
+        };
+        
+        axiosSecure.post('/compare',info)
+        .then(res => {
+            if (res.status === 200) {
+                toast.success("Go To your Profile For See Compared Product");
+                refetch();
+            } else {
+                toast.error("Failed to submit review");
+            }
+        });
+     }
     return (
        <div className='my-10'>
+
          <div className="max-w-4xl mx-auto p-4 ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-lg mt-10">
                 {/* Product Image */}
@@ -50,7 +78,7 @@ const ProductsDetails = () => {
                    
                         <div className='flex justify-between'>
                         <div className='my-4  '><CartButton  prodId={product._id} ></CartButton></div>
-                        <div className='my-4'>  <button className=' bg-gray-800 text-white rounded-lg p-2 flex justify-center items-center' > <span><MdCompareArrows /> </span>Compare</button></div>
+                        <div className='my-4'>  <button onClick={handleCompare} className=' bg-gray-800 text-white rounded-lg p-2 flex justify-center items-center' > <span> </span>Add To Compare</button></div>
                         </div>
                        
              
@@ -60,6 +88,10 @@ const ProductsDetails = () => {
                 </div>
             </div>
         </div>
+        <div>
+            <DetailsTab  reviewId ={product._id} productDescription = {product.description}></DetailsTab>
+        </div>
+       
        </div>
     );
 };

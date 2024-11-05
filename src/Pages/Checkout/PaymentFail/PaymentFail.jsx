@@ -18,7 +18,7 @@ const PaymentFail = () => {
             <div className="text-center font-bold text-red-500">
                 <h1 className="text-6xl">Payment Failed</h1>
                 <Link to={'/'}>
-                    <p className="text-2xl my-4 btn">Go to Home</p>
+                    <button className="text-2xl my-4  border p-3 hover:border-black  hover:bg-blue-200 hover:text-black rounded-xl">Go to Home</button>
                 </Link>
             </div>
         </div>

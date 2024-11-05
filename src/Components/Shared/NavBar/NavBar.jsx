@@ -35,7 +35,7 @@ const NavBar = () => {
                 <nav className=" px-3.5 flex-center-between w-full max-w-7xl mx-auto">
                     <div className="flex-center gap-x-3 z-[999] relative">
                         {/* <img src={Logo} alt="" className="size-8" /> */}
-                        <h3 className="text-lg font-semibold">Laptop Gallery</h3>
+                        <Link to={'/'}><h3 className="text-lg font-semibold">Laptop Gallery</h3></Link>
                     </div>
 
                     <ul className="gap-x-1 lg:flex-center hidden">

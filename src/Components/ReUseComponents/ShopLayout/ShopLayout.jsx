@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartButton from '../CartButton';
+import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'react-hot-toast';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
   const [sortOrder, setSortOrder] = useState("");
@@ -39,6 +41,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
   return (
     <div className="p-6 bg-base-200 my-10">
+       
       <div className="flex">
         <div className="w-64 min-h-screen p-4 bg-white rounded-lg">
           {/* Availability Filter */}
@@ -168,6 +171,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
           </div>
         </div>
       </div>
+   
     </div>
   );
 };
