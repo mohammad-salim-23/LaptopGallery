@@ -33,8 +33,8 @@ const CartButton = ({ prodId }) => {
     }
 
     const { email, displayName } = user || {};
-    const { brand, price, image, model, productId, color } = productInfo || {};
-    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color};
+    const { brand, price, image, model, productId, color,type,subCategory } = productInfo || {};
+    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color,type,subCategory};
 
     const handleAddToCart = async () => {
         if (!user) {

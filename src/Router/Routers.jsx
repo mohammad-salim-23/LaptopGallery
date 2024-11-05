@@ -22,6 +22,9 @@ import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
 import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
 import Cart from "../Pages/Cart/Cart";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Checkout from "../Pages/Checkout/Checkout";
+import PaymentSuccess from "../Pages/Checkout/PaymentSuccess/PaymentSuccess";
+import PaymentFail from "../Pages/Checkout/PaymentFail/PaymentFail";
 
 export const router = createBrowserRouter([
     {
@@ -72,8 +75,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/cart',
-                element: <PrivateRoute><Cart></Cart></PrivateRoute>
+                element:  <Cart></Cart> 
+            },
+            {
+                path: '/payment/success/:tranId',
+                element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: '/payment/fail/:tranId',
+                element: <PaymentFail></PaymentFail>
             }
+            
         ]
     },
     {
