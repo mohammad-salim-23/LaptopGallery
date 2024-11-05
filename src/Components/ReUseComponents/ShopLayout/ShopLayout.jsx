@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartButton from '../CartButton';
-import { ToastContainer } from 'react-toastify';
-import { Toaster } from 'react-hot-toast';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
   const [sortOrder, setSortOrder] = useState("");
@@ -11,17 +9,22 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   const [selectedStorage, setSelectedStorage] = useState([]);
   const [selectedOs, setSelectedOs] = useState([]);
   const [selectedProcessor, setSelectedProcessor] = useState([]);
+  const [selectedSubcategory, setSelectedSubcategory] = useState([]); 
   const [inStockOnly, setInStockOnly] = useState(false);
+
+  // Determine if selected subcategory is an accessory
+  const isAccessory = selectedSubcategory.includes("Laptop Accessories") || selectedSubcategory.includes("Mobile Accessories");
 
   // Sorting and filtering function
   const sortedItems = [...items]
     .filter(item => 
       (!inStockOnly || item.stock) &&
       (selectedBrand.length === 0 || selectedBrand.includes(item.brand)) &&
-      (selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
-      (selectedStorage.length === 0 || selectedStorage.includes(item.storage)) &&
-      (selectedOs.length === 0 || selectedOs.includes(item.os)) &&
-      (selectedProcessor.length === 0 || selectedProcessor.includes(item.processor))
+      (isAccessory || selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
+      (isAccessory || selectedStorage.length === 0 || selectedStorage.includes(item.storage)) &&
+      (isAccessory || selectedOs.length === 0 || selectedOs.includes(item.os)) &&
+      (isAccessory || selectedProcessor.length === 0 || selectedProcessor.includes(item.processor)) &&
+      (selectedSubcategory.length === 0 || selectedSubcategory.includes(item.subCategory))
     )
     .sort((a, b) => {
       if (sortOrder === "lowToHigh") return a.price - b.price;
@@ -34,6 +37,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   };
 
   const brands = [...new Set(items.map(item => item.brand))];
+  const subcategories = [...new Set(items.map(item => item.subCategory))];
   const ram = [...new Set(items.map(item => item.ram))];
   const storage = [...new Set(items.map(item => item.storage))];
   const os = [...new Set(items.map(item => item.os))];
@@ -41,7 +45,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
   return (
     <div className="p-6 bg-base-200 my-10">
-       
       <div className="flex">
         <div className="w-64 min-h-screen p-4 bg-white rounded-lg">
           {/* Availability Filter */}
@@ -54,7 +57,22 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             />
             <label>In Stock</label>
           </div>
-          
+
+          {/* Subcategory Filter */}
+          <div className="p-4">
+            <h2>Subcategory</h2>
+            {subcategories.map((subcat, index) => (
+              <div key={index}>
+                <input 
+                  type="checkbox" 
+                  onChange={() => toggleFilter(setSelectedSubcategory, subcat)} 
+                  checked={selectedSubcategory.includes(subcat)}
+                />
+                <label>{subcat}</label>
+              </div>
+            ))}
+          </div>
+
           {/* Brand Filter */}
           <div className="p-4">
             <h2>Brand</h2>
@@ -70,65 +88,70 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             ))}
           </div>
 
-          {/* RAM Filter */}
-          <div className="p-4">
-            <h2>RAM</h2>
-            {ram.map((ramOption, index) => (
-              <div key={index}>
-                <input 
-                  type="checkbox" 
-                  onChange={() => toggleFilter(setSelectedRam, ramOption)} 
-                  checked={selectedRam.includes(ramOption)}
-                />
-                <label>{ramOption}</label>
+          {/* Conditionally Rendered Filters for Non-Accessories */}
+          {!isAccessory && (
+            <>
+              {/* RAM Filter */}
+              <div className="p-4">
+                <h2>RAM</h2>
+                {ram.map((ramOption, index) => (
+                  <div key={index}>
+                    <input 
+                      type="checkbox" 
+                      onChange={() => toggleFilter(setSelectedRam, ramOption)} 
+                      checked={selectedRam.includes(ramOption)}
+                    />
+                    <label>{ramOption}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Storage Filter */}
-          <div className="p-4">
-            <h2>Storage</h2>
-            {storage.map((storageOption, index) => (
-              <div key={index}>
-                <input 
-                  type="checkbox" 
-                  onChange={() => toggleFilter(setSelectedStorage, storageOption)} 
-                  checked={selectedStorage.includes(storageOption)}
-                />
-                <label>{storageOption}</label>
+              {/* Storage Filter */}
+              <div className="p-4">
+                <h2>Storage</h2>
+                {storage.map((storageOption, index) => (
+                  <div key={index}>
+                    <input 
+                      type="checkbox" 
+                      onChange={() => toggleFilter(setSelectedStorage, storageOption)} 
+                      checked={selectedStorage.includes(storageOption)}
+                    />
+                    <label>{storageOption}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* OS Filter */}
-          <div className="p-4">
-            <h2>Operating System</h2>
-            {os.map((osOption, index) => (
-              <div key={index}>
-                <input 
-                  type="checkbox" 
-                  onChange={() => toggleFilter(setSelectedOs, osOption)} 
-                  checked={selectedOs.includes(osOption)}
-                />
-                <label>{osOption}</label>
+              {/* OS Filter */}
+              <div className="p-4">
+                <h2>Operating System</h2>
+                {os.map((osOption, index) => (
+                  <div key={index}>
+                    <input 
+                      type="checkbox" 
+                      onChange={() => toggleFilter(setSelectedOs, osOption)} 
+                      checked={selectedOs.includes(osOption)}
+                    />
+                    <label>{osOption}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Processor Filter */}
-          <div className="p-4">
-            <h2>Processor</h2>
-            {processor.map((processorOption, index) => (
-              <div key={index}>
-                <input 
-                  type="checkbox" 
-                  onChange={() => toggleFilter(setSelectedProcessor, processorOption)} 
-                  checked={selectedProcessor.includes(processorOption)}
-                />
-                <label>{processorOption}</label>
+              {/* Processor Filter */}
+              <div className="p-4">
+                <h2>Processor</h2>
+                {processor.map((processorOption, index) => (
+                  <div key={index}>
+                    <input 
+                      type="checkbox" 
+                      onChange={() => toggleFilter(setSelectedProcessor, processorOption)} 
+                      checked={selectedProcessor.includes(processorOption)}
+                    />
+                    <label>{processorOption}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
 
         <div className="flex-1 px-4">
@@ -148,30 +171,35 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             </div>
           </div>
 
-          
-          {/* Cards */}
+          {/* Product Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {sortedItems?.map((data) => (
-            <div key={data._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
-             <Link to={`/productDetails/${data._id}`}> <img src={data.image} alt={data.model} className="w-full h-40 object-cover" /></Link>
-             <div className="p-4">
-             <Link to={`/productDetails/${data._id}`}> <h3 className="text-lg font-bold mb-2 hover:text-red-500 hover:underline">{data.brand} - {data.model}</h3></Link>
-               <p className="text-gray-700">Processor: {data.processor}</p>
-               <p className="text-gray-700">RAM: {data.ram}</p>
-               <p className="text-gray-700">Storage: {data.storage}</p>
-               
-               <p className="text-gray-700">OS: {data.os}</p>
-               <div className='border border-gray-300 my-4'></div>
-               <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
-               <div className='my-4'><CartButton prodId={data._id} ></CartButton></div>
-               <div className='border border-gray-300 my-4'></div>
-             </div>
-           </div>
+              <div key={data._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
+                <Link to={`/productDetails/${data._id}`}>
+                  <img src={data.image} alt={data.model} className="w-full h-40 object-cover" />
+                </Link>
+                <div className="p-4">
+                  <Link to={`/productDetails/${data._id}`}>
+                    <h3 className="text-lg font-bold mb-2 hover:text-red-500 hover:underline">
+                      {data.brand} - {data.model}
+                    </h3>
+                  </Link>
+                  <p className="text-gray-700">Processor: {data.processor}</p>
+                  <p className="text-gray-700">RAM: {data.ram}</p>
+                  <p className="text-gray-700">Storage: {data.storage}</p>
+                  <p className="text-gray-700">OS: {data.os}</p>
+                  <div className="border border-gray-300 my-4"></div>
+                  <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
+                  <div className="my-4">
+                    <CartButton prodId={data._id} />
+                  </div>
+                  <div className="border border-gray-300 my-4"></div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </div>
-   
     </div>
   );
 };

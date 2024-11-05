@@ -1,13 +1,14 @@
 import React from 'react';
 import useCompare from '../../hooks/useCompare';
 import CartButton from '../../Components/ReUseComponents/CartButton';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Compare = () => {
     const [compare, refetch] = useCompare();
-
+ const axiosSecure = useAxiosSecure();
     console.log(compare);
     const sortedCompare = compare
-        
         .sort((a, b) => new Date(b.time) - new Date(a.time))
         .slice(0, 4);
 
@@ -26,7 +27,37 @@ const Compare = () => {
         { label: "Status", key: "status" },
     ];
 
-    
+    const handleRemove = (id) => {
+        console.log("Deleting item with ID:", id);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Remove it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+      
+      
+              axiosSecure.delete(`/compare/${id}`)
+                .then(res => {
+                    console.log(res);
+                  if (res.data.deletedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                      title: "Reject!",
+                      text: "Rejected.",
+                      icon: "success"
+                    });
+                  }
+                })
+            }
+          });
+    };
+
     return (
         <div className="overflow-x-auto p-4 my-24">
             <h2 className="text-2xl font-semibold mb-4">Product Comparison</h2>
@@ -66,7 +97,20 @@ const Compare = () => {
                         <td className="border p-2 font-semibold bg-gray-50">Add to Cart</td>
                         {sortedCompare.map((product, index) => (
                             <td key={index} className="border p-2 text-center">
-                               <CartButton prodId={product?.prodId}></CartButton>
+                                <CartButton prodId={product?.prodId}></CartButton>
+                            </td>
+                        ))}
+                    </tr>
+                    <tr>
+                        <td className="border p-2 font-semibold bg-gray-50">Remove</td>
+                        {sortedCompare.map((product, index) => (
+                            <td key={index} className="border p-2 text-center">
+                                <button
+                                    onClick={() => handleRemove(product._id)}
+                                    className="px-2 py-1 bg-red-500 text-white rounded"
+                                >
+                                    Remove
+                                </button>
                             </td>
                         ))}
                     </tr>

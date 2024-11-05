@@ -23,6 +23,7 @@ import Cart from "../Pages/Cart/Cart";
 import PaymentSuccess from "../Pages/Checkout/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/Checkout/PaymentFail/PaymentFail";
 import Compare from "../Pages/Compare/Compare";
+import AccessoriesInHome from "../Pages/AccessoriesInHome/AccessoriesInHome";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +63,11 @@ export const router = createBrowserRouter([
 
                 path: '/laptop',
                 element: <Laptops></Laptops>
+            },
+            {
+
+                path: '/accessories',
+                element: <AccessoriesInHome></AccessoriesInHome>
             },
             {
                 path: '/phone',
