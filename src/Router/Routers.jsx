@@ -23,6 +23,7 @@ import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessor
 import Cart from "../Pages/Cart/Cart";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Compare from "../Pages/Compare/Compare";
+import AccessoriesInHome from "../Pages/AccessoriesInHome/AccessoriesInHome";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +63,11 @@ export const router = createBrowserRouter([
 
                 path: '/laptop',
                 element: <Laptops></Laptops>
+            },
+            {
+
+                path: '/accessories',
+                element: <AccessoriesInHome></AccessoriesInHome>
             },
             {
                 path: '/phone',
