@@ -4,7 +4,6 @@ import 'react-tabs/style/react-tabs.css';
 import Rating from 'react-rating-stars-component';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
-
 import { toast, Toaster } from 'react-hot-toast';
 import useReview from '../../hooks/useReview';
 
@@ -15,7 +14,7 @@ const DetailsTab = ({ productDescription, reviewId }) => {
     const date = new Date();
     const image = user?.photoURL;
     const userName = user?.displayName;
-    const [reviews,refetch] = useReview();
+    const [reviews, refetch] = useReview();
     const productReview = reviews?.filter(r => String(r.productId) === String(reviewId));
 
     const reviewDate = date.toLocaleDateString();
@@ -31,7 +30,6 @@ const DetailsTab = ({ productDescription, reviewId }) => {
     };
 
     const handleSubmit = (e) => {
-      
         e.preventDefault();
         const info = {
             rating,
@@ -53,8 +51,6 @@ const DetailsTab = ({ productDescription, reviewId }) => {
                     toast.error("Failed to submit review");
                 }
             });
-          
-          
     };
 
     // Sort product reviews by date and time (latest first)
@@ -62,11 +58,10 @@ const DetailsTab = ({ productDescription, reviewId }) => {
         const dateA = new Date(`${a.reviewDate} ${a.time}`);
         const dateB = new Date(`${b.reviewDate} ${b.time}`);
         return dateB - dateA; // Sort in descending order
-        });
-        
+    });
+
     return (
         <div className='p-24'>
-          
             <Tabs>
                 <TabList>
                     <Tab>Description</Tab>
@@ -86,41 +81,41 @@ const DetailsTab = ({ productDescription, reviewId }) => {
                 <TabPanel>
                     <h2 className="flex justify-center items-center text-lg font-semibold mb-4 text-gray-800">Product Reviews</h2>
                     {sortedProductReview && sortedProductReview.length > 0 ? (
-    sortedProductReview.map((review, index) => (
-        <div key={index} className="mb-4 flex items-start space-x-4">
-            {/* Reviewer's Image */}
-            <img
-                src={review.reviewerImg || "https://i.ibb.co/2nMDYtg/blank-profile-picture-973460-1280.png"}
-                alt={review.reviewerName || "Reviewer"}
-                onError={(e) => {
-                    e.target.onerror = null; 
-                    e.target.src = "https://i.ibb.co/2nMDYtg/blank-profile-picture-973460-1280.png";
-                }}
-                className="w-12 h-12 rounded-full object-cover"
-            />
+                        sortedProductReview.map((review, index) => (
+                            <div key={index} className="mb-4 flex items-start space-x-4">
+                                {/* Reviewer's Image */}
+                                <img
+                                    src={review.reviewerImg || "https://i.ibb.co/2nMDYtg/blank-profile-picture-973460-1280.png"}
+                                    alt={review.reviewerName || "Reviewer"}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = "https://i.ibb.co/2nMDYtg/blank-profile-picture-973460-1280.png";
+                                    }}
+                                    className="w-12 h-12 rounded-full object-cover"
+                                />
 
-            {/* Reviewer's Information and Content */}
-            <div>
-                <p className="font-semibold">{review.reviewerName}</p>
-                <p className="text-sm text-gray-500">{review.reviewDate} at {review.time}</p>
+                                {/* Reviewer's Information and Content */}
+                                <div>
+                                    <p className="font-semibold">{review.reviewerName}</p>
+                                    <p className="text-sm text-gray-500">{review.reviewDate} at {review.time}</p>
 
-                {/* Rating Display */}
-                <Rating
-                    count={5}
-                    value={review.rating}
-                    edit={false}
-                    size={20}
-                    activeColor="#ffd700"
-                />
+                                    {/* Rating Display */}
+                                    <Rating
+                                        count={5}
+                                        value={review.rating}
+                                        edit={false}
+                                        size={20}
+                                        activeColor="#ffd700"
+                                    />
 
-                {/* Review Text */}
-                <p className="mt-2">{review.review}</p>
-            </div>
-        </div>
-    ))
-) : (
-    <p>No reviews available for this product.</p>
-)}
+                                    {/* Review Text */}
+                                    <p className="mt-2">{review.review}</p>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No reviews available for this product.</p>
+                    )}
 
                     {/* Review Submission Form */}
                     <div className='border border-gray-300 my-4'></div>
@@ -149,9 +144,10 @@ const DetailsTab = ({ productDescription, reviewId }) => {
                         </div>
                         <button
                             type="submit"
-                            className="px-6 py-2 bg-pink-500 text-white font-semibold rounded-lg hover:bg-pink-600 transition"
+                            disabled={!user}
+                            className={`px-6 py-2 font-semibold rounded-lg transition ${user ? 'bg-pink-500 text-white hover:bg-pink-600' : 'bg-gray-400 text-gray-700 cursor-not-allowed'}`}
                         >
-                            Submit
+                            {user ? 'Submit' : 'Login to submit a review'}
                         </button>
                     </form>
                 </TabPanel>
