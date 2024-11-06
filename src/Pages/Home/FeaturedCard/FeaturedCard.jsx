@@ -8,12 +8,11 @@ const FeaturedCard = () => {
     const products = product.slice(1, 13)
     return (
         <div className='container mx-auto px-4 mt-10'>
-
             <h1 className='text-3xl'>Our Collection</h1>
             <div className='divider mb-10'></div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
                 {products?.map((data) => (
-                    <div key={data._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div key={data._id} className="card border bg-white shadow-lg rounded-lg overflow-hidden">
                         <Link to={`/productDetails/${data._id}`}> <img src={data.image} alt={data.model} className="w-full h-40 object-cover" /></Link>
                         <div className="p-4">
                             <Link to={`/productDetails/${data._id}`}> <h3 className="text-lg font-bold mb-2 hover:text-red-500 hover:underline">{data.brand} - {data.model}</h3></Link>

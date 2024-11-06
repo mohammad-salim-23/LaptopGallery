@@ -57,7 +57,7 @@ export default function MobMenu({ Menus }) {
                                     className="flex-center-between p-4 hover:bg-white/5 rounded-md cursor-pointer relative"
                                     onClick={() => setClicked(isClicked ? null : i)}
                                 >
-                                    <Link to={`/${link}`} onClick={toggleDrawer}>
+                                    <Link to={`${link}`} onClick={toggleDrawer}>
                                         {name}
                                     </Link>
                                     {hasSubMenu && (
