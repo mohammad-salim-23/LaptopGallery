@@ -24,6 +24,11 @@ import PaymentSuccess from "../Pages/Checkout/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/Checkout/PaymentFail/PaymentFail";
 import Compare from "../Pages/Compare/Compare";
 import AccessoriesInHome from "../Pages/AccessoriesInHome/AccessoriesInHome";
+import Terms from "../Pages/FooterPages/Terms";
+import AboutUs from "../Pages/FooterPages/AboutUs";
+import DeliveryPolicy from "../Pages/FooterPages/DeliveryPolicy";
+import Faq from "../Pages/Home/Faq/Faq";
+import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 
 export const router = createBrowserRouter([
     {
@@ -84,6 +89,26 @@ export const router = createBrowserRouter([
             {
                 path: '/cart',
                 element:  <Cart></Cart> 
+            },
+            {
+                path: '/terms',
+                element:  <Terms></Terms> 
+            },
+            {
+                path: '/about',
+                element: <AboutUs></AboutUs> 
+            },
+            {
+                path: '/delivery',
+                element: <DeliveryPolicy></DeliveryPolicy> 
+            },
+            {
+                path: '/faq',
+                element: <Faq></Faq> 
+            },
+            {
+                path: '/returns',
+                element: <ReturnPolicy></ReturnPolicy> 
             },
             {
                 path: '/payment/success/:tranId',
