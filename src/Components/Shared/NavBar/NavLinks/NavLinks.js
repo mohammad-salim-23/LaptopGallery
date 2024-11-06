@@ -5,7 +5,7 @@ export const Navlinks = [
     subMenu: [
       {
         name: "Dell",
-        link: 'link'
+        link: 'dell'
       },
       {
         name: "Asus",

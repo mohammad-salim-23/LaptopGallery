@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartButton from '../CartButton';
+import { CiFilter } from "react-icons/ci";
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
   const [sortOrder, setSortOrder] = useState("");
@@ -11,14 +12,14 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   const [selectedProcessor, setSelectedProcessor] = useState([]);
   const [selectedSubcategory, setSelectedSubcategory] = useState([]); 
   const [inStockOnly, setInStockOnly] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  // Determine if selected subcategory is an accessory
   const isAccessory = selectedSubcategory.includes("Laptop Accessories") || selectedSubcategory.includes("Mobile Accessories");
 
   // Sorting and filtering function
   const sortedItems = [...items]
     .filter(item => 
-      (!inStockOnly || item.stock) &&
+      (!inStockOnly || item.status) &&
       (selectedBrand.length === 0 || selectedBrand.includes(item.brand)) &&
       (isAccessory || selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
       (isAccessory || selectedStorage.length === 0 || selectedStorage.includes(item.storage)) &&
@@ -44,10 +45,12 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   const processor = [...new Set(items.map(item => item.processor))];
 
   return (
-    <div className="p-6 bg-base-200 my-10">
+    <div className="p-6 bg-base-200 my-24">
       <div className="flex">
-        <div className="w-64 min-h-screen p-4 bg-white rounded-lg">
-          {/* Availability Filter */}
+        {/* Sidebar */}
+        <div className={`${sidebarVisible ? 'translate-x-0' : '-translate-x-full'}
+          fixed inset-y-0 left-0 z-30 w-64 bg-white transform md:translate-x-0 transition-transform duration-300 ease-in-out md:flex md:relative md:flex-col`}>
+          
           <div className="p-4">
             <h2>Availability</h2>
             <input 
@@ -58,7 +61,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             <label>In Stock</label>
           </div>
 
-          {/* Subcategory Filter */}
           <div className="p-4">
             <h2>Subcategory</h2>
             {subcategories.map((subcat, index) => (
@@ -73,7 +75,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             ))}
           </div>
 
-          {/* Brand Filter */}
           <div className="p-4">
             <h2>Brand</h2>
             {brands.map((brand, index) => (
@@ -88,10 +89,8 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             ))}
           </div>
 
-          {/* Conditionally Rendered Filters for Non-Accessories */}
           {!isAccessory && (
             <>
-              {/* RAM Filter */}
               <div className="p-4">
                 <h2>RAM</h2>
                 {ram.map((ramOption, index) => (
@@ -106,7 +105,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 ))}
               </div>
 
-              {/* Storage Filter */}
               <div className="p-4">
                 <h2>Storage</h2>
                 {storage.map((storageOption, index) => (
@@ -121,7 +119,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 ))}
               </div>
 
-              {/* OS Filter */}
               <div className="p-4">
                 <h2>Operating System</h2>
                 {os.map((osOption, index) => (
@@ -136,7 +133,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 ))}
               </div>
 
-              {/* Processor Filter */}
               <div className="p-4">
                 <h2>Processor</h2>
                 {processor.map((processorOption, index) => (
@@ -156,7 +152,10 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
         <div className="flex-1 px-4">
           <div className="navbar flex flex-col md:flex-row gap-2 bg-base-100 rounded-lg md:p-4 justify-between">
-            <p className='text-xl'>{title}</p>
+            <button className="md:hidden" onClick={() => setSidebarVisible(!sidebarVisible)}>
+              <CiFilter /> Filtering
+            </button>
+            <p className='text-xl hidden md:block'>{title}</p>
             <div className='flex-row gap-2'>
               <p>Sort By:</p>
               <select
@@ -171,9 +170,8 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             </div>
           </div>
 
-          {/* Product Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            {sortedItems?.map((data) => (
+            {sortedItems.map((data) => (
               <div key={data._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
                 <Link to={`/productDetails/${data._id}`}>
                   <img src={data.image} alt={data.model} className="w-full h-40 object-cover" />
@@ -193,7 +191,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                   <div className="my-4">
                     <CartButton prodId={data._id} />
                   </div>
-                  <div className="border border-gray-300 my-4"></div>
                 </div>
               </div>
             ))}
