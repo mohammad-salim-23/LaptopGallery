@@ -13,7 +13,6 @@ import TotalMobile from "../Pages/Admin/Dashboard/Mobile/TotalMobile";
 import TotalUsers from "../Pages/Admin/Dashboard/TotalUsers/TotalUsers";
 import AdminPanel from "../Pages/Admin/Dashboard/AdminPanel/AdminPanel";
 import UpdateProductLaptop from "../Layout/UpdateProductLaptop/UpdateProductLaptop";
-
 import Laptops from "../Pages/Laptops/Laptops";
 import Phone from "../Pages/Phone/Phone";
 import Brand from "../Components/Shared/Brands/Brand";
@@ -21,7 +20,8 @@ import UpdateProductMobile from "../Layout/UpdateProductMobile/UpdateProductMobi
 import Accessories from "../Pages/Admin/Dashboard/Accessories/Accessories";
 import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessories";
 import Cart from "../Pages/Cart/Cart";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import PaymentSuccess from "../Pages/Checkout/PaymentSuccess/PaymentSuccess";
+import PaymentFail from "../Pages/Checkout/PaymentFail/PaymentFail";
 import Compare from "../Pages/Compare/Compare";
 import AccessoriesInHome from "../Pages/AccessoriesInHome/AccessoriesInHome";
 
@@ -83,8 +83,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/cart',
-                element: <PrivateRoute><Cart></Cart></PrivateRoute>
+                element:  <Cart></Cart> 
+            },
+            {
+                path: '/payment/success/:tranId',
+                element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: '/payment/fail/:tranId',
+                element: <PaymentFail></PaymentFail>
             }
+            
         ]
     },
     {

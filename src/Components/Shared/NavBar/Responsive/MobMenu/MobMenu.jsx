@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,47 +6,63 @@ import { Link } from "react-router-dom";
 export default function MobMenu({ Menus }) {
     const [isOpen, setIsOpen] = useState(false);
     const [clicked, setClicked] = useState(null);
+    const drawerRef = useRef(null);
+
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
         setClicked(null);
     };
 
+    const handleClickOutside = (event) => {
+        if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
+
     const subMenuDrawer = {
-        enter: {
-            height: "auto",
-            overflow: "hidden",
-        },
-        exit: {
-            height: 0,
-            overflow: "hidden",
-        },
+        enter: { height: "auto", overflow: "hidden" },
+        exit: { height: 0, overflow: "hidden" },
     };
 
     return (
         <div>
-            <button className="lg:hidden z-[999] relative" onClick={toggleDrawer}>
+            <button onClick={toggleDrawer} className="lg:hidden z-[999] relative">
                 {isOpen ? <X /> : <Menu />}
             </button>
 
             <motion.div
-                className="fixed left-0 right-0 top-16 overflow-y-auto h-full bg-secondary text-black backdrop-blur p-6 pb-20"
+                ref={drawerRef}
+                className="fixed left-0 right-20 top-16 overflow-y-auto h-full text-black bg-white z-50 pb-16"
                 initial={{ x: "-100%" }}
                 animate={{ x: isOpen ? "0%" : "-100%" }}
             >
                 <ul>
-                    {Menus.map(({ name, subMenu }, i) => {
+                    {Menus.map(({ name, subMenu, link }, i) => {
                         const isClicked = clicked === i;
                         const hasSubMenu = subMenu?.length;
                         return (
-                            <li key={name} className="">
+                            <li key={name}>
                                 <span
                                     className="flex-center-between p-4 hover:bg-white/5 rounded-md cursor-pointer relative"
                                     onClick={() => setClicked(isClicked ? null : i)}
                                 >
-                                    {name}
+                                    <Link to={`/${link}`} onClick={toggleDrawer}>
+                                        {name}
+                                    </Link>
                                     {hasSubMenu && (
                                         <ChevronDown
-                                            className={`ml-auto ${isClicked && "rotate-180"} `}
+                                            className={`ml-auto ${isClicked && "rotate-180"}`}
                                         />
                                     )}
                                 </span>
@@ -64,9 +80,10 @@ export default function MobMenu({ Menus }) {
                                             >
                                                 {link ? (
                                                     <Link
-                                                        to={link}
+                                                        to={`/products/${link}`}
                                                         className="text-black"
                                                         rel="noopener noreferrer"
+                                                        onClick={toggleDrawer}
                                                     >
                                                         {name}
                                                     </Link>

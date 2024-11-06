@@ -74,7 +74,7 @@ export const Navlinks = [
   },
   {
     name: "Accessories",
-    link: 'accessories',
+    link: '/accessories',
     gridCols: 3,
   },
   {
@@ -131,9 +131,5 @@ export const Navlinks = [
       },
     ],
     gridCols: 2,
-  },
-  {
-    name: "Cart",
-    link: '/cart'
   },
 ];

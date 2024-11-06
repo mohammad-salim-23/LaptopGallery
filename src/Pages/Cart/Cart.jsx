@@ -4,17 +4,23 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { RxCross1 } from "react-icons/rx";
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
+import Checkout from '../Checkout/Checkout';
 
 const Cart = () => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
-    // Calculate all price
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    console.log(cart);
+
+    // Calculate total price
     const totalPrice = cart.reduce((total, item) => {
         const itemPrice = parseFloat(item.price) || 0;
         const itemQuantity = item.quantity || 0;
         const itemTotal = itemPrice * itemQuantity;
         return total + itemTotal;
     }, 0);
+
     const shipping = 120;
     const subTotal = totalPrice + shipping;
 
@@ -28,8 +34,11 @@ const Cart = () => {
             console.error("Error removing item:", error);
             toast.error("Error removing item");
         }
-    }
+    };
 
+    const handleCheckout = () => {
+        setIsModalVisible(true);
+    };
 
     return (
         <div className="min-h-screen bg-gray-100 p-4 lg:p-6">
@@ -45,27 +54,20 @@ const Cart = () => {
                             {cart.map(item => (
                                 <div key={item._id} className="flex items-center gap-4 p-4 border-b border-gray-200">
                                     <img src={item.image} alt={item.name} className="w-24 h-24 rounded" />
-
                                     <div className="flex-1">
                                         <h3 className="text-lg font-semibold text-gray-700">{item.model}</h3>
                                         <p className="text-gray-500">Color: {item.color}</p>
                                         <span className="text-gray-700 font-bold">${item.price}</span>
                                     </div>
-
                                     <div className="flex items-center gap-2">
                                         {/* Quantity Controls */}
-                                        <button
-                                            className="text-2xl hover:text-gray-600 border-gray-300"
-                                        >
+                                        <button className="text-2xl hover:text-gray-600 border-gray-300">
                                             <CiSquareMinus />
                                         </button>
                                         <span className="text-gray-700 text-xl font-semibold">{item.quantity}</span>
-                                        <button
-                                            className="text-2xl hover:text-gray-600 border-gray-300"
-                                        >
+                                        <button className="text-2xl hover:text-gray-600 border-gray-300">
                                             <CiSquarePlus />
                                         </button>
-
                                         <button onClick={() => handleRemoveItem(item._id)} className='text-2xl text-red-500 hover:text-red-700 ml-2'>
                                             <RxCross1 />
                                         </button>
@@ -78,27 +80,41 @@ const Cart = () => {
                     {/* Cart Summary Section */}
                     <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-4 text-gray-600">Order Summary</h2>
-
                         <div className="flex justify-between mb-2">
                             <span className="text-gray-600">Subtotal</span>
                             <span className="text-gray-700 font-semibold flex items-center"><TbCurrencyTaka />{totalPrice.toFixed(2)}</span>
                         </div>
-
                         <div className="flex justify-between mb-4">
                             <span className="text-gray-600">Shipping</span>
                             <span className="text-gray-700 font-semibold flex items-center"><TbCurrencyTaka />{shipping.toFixed(2)}</span>
                         </div>
-
                         <div className="flex justify-between border-t border-gray-200 pt-4 mb-4">
                             <span className="text-xl font-semibold text-gray-700">Total</span>
                             <span className="text-xl flex items-center font-bold text-gray-900"><TbCurrencyTaka />{subTotal.toFixed(2)}</span>
                         </div>
 
-                        <button className="w-full bg-gray-800 text-white font-semibold py-3 rounded-lg hover:bg-gray-900 transition-colors duration-300">
+                        <button 
+                            onClick={handleCheckout} 
+                            className="w-full bg-gray-800 text-white font-semibold py-3 rounded-lg hover:bg-gray-900 transition-colors duration-300"
+                            disabled={cart.length === 0}
+                        >
                             Proceed to Checkout
                         </button>
                     </div>
                 </div>
+
+                {isModalVisible && (
+                    <dialog id="confirm" open className="modal">
+                        <div className="modal-box relative p-6 h-[620px] w-full bg-white rounded-lg shadow-lg">
+                            <h3 className="font-bold text-xl text-center mb-2">Customer Information</h3>
+                            <p className='text-center font-semibold'>Are you sure you want to proceed with the payment?</p>
+                            <Checkout
+                                subTotal={subTotal}
+                                setIsModalVisible={setIsModalVisible}
+                            />
+                        </div>
+                    </dialog>
+                )}
             </div>
         </div>
     );
