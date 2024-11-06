@@ -10,13 +10,12 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   const [selectedStorage, setSelectedStorage] = useState([]);
   const [selectedOs, setSelectedOs] = useState([]);
   const [selectedProcessor, setSelectedProcessor] = useState([]);
-  const [selectedSubcategory, setSelectedSubcategory] = useState([]); 
+  const [selectedSubcategory, setSelectedSubcategory] = useState([]);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const isAccessory = selectedSubcategory.includes("Laptop Accessories") || selectedSubcategory.includes("Mobile Accessories");
 
-  // Sorting and filtering function
   const sortedItems = [...items]
     .filter(item => 
       (!inStockOnly || item.status) &&
@@ -50,7 +49,6 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
         {/* Sidebar */}
         <div className={`${sidebarVisible ? 'translate-x-0' : '-translate-x-full'}
           fixed inset-y-0 left-0 z-30 w-64 bg-white transform md:translate-x-0 transition-transform duration-300 ease-in-out md:flex md:relative md:flex-col`}>
-          
           <div className="p-4">
             <h2>Availability</h2>
             <input 
@@ -182,16 +180,33 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       {data.brand} - {data.model}
                     </h3>
                   </Link>
-                  <p className="text-gray-700">Processor: {data.processor}</p>
-                  <p className="text-gray-700">RAM: {data.ram}</p>
-                  <p className="text-gray-700">Storage: {data.storage}</p>
-                  <p className="text-gray-700">OS: {data.os}</p>
-                  <div className="border border-gray-300 my-4"></div>
-                  <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
-                  <div className="my-4">
-                    <CartButton prodId={data._id} />
-                  </div>
-                </div>
+                
+                  
+                  {/* Conditional Display */}
+                  {title === "Accessories" ? (
+                        <>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Sub-Category:</span> {data.subCategory}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">SKU:</span> {data.productSKU}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Stock:</span> {data.stock}</p>
+                           
+                        </>
+                    ) : (
+                        <>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {data.processor}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {data.ram}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {data.storage}</p>
+                            
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {data.display}</p>
+                   
+                         
+                        </>
+                    )}
+
+<div className='border border-gray-300 my-4'></div>
+                            <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
+                            <div className='my-4'><CartButton prodId={data._id} ></CartButton></div>
+                            <div className='border border-gray-300 my-4'></div>
+                        </div>
               </div>
             ))}
           </div>
