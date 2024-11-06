@@ -203,7 +203,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                     )}
 
 <div className='border border-gray-300 my-4'></div>
-                            <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
+                            <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} </p>
                             <div className='my-4'><CartButton prodId={data._id} ></CartButton></div>
                             <div className='border border-gray-300 my-4'></div>
                         </div>
