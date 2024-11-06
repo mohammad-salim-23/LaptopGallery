@@ -53,7 +53,7 @@ const AdminPanel = () => {
 
     return (
         <div className="flex flex-col items-center">
-            <div className="grid grid-cols-3 gap-4 p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
                 <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
                     <FaDollarSign className="text-3xl mr-4" />
                     <div>
