@@ -6,14 +6,18 @@ import DesktopMenu from "./Responsive/DesktopMenu/DesktopMenu";
 import useAuth from "../../../hooks/useAuth";
 import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../../../Auth/Provider/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import Search from "./Search";
+// import useProducts from "../../../hooks/useProducts";
 
 const NavBar = () => {
     const { user } = useAuth();
     const { logOut } = useContext(AuthContext);
+
+
 
     // Handel Logout
     const handleLogOut = () => {
@@ -45,16 +49,7 @@ const NavBar = () => {
                         </div>
                         <div>
                             <div className="relative flex space-x-3 mx-auto">
-                                <div className="hidden w-[400px] lg:flex">
-                                    <input
-                                        type="text"
-                                        placeholder="Search..."
-                                        className="w-full text-gray-500 pl-8 pr-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    />
-                                    <span className="absolute cursor-pointer inset-y-0 left-2 flex items-center text-gray-500">
-                                        <CiSearch size={18} />
-                                    </span>
-                                </div>
+                                <Search></Search>
                             </div>
 
                         </div>
@@ -66,7 +61,7 @@ const NavBar = () => {
                         </div>
                     </div>
                 </div>
-                <header className="h-10 bg-gray-100 lg:border-b-2 text-[15px] sticky z-50 inset-0 text-black lg:flex-center hidden">
+                <header className="h-10 bg-gray-100 lg:border-b-2 text-[15px] sticky z-40 inset-0 text-black lg:flex-center hidden">
                     <nav className="px-3.5 flex-center w-full max-w-7xl mx-auto">
 
                         <ul className="gap-x-1 lg:flex-center hidden">

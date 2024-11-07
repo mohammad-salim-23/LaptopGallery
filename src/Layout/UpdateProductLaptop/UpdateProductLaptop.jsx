@@ -10,6 +10,7 @@ const UpdateProductLaptop = () => {
 
     const updateProduct = useLoaderData();
     const { user } = useContext(AuthContext)
+    const [loading, setLoading] = useState(false);
     const axiosPublic = useAxiosPublic();
     // console.log(updateProduct)
 
@@ -23,34 +24,36 @@ const UpdateProductLaptop = () => {
     const onSubmit = async (data) => {
         data._id = _id;
         // console.log(data)
+        setLoading(true);  // Start loading
         try {
-                const productsInfo = {
-                    brand: data.brand,
-                    model: data.model,
-                    processor: data.processor,
-                    ram: data.ram,
-                    storage: data.storage,
-                    graphics: data.graphics,
-                    display: data.display,
-                    color: data.color,
-                    operating_System: data.operating_System,
-                    price: data.price,
-                    status: data.status,
-                };
+            const productsInfo = {
+                brand: data.brand,
+                model: data.model,
+                processor: data.processor,
+                ram: data.ram,
+                storage: data.storage,
+                graphics: data.graphics,
+                display: data.display,
+                color: data.color,
+                operating_System: data.operating_System,
+                price: data.price,
+                description: data.description,
+                status: data.status,
+            };
 
-                // Store the laptop data in MongoDB
-                const response = await axiosPublic.put(`/products/${data._id}`, productsInfo);
-                console.log(response)
-                if (response.data.modifiedCount > 0) {
-                    Swal.fire({
-                        position: "top-center",
-                        icon: "success",
-                        title: `Laptop "${data.brand}" has been Update`,
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
+            // Store the laptop data in MongoDB
+            const response = await axiosPublic.put(`/products/${data._id}`, productsInfo);
+            console.log(response)
+            if (response.data.modifiedCount > 0) {
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: `Laptop "${data.brand}" has been Update`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
 
-                }
+            }
         }
         catch (error) {
             console.log(error)
@@ -59,11 +62,13 @@ const UpdateProductLaptop = () => {
                 title: "Oops...",
                 text: error.message || "Something went wrong!",
             });
+        } finally {
+            setLoading(false);  // Stop loading
         }
     }
 
     return (
-        <div className="py-24 md:py-28 lg:py-32">
+        <div className="py-4">
             <div className="  px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-6 border-2 border-blue-400 bg-blue-200 hover:bg-blue-300 transition duration-300  rounded-2xl mt-4 mx-auto container">
 
                 <div className="flex justify-center gap-4">
@@ -73,12 +78,12 @@ const UpdateProductLaptop = () => {
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} >
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
                         <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-                                <img
-                                    className="w-full lg:h-[600px]"
-                                    alt={`${updateProduct.model}`}
-                                    src={updateProduct.image}
+                            <img
+                                className="w-full lg:h-[600px]"
+                                alt={`${updateProduct.model}`}
+                                src={updateProduct.image}
 
-                                />
+                            />
 
                         </div>
 
@@ -280,7 +285,7 @@ const UpdateProductLaptop = () => {
                                             className="file-input file-input-bordered w-full  cursor-pointer"
                                             htmlFor="file-upload"
                                             readOnly
-                                            // {...register('image', { onChange: handleInputChange })}
+                                        // {...register('image', { onChange: handleInputChange })}
                                         />
                                     </div>
 
@@ -288,37 +293,23 @@ const UpdateProductLaptop = () => {
 
                                 </div>
 
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-
-                                    {/* Admin Name */}
+                                <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                                    {/* Description */}
                                     <div className="form-control w-full">
                                         <label className="label">
-                                            <span className="label-text font-medium">Admin Name</span>
+                                            <span className="label-text font-medium">Description</span>
                                         </label>
-                                        <input
+                                        <textarea
                                             type="text"
-                                            defaultValue={user?.displayName}
-                                            className="input input-bordered w-full"
-                                            // disabled
-                                            readOnly
+                                            className="textarea textarea-bordered w-full"
+                                            defaultValue={updateProduct.description}                                             
+                                            {...register("description", { required: true })}
                                         />
+                                        {errors.description && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                                     </div>
 
 
-                                    {/* Admin Email */}
-                                    <div className="form-control w-full">
-                                        <label className="label">
-                                            <span className="label-text font-medium">Admin Email</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            defaultValue={user?.email}
-                                            className="input input-bordered w-full"
-                                            // disabled
-                                            readOnly
-                                        />
-                                    </div>
                                 </div>
 
 
@@ -329,8 +320,15 @@ const UpdateProductLaptop = () => {
 
 
                     <div className="lg:flex justify-center">
-                        <button className="btn btn-primary text-white w-48">
-                            Update Laptop
+                        <button
+                            className="btn btn-primary text-white w-32"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <span className="loading loading-ring loading-sm"></span>
+                            ) : (
+                                "Submit Laptop"
+                            )}
                         </button>
                     </div>
                 </form>

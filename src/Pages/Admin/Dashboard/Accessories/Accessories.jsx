@@ -40,6 +40,7 @@ const Accessories = () => {
 
     const onSubmit = async (data) => {
         // console.log(data)
+        setLoading(true);  // Start loading
         try {
             // Image upload to imgbb
             const imageFile = new FormData();
@@ -95,6 +96,9 @@ const Accessories = () => {
                 title: "Oops...",
                 text: error.message || "Something went wrong!",
             });
+        }
+        finally {
+            setLoading(false);  // Stop loading
         }
     };
 
@@ -343,7 +347,10 @@ const Accessories = () => {
 
 
                         <div className="lg:flex justify-center">
-                            <button className="btn btn-primary text-white w-40">
+                            <button
+                                className="btn btn-primary text-white w-48"
+                                disabled={loading}
+                            >
                                 {loading ? (
                                     <span className="loading loading-ring loading-sm"></span>
                                 ) : (

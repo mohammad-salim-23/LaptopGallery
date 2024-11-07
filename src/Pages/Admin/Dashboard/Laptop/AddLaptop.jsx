@@ -36,19 +36,18 @@ const AddLaptop = () => {
 
 
   const onSubmit = async (data) => {
-    // console.log(data)
+    setLoading(true);  // Start loading
     try {
-      // Image upload to imgbb
+      // Prepare the image file for upload
       const imageFile = new FormData();
-      console.log(data.image[0]);
       imageFile.append("image", data.image[0]);
 
+      // Upload image to imgbb
       const res = await axiosPublic.post(image_hosting_api, imageFile, {
         headers: {
           "content-type": "multipart/form-data",
         },
       });
-      // console.log(res);
 
       if (res.data.success) {
         const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -63,17 +62,17 @@ const AddLaptop = () => {
           display: data.display,
           color: data.color,
           operating_System: data.operating_System,
-          price: data.price,
+          price: `${data.price} BDT`,
           image: res.data.data.display_url,
           status: data.status,
+          description: data.description,
           type: "laptop",
-          productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`
+          productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
         };
-        // console.log(productsInfo)
 
-        // Store the laptop data in MongoDB
+        // Store laptop data in MongoDB
         const response = await axiosSecure.post("/products", productsInfo);
-        // console.log(response)
+
         if (response.data.insertedId) {
           Swal.fire({
             position: "top-end",
@@ -82,18 +81,19 @@ const AddLaptop = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-
         }
       } else {
         throw new Error("Image upload failed");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: error.message || "Something went wrong!",
       });
+    } finally {
+      setLoading(false);  // Stop loading
     }
   };
 
@@ -317,37 +317,22 @@ const AddLaptop = () => {
 
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-
-                  {/* Admin Name */}
+                <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                  {/* Description */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Admin Name</span>
+                      <span className="label-text font-medium">Description</span>
                     </label>
-                    <input
+                    <textarea
                       type="text"
-                      defaultValue={user?.displayName}
-                      className="input input-bordered w-full"
-                      // disabled
-                      readOnly
+                      className="textarea textarea-bordered w-full"
+                      placeholder="Description"
+                      {...register("description", { required: true })}
                     />
+                    {errors.description && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
 
 
-                  {/* Admin Email */}
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text font-medium">Admin Email</span>
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue={user?.email}
-                      className="input input-bordered w-full"
-                      // disabled
-                      readOnly
-                    />
-                  </div>
                 </div>
 
 
@@ -356,9 +341,11 @@ const AddLaptop = () => {
 
           </div>
 
-
           <div className="lg:flex justify-center">
-            <button className="btn btn-primary text-white w-32">
+            <button
+              className="btn btn-primary text-white w-32"
+              disabled={loading}
+            >
               {loading ? (
                 <span className="loading loading-ring loading-sm"></span>
               ) : (
@@ -366,6 +353,7 @@ const AddLaptop = () => {
               )}
             </button>
           </div>
+
         </form>
       </div>
 

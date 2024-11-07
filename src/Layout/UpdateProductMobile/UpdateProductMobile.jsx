@@ -69,7 +69,7 @@ const UpdateProductMobile = () => {
     return (
         <div>
 
-            <div className="py-24 md:py-28 lg:py-32">
+            <div className="py-4">
                 <div className="  px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-6 border-2 border-blue-400 bg-blue-200 hover:bg-blue-300 transition duration-300  rounded-2xl mt-4 mx-auto container">
 
                     <div className="flex justify-center gap-4">

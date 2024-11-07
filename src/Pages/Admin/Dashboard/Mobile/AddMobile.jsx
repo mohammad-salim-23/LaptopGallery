@@ -18,6 +18,7 @@ const AddLaptop = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
 
+
   // Image change
   const handleFileChange = (file) => {
     if (file) {
@@ -37,6 +38,7 @@ const AddLaptop = () => {
 
   const onSubmit = async (data) => {
     // console.log(data)
+    setLoading(true);  // Start loading
     try {
       // Image upload to imgbb
       const imageFile = new FormData();
@@ -63,7 +65,7 @@ const AddLaptop = () => {
           displayType: data.displayType,
           camera: data.camera,
           operating_System: data.operating_System,
-          price: data.price,
+          price: `${data.price} BDT`,
           mobileBattery: data.mobileBattery,
           image: res.data.data.display_url,
           status: data.status,
@@ -95,6 +97,8 @@ const AddLaptop = () => {
         title: "Oops...",
         text: error.message || "Something went wrong!",
       });
+    } finally {
+      setLoading(false);  // Stop loading
     }
   };
 
@@ -362,7 +366,10 @@ const AddLaptop = () => {
 
 
           <div className="lg:flex justify-center">
-            <button className="btn btn-primary text-white w-32">
+            <button
+              className="btn btn-primary text-white w-32"
+              disabled={loading}
+            >
               {loading ? (
                 <span className="loading loading-ring loading-sm"></span>
               ) : (
