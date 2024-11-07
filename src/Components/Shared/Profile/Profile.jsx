@@ -6,7 +6,7 @@ import Myorder from './Myorder/Myorder';
 
 const Profile = () => {
     return (
-        <div className=' container mx-auto p-24 '>
+        <div className=' md:container md:mx-auto md:p-24 '>
             <Tabs>
                 <TabList>
                     <Tab>My Order</Tab>
