@@ -1,8 +1,11 @@
 import React from 'react';
-import useCompare from '../../hooks/useCompare';
-import CartButton from '../../Components/ReUseComponents/CartButton';
+
+
 import Swal from 'sweetalert2';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+
+import useCompare from '../../../../hooks/useCompare';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import CartButton from '../../../ReUseComponents/CartButton';
 
 const Compare = () => {
     const [compare, refetch] = useCompare();
@@ -49,8 +52,8 @@ const Compare = () => {
     };
 
     return (
-        <div className="p-4 my-24">
-            <h2 className="text-2xl font-semibold mb-4">Product Comparison</h2>
+        <div className="p-4 my-4">
+            <h2 className="text-2xl font-semibold  my-10 text-gray-700 flex justify-center items-center">----Product Comparison----</h2>
             <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse border border-gray-200 hidden md:table">
                     <thead>
