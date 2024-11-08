@@ -57,11 +57,11 @@ const ProductsDetails = () => {
        <div className='my-10'>
             <div className='flex flex-col lg:flex-row container mx-auto space-y-10 px-4 lg:px-0 '>
                 <div className='lg:w-[60%] '>
-                <div className=" mx-auto px-22 ">
+                <div className=" mx-auto px-22  ">
          <div className="grid grid-cols-1 md:grid-cols-2 gap-6  p-6 rounded-lg  mt-10">
            
            {/* Product Image */}
-           <div className="flex flex-col ">
+           <div className="flex flex-col  ">
            <h1 className="text-3xl font-bold mb-4 text-gray-800">{product.model}</h1>
            <div className="flex gap-4 mb-4  flex-col md:flex-row">
    {/* SKU Display */}
@@ -89,7 +89,7 @@ const ProductsDetails = () => {
            </div>
            
            {/* Product Details */}
-           <div className="flex flex-col justify-center lg:mt-24 ">
+           <div className="flex flex-col justify-center lg:mt-24  ">
                
                <p className="text-gray-600  mb-2"><span className="font-semibold">Brand:</span> {product.brand}</p>
                {product.type === "accessories" ? (
@@ -118,8 +118,8 @@ const ProductsDetails = () => {
                <div className='flex flex-col lg:flex-row lg:gap-4 '>
                    <div className='my-4'><CartButton prodId={product._id} /></div>
                    <div className='my-4 '>  
-                       <button onClick={handleCompare} className='bg-gray-800 text-white rounded-lg p-2 flex justify-center items-center'>
-                        Add To Compare
+                       <button onClick={handleCompare} className='bg-gray-800 text-white rounded-lg gap-x-1 p-2 flex justify-center items-center'>
+                       <DiGitCompare />Add To Compare
                        </button>
                    </div>
                </div>
