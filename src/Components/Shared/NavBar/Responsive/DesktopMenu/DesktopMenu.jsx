@@ -42,7 +42,7 @@ export default function DesktopMenu({ menu }) {
       key={menu.name}
     >
       <Link to={`${menu.link}`}>
-        <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
+        <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer hover:text-orange-500 px-3 py-1 rounded-xl">
           {menu.name} 
          
         </span>
@@ -64,7 +64,7 @@ export default function DesktopMenu({ menu }) {
           >
             {hasSubMenu &&
               menu.subMenu.map((submenu, i) => (
-                <div className="relative cursor-pointer hover:bg-primary" key={i}>
+                <div className="relative cursor-pointer hover:text-orange-400" key={i}>
                   <div className="flex-center gap-x-4 group/menubox">
                     <div>
 

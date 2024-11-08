@@ -17,7 +17,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   const isAccessory = selectedSubcategory.includes("Laptop Accessories") || selectedSubcategory.includes("Mobile Accessories");
 
   const sortedItems = [...items]
-    .filter(item => 
+    .filter(item =>
       (!inStockOnly || item.status) &&
       (selectedBrand.length === 0 || selectedBrand.includes(item.brand)) &&
       (isAccessory || selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
@@ -51,10 +51,10 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
           fixed inset-y-0 left-0 z-30 w-64 bg-white transform md:translate-x-0 transition-transform duration-300 ease-in-out md:flex md:relative md:flex-col`}>
           <div className="p-4">
             <h2>Availability</h2>
-            <input 
-              type="checkbox" 
-              checked={inStockOnly} 
-              onChange={() => setInStockOnly(prev => !prev)} 
+            <input
+              type="checkbox"
+              checked={inStockOnly}
+              onChange={() => setInStockOnly(prev => !prev)}
             />
             <label>In Stock</label>
           </div>
@@ -63,9 +63,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             <h2>Subcategory</h2>
             {subcategories.map((subcat, index) => (
               <div key={index}>
-                <input 
-                  type="checkbox" 
-                  onChange={() => toggleFilter(setSelectedSubcategory, subcat)} 
+                <input
+                  type="checkbox"
+                  onChange={() => toggleFilter(setSelectedSubcategory, subcat)}
                   checked={selectedSubcategory.includes(subcat)}
                 />
                 <label>{subcat}</label>
@@ -77,9 +77,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             <h2>Brand</h2>
             {brands.map((brand, index) => (
               <div key={index}>
-                <input 
-                  type="checkbox" 
-                  onChange={() => toggleFilter(setSelectedBrand, brand)} 
+                <input
+                  type="checkbox"
+                  onChange={() => toggleFilter(setSelectedBrand, brand)}
                   checked={selectedBrand.includes(brand)}
                 />
                 <label>{brand}</label>
@@ -93,9 +93,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 <h2>RAM</h2>
                 {ram.map((ramOption, index) => (
                   <div key={index}>
-                    <input 
-                      type="checkbox" 
-                      onChange={() => toggleFilter(setSelectedRam, ramOption)} 
+                    <input
+                      type="checkbox"
+                      onChange={() => toggleFilter(setSelectedRam, ramOption)}
                       checked={selectedRam.includes(ramOption)}
                     />
                     <label>{ramOption}</label>
@@ -107,9 +107,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 <h2>Storage</h2>
                 {storage.map((storageOption, index) => (
                   <div key={index}>
-                    <input 
-                      type="checkbox" 
-                      onChange={() => toggleFilter(setSelectedStorage, storageOption)} 
+                    <input
+                      type="checkbox"
+                      onChange={() => toggleFilter(setSelectedStorage, storageOption)}
                       checked={selectedStorage.includes(storageOption)}
                     />
                     <label>{storageOption}</label>
@@ -121,9 +121,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 <h2>Operating System</h2>
                 {os.map((osOption, index) => (
                   <div key={index}>
-                    <input 
-                      type="checkbox" 
-                      onChange={() => toggleFilter(setSelectedOs, osOption)} 
+                    <input
+                      type="checkbox"
+                      onChange={() => toggleFilter(setSelectedOs, osOption)}
                       checked={selectedOs.includes(osOption)}
                     />
                     <label>{osOption}</label>
@@ -135,9 +135,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                 <h2>Processor</h2>
                 {processor.map((processorOption, index) => (
                   <div key={index}>
-                    <input 
-                      type="checkbox" 
-                      onChange={() => toggleFilter(setSelectedProcessor, processorOption)} 
+                    <input
+                      type="checkbox"
+                      onChange={() => toggleFilter(setSelectedProcessor, processorOption)}
                       checked={selectedProcessor.includes(processorOption)}
                     />
                     <label>{processorOption}</label>
@@ -180,33 +180,33 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       {data.brand} - {data.model}
                     </h3>
                   </Link>
-                
-                  
+
+
                   {/* Conditional Display */}
                   {title === "Accessories" ? (
-                        <>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Sub-Category:</span> {data.subCategory}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">SKU:</span> {data.productSKU}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Stock:</span> {data.stock}</p>
-                           
-                        </>
-                    ) : (
-                        <>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {data.processor}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {data.ram}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {data.storage}</p>
-                            
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {data.display}</p>
-                   
-                         
-                        </>
-                    )}
+                    <>
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">Sub-Category:</span> {data.subCategory}</p>
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">SKU:</span> {data.productSKU}</p>
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">Stock:</span> {data.stock}</p>
 
-<div className='border border-gray-300 my-4'></div>
-                            <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
-                            <div className='my-4'><CartButton prodId={data._id} ></CartButton></div>
-                            <div className='border border-gray-300 my-4'></div>
-                        </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {data.processor}</p>
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {data.ram}</p>
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {data.storage}</p>
+
+                      <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {data.display}</p>
+
+
+                    </>
+                  )}
+
+                  <div className='border border-gray-300 my-4'></div>
+                  <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
+                  <div className='my-4'><CartButton prodId={data._id} ></CartButton></div>
+                  <div className='border border-gray-300 my-4'></div>
+                </div>
               </div>
             ))}
           </div>
