@@ -10,7 +10,7 @@ const Laptops = () => {
     const laptops = products.filter(item => item.type === "laptop")
     return (
         <div>
-            <ShopLayout  items={laptops} title="Laptop"></ShopLayout>
+            <ShopLayout items={laptops} title="Laptop"></ShopLayout>
         </div>
     );
 };

@@ -1,101 +1,104 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { Link } from 'react-router-dom';
-import { IoMdSearch } from 'react-icons/io';
-
-const slidesData = [
-    {
-        image: "https://www.startech.com.bd/image/cache/catalog/home/queue-banner-home-service-982x500.png",
-    },
-    {
-        image: "https://www.startech.com.bd/image/cache/catalog/home/happy-hour-june-982x500.webp",
-    },
-    {
-        image: "https://img.freepik.com/free-photo/female-hand-typing-keyboard-laptop_1150-15742.jpg?t=st=1729861804~exp=1729865404~hmac=21c5ffd06bb3982c69d5a7b4d17a4b39dc67f7b80a6b37c711d5d019d74dc965&w=1380",
-    }
-];
+import React, { useState, useEffect } from "react";
 
 const Banner = () => {
+    const banners = [
+        {
+            id: 1,
+            url: "https://images.herzindagi.info/her-zindagi-english/images/2024/10/14/article/image/Intel-Laptop-(1)-1728900589444.jpg",
+            title: "Explore Cutting-Edge Laptops",
+            subtitle: "High performance, stylish designs, best prices.",
+        },
+        {
+            id: 2,
+            url: "https://via.placeholder.com/1600x600?text=Laptop+Gallery+Banner+2",
+            title: "Top Brands for Every Need",
+            subtitle: "Find your next laptop with ease and confidence.",
+        },
+        {
+            id: 3,
+            url: "https://via.placeholder.com/1600x600?text=Laptop+Gallery+Banner+3",
+            title: "Experience Ultimate Power",
+            subtitle: "Push your limits with next-gen technology.",
+        },
+    ];
+
+    const [current, setCurrent] = useState(0);
+
+    // Function to move to the next slide
+    const nextSlide = () => {
+        setCurrent((prevCurrent) => (prevCurrent === banners.length - 1 ? 0 : prevCurrent + 1));
+    };
+
+    // Function to move to the previous slide
+    const prevSlide = () => {
+        setCurrent((prevCurrent) => (prevCurrent === 0 ? banners.length - 1 : prevCurrent - 1));
+    };
+
+    // Auto-slide every 5 seconds
+    useEffect(() => {
+        const slideInterval = setInterval(nextSlide, 5000);
+
+        // Clear interval when component unmounts or on manual change
+        return () => clearInterval(slideInterval);
+    }, []);
+
+    // Reset auto-slide interval on manual button click
+    const handleManualChange = (direction) => {
+        if (direction === "next") nextSlide();
+        if (direction === "prev") prevSlide();
+    };
+
     return (
-        <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row mt-4 space-y-6 lg:space-y-0 lg:space-x-6">
-                <div className="lg:w-1/4 w-full">
-                    <div className="bg-yellow-200 pt-6   rounded-md shadow-md mb-6 lg:mb-0">
-                        <h1 className="font-semibold text-center text-lg text-black">Compare Products</h1>
-                        <p className="mt-1 text-center text-gray-600 text-sm">Choose Two Products to Compare</p>
-
-                        <div className="p-4">
-                            <div className="relative mb-4">
-                                <input
-                                    type="text"
-                                    placeholder="Search Product..."
-                                    className="w-full p-3 rounded-md border bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <span className="absolute right-3 top-3 text-gray-400">
-                                <IoMdSearch className='text-3xl' />
-                                </span>
-                            </div>
-
-                            <div className="relative mb-4">
-                                <input
-                                    type="text"
-                                    placeholder="Search Product..."
-                                    className="w-full p-3 rounded-md border bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <span className="absolute right-3 top-3 text-gray-400">
-                                <IoMdSearch className='text-3xl' />
-                                </span>
-                            </div>
-
-                            <button className="w-full p-3 font-semibold text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-colors my-3 md:my-0">
-                                View Comparison
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="h-1/2 lg:my-6 md:my-4 my-2">
-                        <Link>
-                            <img
-                                src="https://www.startech.com.bd/image/catalog/home/banner/small/Shape-Your-Career-with-Us.png1.webp"
-                                alt=""
-                                className="w-full rounded-md shadow-md"
-                            />
-                        </Link>
+        <div className="relative container mx-auto px-4 w-full h-[60vh] lg:h-[80vh] overflow-hidden">
+            {banners.map((banner, index) => (
+                <div
+                    key={banner.id}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? "opacity-100" : "opacity-0"
+                        }`}
+                >
+                    <img
+                        src={banner.url}
+                        alt={banner.title}
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"></div>
+                    <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+                        <h2 className="text-3xl lg:text-5xl font-extrabold mb-3 drop-shadow-md">
+                            {banner.title}
+                        </h2>
+                        <p className="text-lg lg:text-2xl font-medium mb-6 drop-shadow-md">
+                            {banner.subtitle}
+                        </p>
+                        <button className="px-6 py-2 mt-2 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
+                            Shop Now
+                        </button>
                     </div>
                 </div>
+            ))}
 
-                <div className="lg:w-3/4 w-full">
-                    <Swiper
-                        slidesPerView={1}
-                        spaceBetween={30}
-                        loop={true}
-                        autoplay={{
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        }}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        navigation={true}
-                        modules={[Autoplay, Pagination, Navigation]}
-                        className="rounded-md shadow-md"
-                    >
-                        {slidesData.map((slide, index) => (
-                            <SwiperSlide key={index}>
-                                <div
-                                    className="h-72 sm:h-80 md:h-96 lg:h-[34rem] bg-cover bg-center rounded-md"
-                                    style={{
-                                        backgroundImage: `url("${slide.image}")`,
-                                    }}
-                                />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
+            {/* Navigation Controls */}
+            <button
+                onClick={() => handleManualChange("prev")}
+                className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition"
+            >
+                &#10094; {/* Left arrow */}
+            </button>
+            <button
+                onClick={() => handleManualChange("next")}
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition"
+            >
+                &#10095; {/* Right arrow */}
+            </button>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {banners.map((_, index) => (
+                    <div
+                        key={index}
+                        className={`w-3 h-3 rounded-full ${index === current ? "bg-blue-500" : "bg-gray-300"
+                            } transition`}
+                    ></div>
+                ))}
             </div>
         </div>
     );

@@ -1,53 +1,99 @@
-// import Marquee from "react-fast-marquee";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Carousel from "react-multi-carousel";
+import { Link } from "react-router-dom";
+import "react-multi-carousel/lib/styles.css";
 
+const Category = () => {
+    const [product, setProduct] = useState([]);
+    const axiosPublic = useAxiosPublic();
 
-// const Category = () => {
-//     const categories = [
-//         {
-//             "id": 1,
-//             "title": "Laptop",
-//             "icon": "📷"
-//         },
-//         {
-//             "id": 2,
-//             "title": "Laptop Accessories",
-//             "icon": "📷"
-//         },
-//         {
-//             "id": 3,
-//             "title": "Mobile ",
-//             "icon": "📷"
-//         }, {
-//             "id": 4,
-//             "title": "Mobile Accessories",
-//             "icon": "📷"
-//         }
-//     ];
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axiosPublic.get("/products");
+                setProduct(response.data);
+            } catch (error) {
+                console.error("Internal server error", error);
+            }
+        };
+        fetchProducts();
+    }, [axiosPublic]);
 
-//     return (
-//         <div className="mx-auto container">
-//             <div className="text-center my-10">
-//                 <h1 className="text-3xl font-bold">Featured Category</h1>
-//                 <p className="text-xl text-black text-opacity-50 my-2">
-//                     Get Your Desired Product from Featured Category!
-//                 </p>
-//             </div>
+    const category = Array.from(new Set(product.map((item) => item.category)))
+        .map((category) => product.find((item) => item.category === category));
 
-//             <Marquee pauseOnHover={true}>
-//                 <div className="flex justify-center space-x-7">
-//                     {categories.map(category => (
-//                         <div
-//                             key={category.id}
-//                             className="flex flex-col items-center p-6 bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-lg shadow-md w-56"
-//                         >
-//                             <div className="text-4xl mb-4">{category.icon}</div>
-//                             <p className="text-lg font-medium">{category.title}</p>
-//                         </div>
-//                     ))}
-//                 </div>
-//             </Marquee>
-//         </div>
-//     );
-// };
+    return (
+        <div className="mt-5 container mx-auto px-4">
+            <div className="space-y-3">
+                <h2 className="text-2xl font-semibold">Featured Category</h2>
+                <p>Your Desired Product from Featured Category!</p>
+            </div>
+            <div className="divider"></div>
+            <div className="container mx-auto px-4">
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className=""
+                    containerClass=""
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    infinite={false}
+                    itemClass=""
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    pauseOnHover
+                    renderArrowsWhenDisabled={false}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={false}
+                    responsive={{
+                        desktop: {
+                            breakpoint: { max: 3000, min: 1024 },
+                            items: 6,
+                            partialVisibilityGutter: 40,
+                        },
+                        mobile: {
+                            breakpoint: { max: 464, min: 0 },
+                            items: 2,
+                            partialVisibilityGutter: 30,
+                        },
+                        tablet: {
+                            breakpoint: { max: 1024, min: 512 },
+                            items: 3,
+                            partialVisibilityGutter: 30,
+                        },
+                    }}
+                    rewind={false}
+                    rewindWithAnimation={false}
+                    rtl={false}
+                    shouldResetAutoplay
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                >
+                    {category.map((item, index) => (
 
-// export default Category;
+                        <div key={item._id || index} className="flex flex-col justify-center items-center px-4">
+                            <Link to={`/category/${item.category}`}>
+                                <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
+                                    <img
+                                        src={item?.image || "default-image.jpg"}
+                                        // alt={item.name}
+                                        className="object-cover w-full h-full"
+                                    />
+                                </div>
+                            </Link>
+                            <p className="font-medium mt-4">{item.category}</p>
+                        </div>
+                    ))}
+                </Carousel>
+            </div>
+        </div>
+    );
+};
+
+export default Category;
