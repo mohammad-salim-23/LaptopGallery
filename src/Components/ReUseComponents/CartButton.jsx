@@ -88,7 +88,7 @@ const CartButton = ({ prodId }) => {
     };
 
     return (
-        <div className='flex justify-center items-center'>
+        <div className='flex lg:justify-center lg:items-center'>
             <button className=' bg-gray-800 text-white rounded-lg p-2 btn-wide flex justify-center items-center' onClick={handleAddToCart}>
                 <span className=''><MdShoppingCartCheckout /> </span> Add To Cart
             </button>
