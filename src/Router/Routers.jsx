@@ -30,6 +30,7 @@ import DeliveryPolicy from "../Pages/FooterPages/DeliveryPolicy";
 import Faq from "../Pages/Home/Faq/Faq";
 import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
+import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
 import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
 
 export const router = createBrowserRouter([
@@ -70,6 +71,12 @@ export const router = createBrowserRouter([
                 element: <CategoryPage></CategoryPage>,
                 loader: ({ params }) => fetch(`http://localhost:3000/products/category/${params.category}`),
             },
+            ,
+            {
+                path: '/dashboard/totalAccessories/:id',
+                element: <UpdateProductAccessories></UpdateProductAccessories>,
+                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+            }
             ,
             {
 

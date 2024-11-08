@@ -10,6 +10,8 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import Search from "./Search";
+// import useProducts from "../../../hooks/useProducts";
 import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
