@@ -55,24 +55,26 @@ const AddLaptop = () => {
       if (res.data.success) {
         const randomNumber = Math.floor(1000 + Math.random() * 9000);
         const productsInfo = {
+          title: data.title,
           brand: data.brand,
+          category: "mobile",
           model: data.model,
-          subCategory: "mobile",
           processor: data.processor,
           ram: data.ram,
           storage: data.storage,
-          displaySize: data.displaySize,
-          displayType: data.displayType,
-          camera: data.camera,
+          display: data.display,
+          color: data.color,
           operating_System: data.operating_System,
           price: `${data.price} BDT`,
-          mobileBattery: data.mobileBattery,
+          regularPrice: `${data.regularPrice} BDT`,
           image: res.data.data.display_url,
           status: data.status,
+          description: data.description,
+          warranty: data.warranty,
           type: "mobile",
-          productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`
-
+          productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
         };
+
 
         // Store the laptop data in MongoDB
         const response = await axiosSecure.post("/products", productsInfo);
@@ -131,19 +133,37 @@ const AddLaptop = () => {
               <div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {/* Brand */}
+                  {/* Title */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Brand Name</span>
+                      <span className="label-text font-medium">Title</span>
                     </label>
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Samsung"
+                      placeholder="Title"
+                      {...register("title", { required: true })}
+                    />
+                    {errors.title && <span className="text-red-500 font-semibold mt-1">Title field is required</span>}
+                  </div>
+
+                  {/* brand */}
+                  <div className="form-control w-full">
+                    <label className="label">
+                      <span className="label-text font-medium">Brand</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="input input-bordered w-full"
+                      placeholder="Apple"
                       {...register("brand", { required: true })}
                     />
-                    {errors.brand && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                    {errors.brand && <span className="text-red-500 font-semibold mt-1">Brand field is required</span>}
                   </div>
+
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                   {/* model */}
                   <div className="form-control w-full">
@@ -153,15 +173,11 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Galaxy S23"
+                      placeholder="MacBook Pro 14-inch"
                       {...register("model", { required: true })}
                     />
-                    {errors.model && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                    {errors.model && <span className="text-red-500 font-semibold mt-1">Model field is required</span>}
                   </div>
-
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                   {/* Processor */}
                   <div className="form-control w-full">
@@ -171,108 +187,78 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Snapdragon 8 Gen 2"
+                      placeholder="Intel Pentium CPU N4200"
                       {...register("processor", { required: true })}
                     />
-                    {errors.processor && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                    {errors.processor && <span className="text-red-500 font-semibold mt-1">Processor field is required</span>}
                   </div>
+
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                   {/* ram */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Ram</span>
+                      <span className="label-text font-medium">ram</span>
                     </label>
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="8GB"
+                      placeholder="128GB SSD"
                       {...register("ram", { required: true })}
                     />
                     {errors.ram && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
 
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
                   {/* storage */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Storage</span>
+                      <span className="label-text font-medium">storage</span>
                     </label>
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="128GB"
+                      placeholder="4GB UHD GPU 605"
                       {...register("storage", { required: true })}
                     />
                     {errors.storage && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
 
-                  {/* Display Size */}
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {/* display */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Display Size</span>
+                      <span className="label-text font-medium">Display</span>
                     </label>
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="6.1 inches"
-                      {...register("displaySize", { required: true })}
+                      placeholder="11.6'HD"
+                      {...register("display", { required: true })}
                     />
-                    {errors.displaySize && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                    {errors.display && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                  </div>
+
+                  {/* color */}
+                  <div className="form-control w-full">
+                    <label className="label">
+                      <span className="label-text font-medium">Color</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="input input-bordered w-full"
+                      placeholder="Black"
+                      {...register("color", { required: true })}
+                    />
+                    {errors.color && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
 
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {/* display type */}
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text font-medium">Display Type</span>
-                    </label>
-                    <input
-                      type="text"
-                      className="input input-bordered w-full"
-                      placeholder="Dynamic AMOLED 2X"
-                      {...register("displayType", { required: true })}
-                    />
-                    {errors.displayType && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-                  </div>
-
-                  {/* camera */}
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text font-medium">Camera</span>
-                    </label>
-                    <input
-                      type="text"
-                      className="input input-bordered w-full"
-                      placeholder="50MP + 12MP + 10MP"
-                      {...register("camera", { required: true })}
-                    />
-                    {errors.camera && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-                  </div>
-
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-                  {/* Battery */}
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text font-medium">Battery</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="5000mAh"
-                      className="input input-bordered w-full"
-                      {...register("mobileBattery", { required: true })}
-                    />
-                    {errors.mobileBattery && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
-                  </div>
-
                   {/* Operating System */}
                   <div className="form-control w-full">
                     <label className="label">
@@ -281,10 +267,22 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="Android 13"
-                      {...register("operating_System", { required: true })}
+                      placeholder="N/A"
+                      {...register("operating_System",)}
                     />
-                    {errors.operating_System && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                  </div>
+
+                  {/* Status */}
+                  <div className="form-control w-full">
+                    <label className="label">
+                      <span className="label-text font-medium">Status</span>
+                    </label>
+                    <select className="select  w-full" placeholder="Select..." name="country" id="country" {...register("status", { required: true })}>
+                      <option>In Stock</option>
+                      <option>Out of Stock</option>
+                      <option>Upcoming</option>
+                    </select>
+                    {errors.status && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
 
 
@@ -301,16 +299,36 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="20000 BDT"
+                      placeholder="17500 BDT"
                       {...register("price", { required: true })}
                     />
                     {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
 
-                  {/* Mobile image */}
+                  {/* regularPrice */}
+                  <div className="form-control w-full">
+                    <label className="label">
+                      <span className="label-text font-medium">Regular Price</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="input input-bordered w-full"
+                      placeholder="18500 BDT"
+                      {...register("regularPrice", { required: true })}
+                    />
+                    {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
+                  </div>
+
+
+
+                </div>
+
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {/* Laptop image */}
                   <div className="form-control w-full ">
                     <label className="label">
-                      <span className="label-text font-medium">Mobile Image</span>
+                      <span className="label-text font-medium">Laptop Image</span>
                     </label>
                     <input
                       id="file-upload"
@@ -322,45 +340,46 @@ const AddLaptop = () => {
                     />
                   </div>
 
+                  {/* warranty */}
+                  <div className="form-control w-full">
+                    <label className="label">
+                      <span className="label-text font-medium">Warranty</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="input input-bordered w-full"
+                      placeholder="1 Year International Warranty"
+                      {...register("warranty")}
+                    />
+                  </div>
 
 
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {/* Status */}
+
+
+                <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                  {/* Description */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Status</span>
+                      <span className="label-text font-medium">Description</span>
                     </label>
-                    <select className="select  w-full" placeholder="Select..." name="country" id="country" {...register("status", { required: true })}>
-                      <option>In Stock</option>
-                      <option>Out of Stock</option>
-                      <option>Upcoming</option>
-                    </select>
-                    {errors.status && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-                  </div>
-
-
-
-
-                  {/* Admin Email */}
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text font-medium">Admin Email</span>
-                    </label>
-                    <input
+                    <textarea
                       type="text"
-                      defaultValue={user?.email}
-                      className="input input-bordered w-full"
-                      // disabled
-                      readOnly
+                      className="textarea textarea-bordered w-full"
+                      placeholder="Description"
+                      {...register("description", { required: true })}
                     />
+                    {errors.description && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                   </div>
+
+
                 </div>
 
 
               </div>
             </div>
+
 
           </div>
 

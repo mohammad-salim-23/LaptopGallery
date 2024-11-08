@@ -26,21 +26,20 @@ const UpdateProductMobile = () => {
         // console.log(data)
         try {
             const productsInfo = {
+                title: data.title,
                 brand: data.brand,
                 model: data.model,
                 processor: data.processor,
                 ram: data.ram,
                 storage: data.storage,
-                graphics: data.graphics,
                 display: data.display,
                 color: data.color,
                 operating_System: data.operating_System,
-                price: data.price,
+                price: `${data.price} BDT`,
+                regularPrice: `${data.regularPrice} BDT`,
                 status: data.status,
-                mobileBattery: data.mobileBattery,
-                camera: data.camera,
-                displayType: data.displayType,
-                displaySize: data.displaySize,
+                description: data.description,
+                warranty: data.warranty,
             };
 
             // Store the laptop data in MongoDB
@@ -92,10 +91,24 @@ const UpdateProductMobile = () => {
                                 <div>
 
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                        {/* Brand */}
+                                        {/* Title */}
                                         <div className="form-control w-full">
                                             <label className="label">
-                                                <span className="label-text font-medium">Brand Name</span>
+                                                <span className="label-text font-medium">Title</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className="input input-bordered w-full"
+                                                defaultValue={updateProduct.title}
+                                                {...register("title", { required: true })}
+                                            />
+                                            {errors.title && <span className="text-red-500 font-semibold mt-1">Title field is required</span>}
+                                        </div>
+
+                                        {/* brand */}
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text font-medium">Brand</span>
                                             </label>
                                             <input
                                                 type="text"
@@ -103,8 +116,13 @@ const UpdateProductMobile = () => {
                                                 defaultValue={updateProduct.brand}
                                                 {...register("brand", { required: true })}
                                             />
-                                            {errors.brand && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                            {errors.brand && <span className="text-red-500 font-semibold mt-1">Brand field is required</span>}
                                         </div>
+
+                                    </div>
+
+
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                         {/* model */}
                                         <div className="form-control w-full">
@@ -117,12 +135,8 @@ const UpdateProductMobile = () => {
                                                 defaultValue={updateProduct.model}
                                                 {...register("model", { required: true })}
                                             />
-                                            {errors.model && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                            {errors.model && <span className="text-red-500 font-semibold mt-1">Model field is required</span>}
                                         </div>
-
-                                    </div>
-
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                         {/* Processor */}
                                         <div className="form-control w-full">
@@ -135,25 +149,11 @@ const UpdateProductMobile = () => {
                                                 defaultValue={updateProduct.processor}
                                                 {...register("processor", { required: true })}
                                             />
-                                            {errors.processor && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-                                        </div>
-
-                                        {/* ram */}
-                                        <div className="form-control w-full">
-                                            <label className="label">
-                                                <span className="label-text font-medium">Ram</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="input input-bordered w-full"
-                                                placeholder="8GB"
-                                                defaultValue={updateProduct.ram}
-                                                {...register("ram", { required: true })}
-                                            />
-                                            {errors.ram && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                            {errors.processor && <span className="text-red-500 font-semibold mt-1">Processor field is required</span>}
                                         </div>
 
                                     </div>
+
 
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
@@ -183,64 +183,78 @@ const UpdateProductMobile = () => {
                                                 className="input input-bordered w-full"
                                                 // placeholder="6.1 inches"
                                                 defaultValue={updateProduct.displaySize}
-                                                {...register("displaySize", { required: true })}
+                                                {...register("displaySize")}
                                             />
-                                            {errors.displaySize && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                                         </div>
 
 
                                     </div>
 
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                        {/* display type */}
+
+                                        {/* ram */}
                                         <div className="form-control w-full">
                                             <label className="label">
-                                                <span className="label-text font-medium">Display Type</span>
+                                                <span className="label-text font-medium">ram</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
-                                                // placeholder="Dynamic AMOLED 2X"
-                                                defaultValue={updateProduct.displayType}
-                                                {...register("displayType", { required: true })}
+                                                defaultValue={updateProduct.ram}
+                                                {...register("ram", { required: true })}
                                             />
-                                            {errors.displayType && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                            {errors.ram && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                                         </div>
 
-                                        {/* camera */}
+                                        {/* storage */}
                                         <div className="form-control w-full">
                                             <label className="label">
-                                                <span className="label-text font-medium">Camera</span>
+                                                <span className="label-text font-medium">storage</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
-                                                // placeholder="50MP + 12MP + 10MP"
-                                                defaultValue={updateProduct.camera}
-                                                {...register("camera", { required: true })}
+                                                defaultValue={updateProduct.storage}
+                                                {...register("storage", { required: true })}
                                             />
-                                            {errors.camera && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                            {errors.storage && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        </div>
+
+                                    </div>
+
+
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                        {/* display */}
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text font-medium">Display</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className="input input-bordered w-full"
+                                                defaultValue={updateProduct.display}
+                                                {...register("display", { required: true })}
+                                            />
+                                            {errors.display && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        </div>
+
+                                        {/* color */}
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text font-medium">Color</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className="input input-bordered w-full"
+                                                defaultValue={updateProduct.color}
+                                                {...register("color", { required: true })}
+                                            />
+                                            {errors.color && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                                         </div>
 
                                     </div>
 
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                        {/* Battery */}
-                                        <div className="form-control w-full">
-                                            <label className="label">
-                                                <span className="label-text font-medium">Battery</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                placeholder="5000mAh"
-                                                className="input input-bordered w-full"
-                                                defaultValue={updateProduct.mobileBattery}
-                                                {...register("mobileBattery", { required: true })}
-                                            />
-                                            {errors.mobileBattery && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
-                                        </div>
-
                                         {/* Operating System */}
                                         <div className="form-control w-full">
                                             <label className="label">
@@ -249,56 +263,10 @@ const UpdateProductMobile = () => {
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
-                                                //   placeholder="Android 13"
-                                                defaultValue={updateProduct.operating_System}
-                                                {...register("operating_System", { required: true })}
-                                            />
-                                            {errors.operating_System && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-                                        {/* price */}
-                                        <div className="form-control w-full">
-                                            <label className="label">
-                                                <span className="label-text font-medium">Price</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="input input-bordered w-full"
-                                                // placeholder="20000 BDT"
-                                                defaultValue={updateProduct.price}
-                                                {...register("price", { required: true })}
-                                            />
-                                            {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-                                        </div>
-
-
-                                        {/* Laptop image */}
-                                        <div className="form-control w-full ">
-                                            <label className="label">
-                                                <span className="label-text font-medium">Laptop Image</span>
-                                            </label>
-                                            <input
-                                                id="file-upload"
-                                                type="file"
-                                                accept="image/*"
-                                                className="file-input file-input-bordered w-full  cursor-pointer"
-                                                htmlFor="file-upload"
-                                                readOnly
-                                            // {...register('image', { onChange: handleInputChange })}
+                                                defaultValue={updateProduct.os}
+                                                {...register("operating_System",)}
                                             />
                                         </div>
-
-
-
-                                    </div>
-
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                         {/* Status */}
                                         <div className="form-control w-full">
@@ -314,19 +282,73 @@ const UpdateProductMobile = () => {
                                         </div>
 
 
-                                        {/* Admin Email */}
+
+                                    </div>
+
+
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+                                        {/* price */}
                                         <div className="form-control w-full">
                                             <label className="label">
-                                                <span className="label-text font-medium">Admin Email</span>
+                                                <span className="label-text font-medium">Price</span>
                                             </label>
                                             <input
                                                 type="text"
-                                                defaultValue={user?.email}
                                                 className="input input-bordered w-full"
-                                                // disabled
-                                                readOnly
+                                                defaultValue={updateProduct.price}
+                                                {...register("price", { required: true })}
+                                            />
+                                            {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        </div>
+
+                                        {/* regularPrice */}
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text font-medium">Regular Price</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className="input input-bordered w-full"
+                                                defaultValue={updateProduct.regularPrice}
+                                                {...register("regularPrice", { required: true })}
+                                            />
+                                            {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                        {/* warranty */}
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text font-medium">Warranty</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className="input input-bordered w-full"
+                                                defaultValue={updateProduct.warranty}
+                                                {...register("warranty")}
                                             />
                                         </div>
+
+                                        {/* Description */}
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text font-medium">Description</span>
+                                            </label>
+                                            <textarea
+                                                type="text"
+                                                className="textarea textarea-bordered w-full"
+                                                defaultValue={updateProduct.description}
+                                                {...register("description", { required: true })}
+                                            />
+                                            {errors.description && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        </div>
+
+
                                     </div>
 
 

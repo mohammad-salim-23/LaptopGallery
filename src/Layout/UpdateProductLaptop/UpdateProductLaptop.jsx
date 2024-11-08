@@ -27,18 +27,20 @@ const UpdateProductLaptop = () => {
         setLoading(true);  // Start loading
         try {
             const productsInfo = {
+                title: data.title,
                 brand: data.brand,
                 model: data.model,
                 processor: data.processor,
                 ram: data.ram,
                 storage: data.storage,
-                graphics: data.graphics,
                 display: data.display,
                 color: data.color,
                 operating_System: data.operating_System,
-                price: data.price,
-                description: data.description,
+                price: `${data.price} BDT`,
+                regularPrice: `${data.regularPrice} BDT`,
                 status: data.status,
+                description: data.description,
+                warranty: data.warranty,
             };
 
             // Store the laptop data in MongoDB
@@ -89,12 +91,25 @@ const UpdateProductLaptop = () => {
 
                         <div className="">
                             <div>
-
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                    {/* Brand */}
+                                    {/* Title */}
                                     <div className="form-control w-full">
                                         <label className="label">
-                                            <span className="label-text font-medium">Brand Name</span>
+                                            <span className="label-text font-medium">Title</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="input input-bordered w-full"
+                                            defaultValue={updateProduct.title}
+                                            {...register("title", { required: true })}
+                                        />
+                                        {errors.title && <span className="text-red-500 font-semibold mt-1">Title field is required</span>}
+                                    </div>
+
+                                    {/* brand */}
+                                    <div className="form-control w-full">
+                                        <label className="label">
+                                            <span className="label-text font-medium">Brand</span>
                                         </label>
                                         <input
                                             type="text"
@@ -102,8 +117,12 @@ const UpdateProductLaptop = () => {
                                             defaultValue={updateProduct.brand}
                                             {...register("brand", { required: true })}
                                         />
-                                        {errors.brand && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        {errors.brand && <span className="text-red-500 font-semibold mt-1">Brand field is required</span>}
                                     </div>
+
+                                </div>
+
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                     {/* model */}
                                     <div className="form-control w-full">
@@ -116,12 +135,8 @@ const UpdateProductLaptop = () => {
                                             defaultValue={updateProduct.model}
                                             {...register("model", { required: true })}
                                         />
-                                        {errors.model && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        {errors.model && <span className="text-red-500 font-semibold mt-1">Model field is required</span>}
                                     </div>
-
-                                </div>
-
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                     {/* Processor */}
                                     <div className="form-control w-full">
@@ -134,57 +149,40 @@ const UpdateProductLaptop = () => {
                                             defaultValue={updateProduct.processor}
                                             {...register("processor", { required: true })}
                                         />
-                                        {errors.processor && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                        {errors.processor && <span className="text-red-500 font-semibold mt-1">Processor field is required</span>}
                                     </div>
+
+                                </div>
+
+
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                     {/* ram */}
                                     <div className="form-control w-full">
                                         <label className="label">
-                                            <span className="label-text font-medium">Ram</span>
+                                            <span className="label-text font-medium">ram</span>
                                         </label>
                                         <input
                                             type="text"
                                             className="input input-bordered w-full"
-                                            placeholder="8GB"
                                             defaultValue={updateProduct.ram}
                                             {...register("ram", { required: true })}
                                         />
                                         {errors.ram && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
                                     </div>
 
-                                </div>
-
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
                                     {/* storage */}
                                     <div className="form-control w-full">
                                         <label className="label">
-                                            <span className="label-text font-medium">Storage</span>
+                                            <span className="label-text font-medium">storage</span>
                                         </label>
                                         <input
                                             type="text"
                                             className="input input-bordered w-full"
-                                            placeholder="128GB SSD"
                                             defaultValue={updateProduct.storage}
                                             {...register("storage", { required: true })}
                                         />
                                         {errors.storage && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
-                                    </div>
-
-                                    {/* Graphics */}
-                                    <div className="form-control w-full">
-                                        <label className="label">
-                                            <span className="label-text font-medium">Graphics</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="input input-bordered w-full"
-                                            defaultValue={updateProduct.graphics}
-                                            {...register("graphics", { required: true })}
-                                        />
-                                        {errors.graphics && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
                                     </div>
 
                                 </div>
@@ -202,7 +200,6 @@ const UpdateProductLaptop = () => {
                                             {...register("display", { required: true })}
                                         />
                                         {errors.display && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
                                     </div>
 
                                     {/* color */}
@@ -217,7 +214,6 @@ const UpdateProductLaptop = () => {
                                             {...register("color", { required: true })}
                                         />
                                         {errors.color && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
                                     </div>
 
                                 </div>
@@ -231,12 +227,30 @@ const UpdateProductLaptop = () => {
                                         <input
                                             type="text"
                                             className="input input-bordered w-full"
-                                            defaultValue={updateProduct.operating_System}
+                                            defaultValue={updateProduct.os}
                                             {...register("operating_System", { required: true })}
                                         />
                                         {errors.operating_System && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
                                     </div>
+
+                                    {/* Status */}
+                                    <div className="form-control w-full">
+                                        <label className="label">
+                                            <span className="label-text font-medium">Status</span>
+                                        </label>
+                                        <select className="select  w-full" defaultValue={updateProduct.status} name="country" id="country" {...register("status", { required: true })}>
+                                            <option>In Stock</option>
+                                            <option>Out of Stock</option>
+                                            <option>Upcoming</option>
+                                        </select>
+                                        {errors.status && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
+                                    </div>
+
+                                </div>
+
+
+
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                                     {/* price */}
                                     <div className="form-control w-full">
@@ -248,45 +262,22 @@ const UpdateProductLaptop = () => {
                                             className="input input-bordered w-full"
                                             defaultValue={updateProduct.price}
                                             {...register("price", { required: true })}
-
                                         />
                                         {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
                                     </div>
 
-                                </div>
-
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-                                    {/* Status */}
+                                    {/* regularPrice */}
                                     <div className="form-control w-full">
                                         <label className="label">
-                                            <span className="label-text font-medium">Status</span>
-                                        </label>
-                                        <select className="select  w-full" placeholder="Select..." name="status" id="status" defaultValue={updateProduct.status}  {...register("status", { required: true })}>
-                                            <option>In Stock</option>
-                                            <option>Out of Stock</option>
-                                            <option>Upcoming</option>
-                                        </select>
-                                        {errors.status && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
-
-                                    </div>
-
-
-                                    {/* Laptop image */}
-                                    <div className="form-control w-full ">
-                                        <label className="label">
-                                            <span className="label-text font-medium">Laptop Image</span>
+                                            <span className="label-text font-medium">Regular Price</span>
                                         </label>
                                         <input
-                                            id="file-upload"
-                                            type="file"
-                                            accept="image/*"
-                                            className="file-input file-input-bordered w-full  cursor-pointer"
-                                            htmlFor="file-upload"
-                                            readOnly
-                                        // {...register('image', { onChange: handleInputChange })}
+                                            type="text"
+                                            className="input input-bordered w-full"
+                                            defaultValue={updateProduct.re}
+                                            {...register("regularPrice", { required: true })}
                                         />
+                                        {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
                                     </div>
 
 
@@ -303,7 +294,7 @@ const UpdateProductLaptop = () => {
                                         <textarea
                                             type="text"
                                             className="textarea textarea-bordered w-full"
-                                            defaultValue={updateProduct.description}                                             
+                                            defaultValue={updateProduct.description}
                                             {...register("description", { required: true })}
                                         />
                                         {errors.description && <span className="text-red-500 font-semibold mt-1">This field is required</span>}

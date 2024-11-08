@@ -30,6 +30,7 @@ import DeliveryPolicy from "../Pages/FooterPages/DeliveryPolicy";
 import Faq from "../Pages/Home/Faq/Faq";
 import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
+import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +63,12 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
+                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+            }
+            ,
+            {
+                path: '/dashboard/totalAccessories/:id',
+                element: <UpdateProductAccessories></UpdateProductAccessories>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
             }
             ,

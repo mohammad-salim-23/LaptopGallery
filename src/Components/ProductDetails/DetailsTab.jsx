@@ -61,7 +61,7 @@ const DetailsTab = ({ productDescription, reviewId }) => {
     });
 
     return (
-        <div className='p-24'>
+        <div className='mx-auto container my-16'>
             <Tabs>
                 <TabList>
                     <Tab>Description</Tab>
@@ -145,7 +145,7 @@ const DetailsTab = ({ productDescription, reviewId }) => {
                         <button
                             type="submit"
                             disabled={!user}
-                            className={`px-6 py-2 font-semibold rounded-lg transition ${user ? 'bg-pink-500 text-white hover:bg-pink-600' : 'bg-gray-400 text-gray-700 cursor-not-allowed'}`}
+                            className={`px-6 py-2 font-semibold rounded-lg transition ${user ? 'bg-primary text-white hover:bg-primary' : 'bg-gray-400 text-gray-700 cursor-not-allowed'}`}
                         >
                             {user ? 'Submit' : 'Login to submit a review'}
                         </button>

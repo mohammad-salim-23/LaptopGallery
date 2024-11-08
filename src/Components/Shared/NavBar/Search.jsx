@@ -68,12 +68,12 @@ const Search = () => {
 
                                         <section className="w-2/3 text-sm space-y-1">
                                             <p className="font-bold text-base">
-                                                {truncateName(result.brand, 16)}{" "}
+                                                {truncateName(result.title, 16)}{" "}
                                             </p>
                                             <p className="text-base font-semibold">
                                                 {result.price} $
                                             </p>
-                                            <p className="text-gray-600">{result.subCategory}</p>
+                                            <p className="text-gray-600">{result.brand}</p>
                                             <p className="text-green-600">{result.price}</p>
                                         </section>
                                     </Link>

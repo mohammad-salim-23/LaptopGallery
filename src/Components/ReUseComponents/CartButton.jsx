@@ -88,9 +88,9 @@ const CartButton = ({ prodId }) => {
     };
 
     return (
-        <div className='flex justify-center items-center'>
-            <button className=' bg-gray-800 text-white rounded-lg p-2 btn-wide flex justify-center items-center' onClick={handleAddToCart}>
-                <span className=''><MdShoppingCartCheckout /> </span> Add To Cart
+        <div className='flex lg:justify-center lg:items-center'>
+            <button className=' hover:text-black  text-white rounded-lg gap-2 p-2 flex justify-center items-centers' onClick={handleAddToCart}>
+                <span className=''><MdShoppingCartCheckout className='mt-1' /> </span> Add To Cart
             </button>
         </div>
     );
