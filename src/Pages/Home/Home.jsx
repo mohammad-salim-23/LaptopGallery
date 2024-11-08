@@ -33,7 +33,7 @@ const Home = () => {
     };
     return (
         <div>
-            <Marquee className="bg-primary">
+            <Marquee className="h-12 my-4">
                 <MarqueeText></MarqueeText>
             </Marquee>
             <Banner></Banner>
@@ -41,14 +41,14 @@ const Home = () => {
             <FeaturedCard></FeaturedCard>
             <Faq></Faq>
             <Find></Find>
-            
+
 
             <div className="relative">
 
                 {showButton && (
                     <button
                         onClick={scrollToTop}
-                        className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out transform hover:bg-gradient-to-r hover:from-red-500 hover:to-purple-500 animate-bounce"
+                        className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-primary via-[#42a8e4] to-[#4379F2] text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out transform hover:bg-gradient-to-r hover:from-red-500 hover:to-purple-500 animate-bounce"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

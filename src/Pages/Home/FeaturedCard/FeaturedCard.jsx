@@ -5,10 +5,10 @@ import CartButton from '../../../Components/ReUseComponents/CartButton'
 
 const FeaturedCard = () => {
     const [product] = useProducts();
-    const products = product.slice(1, 6)
+    const products = product.slice(1, 9)
     return (
         <div className='container mx-auto px-4 mt-10'>
-            <h1 className='text-3xl'>Our Collection</h1>
+            <h1 className='text-3xl font-opensans'>Our Collection</h1>
             <div className='divider mb-10'></div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                 {products?.map((data) => (

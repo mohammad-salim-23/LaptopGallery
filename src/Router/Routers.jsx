@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
             {
                 path: "/category/:category",
                 element: <CategoryPage></CategoryPage>,
-                loader: ({ params }) => fetch(`http://localhost:3000/products/category/${params.category}`),
+                loader: ({ params }) => fetch(`http://localhost:3000/products/subCategory/${params.category}`)
             },
             ,
             {
@@ -89,14 +89,14 @@ export const router = createBrowserRouter([
                 path: '/products/:brand',
                 element: <Brand></Brand>
             },
-           
+
             {
                 path: '/cart',
                 element: <Cart></Cart>
             },
             {
                 path: '/profile',
-                element:  <Profile></Profile> 
+                element: <Profile></Profile>
             },
             {
                 path: '/terms',

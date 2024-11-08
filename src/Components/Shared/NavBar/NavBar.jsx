@@ -16,7 +16,7 @@ const NavBar = () => {
     const { user, logOut } = useAuth();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isAdmin] = useAdmin()
-    console.log(user)
+    // console.log(user)
 
     // Handle Logout
     const handleLogOut = () => {
@@ -39,7 +39,7 @@ const NavBar = () => {
     return (
         <>
             <div>
-                <div className="bg-[#2C3E50] text-white flex items-center">
+                <div className="bg-primary text-white flex items-center">
                     <div className="flex items-center justify-between container mx-auto px-4 h-20">
 
                         <div className="flex space-x-5 items-center">
@@ -50,7 +50,7 @@ const NavBar = () => {
                             {/* Logo */}
                             <div>
                                 <Link to={'/'}>
-                                    <h1 className="text-xl lg:text-3xl">Laptop Gallery</h1>
+                                    <h1 className="text-xl lg:text-3xl font-serif">Laptop Gallery</h1>
                                 </Link>
                             </div>
 
@@ -71,7 +71,7 @@ const NavBar = () => {
                         <div className="flex items-center space-x-4">
                             {
                                 !isAdmin && <div className="lg:hidden">
-                                    <button onClick={handleSearchOpen} className="text-gray-500">
+                                    <button onClick={handleSearchOpen}>
                                         <FaMagnifyingGlass size={18} />
                                     </button>
                                 </div>
@@ -144,7 +144,7 @@ const NavBar = () => {
 
                 <header className="h-10 bg-gray-100 lg:border-b-2 text-[15px] sticky z-40 inset-0 text-black lg:flex-center hidden">
                     <nav className="px-3.5 flex-center w-full max-w-7xl mx-auto">
-                        <ul className="gap-x-1 lg:flex-center hidden">
+                        <ul className="gap-x-1 lg:flex-center hidden font-mono">
                             {Navlinks.map((menu) => (
                                 <DesktopMenu menu={menu} key={menu.name} />
                             ))}

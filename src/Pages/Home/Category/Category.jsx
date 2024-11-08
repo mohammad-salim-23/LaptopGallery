@@ -26,7 +26,7 @@ const Category = () => {
     return (
         <div className="mt-5 container mx-auto px-4">
             <div className="space-y-3">
-                <h2 className="text-2xl font-semibold">Featured Category</h2>
+                <h2 className="text-2xl font-semibold font-opensans">Featured Category</h2>
                 <p>Your Desired Product from Featured Category!</p>
             </div>
             <div className="divider"></div>
@@ -78,7 +78,7 @@ const Category = () => {
                     {category.map((item, index) => (
 
                         <div key={item._id || index} className="flex flex-col justify-center items-center px-4">
-                            <Link to={`/category/${item.category}`}>
+                            <Link to={`/category/${item.subCategory}`}>
                                 <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
                                     <img
                                         src={item?.image || "default-image.jpg"}
@@ -87,7 +87,7 @@ const Category = () => {
                                     />
                                 </div>
                             </Link>
-                            <p className="font-medium mt-4">{item.category}</p>
+                            <p className="font-medium mt-4">{item.subCategory}</p>
                         </div>
                     ))}
                 </Carousel>
