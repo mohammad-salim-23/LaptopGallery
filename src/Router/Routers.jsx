@@ -30,6 +30,7 @@ import DeliveryPolicy from "../Pages/FooterPages/DeliveryPolicy";
 import Faq from "../Pages/Home/Faq/Faq";
 import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
+import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
 
 export const router = createBrowserRouter([
     {
@@ -63,7 +64,12 @@ export const router = createBrowserRouter([
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
-            }
+            },
+            {
+                path: "/category/:category",
+                element: <CategoryPage></CategoryPage>,
+                loader: ({ params }) => fetch(`http://localhost:3000/products/category/${params.category}`),
+            },
             ,
             {
 
@@ -86,7 +92,7 @@ export const router = createBrowserRouter([
            
             {
                 path: '/cart',
-                element:  <Cart></Cart> 
+                element: <Cart></Cart>
             },
             {
                 path: '/profile',
@@ -94,23 +100,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/terms',
-                element:  <Terms></Terms> 
+                element: <Terms></Terms>
             },
             {
                 path: '/about',
-                element: <AboutUs></AboutUs> 
+                element: <AboutUs></AboutUs>
             },
             {
                 path: '/delivery',
-                element: <DeliveryPolicy></DeliveryPolicy> 
+                element: <DeliveryPolicy></DeliveryPolicy>
             },
             {
                 path: '/faq',
-                element: <Faq></Faq> 
+                element: <Faq></Faq>
             },
             {
                 path: '/returns',
-                element: <ReturnPolicy></ReturnPolicy> 
+                element: <ReturnPolicy></ReturnPolicy>
             },
             {
                 path: '/payment/success/:tranId',
@@ -120,7 +126,7 @@ export const router = createBrowserRouter([
                 path: '/payment/fail/:tranId',
                 element: <PaymentFail></PaymentFail>
             }
-            
+
         ]
     },
     {
