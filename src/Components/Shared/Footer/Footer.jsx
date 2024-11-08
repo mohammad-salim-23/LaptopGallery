@@ -60,7 +60,11 @@ const Footer = () => {
         <div>
           <h2 className="font-bold text-lg mb-4">Customer Service</h2>
           <ul>
-            <li className="my-8"><Link to="/support">Support Center</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500">  <a 
+  href="https://wa.me/01325798939" 
+  target="_blank" 
+  rel="noreferrer"
+>Support Center</a></li>
             <li className="my-8"><Link to="/faq">FAQ</Link></li>
             <li className="my-8"><Link to="/returns">Return Policy</Link></li>
           </ul>

@@ -170,9 +170,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {sortedItems.map((data) => (
-              <div key={data._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
+              <div key={data._id} className=" bg-white shadow-lg rounded-lg overflow-hidden">
                 <Link to={`/productDetails/${data._id}`}>
-                  <img src={data.image} alt={data.model} className="w-full h-40 object-cover" />
+                  <img src={data.image} alt={data.model} className="w-full h-1/2 object-cover" />
                 </Link>
                 <div className="p-4">
                   <Link to={`/productDetails/${data._id}`}>
@@ -184,29 +184,31 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
                   {/* Conditional Display */}
                   {title === "Accessories" ? (
-                    <>
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">Sub-Category:</span> {data.subCategory}</p>
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">SKU:</span> {data.productSKU}</p>
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">Stock:</span> {data.stock}</p>
+                        <>
+                           <p className="text-gray-600 mb-2"><span className="font-semibold">Sub-Category:</span> {data.subCategory}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">SKU:</span> {data.productSKU}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Stock:</span> {data.stock}</p>
+                           
+                        </>
+                    ) : (
+                        <>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {data.processor}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {data.ram}</p>
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {data.storage}</p>
+                            
+                            <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {data.display}</p>
+                   
+                         
+                        </>
+                    )}
 
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {data.processor}</p>
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {data.ram}</p>
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {data.storage}</p>
-
-                      <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {data.display}</p>
-
-
-                    </>
-                  )}
-
-                  <div className='border border-gray-300 my-4'></div>
-                  <p className="text-xl font-semibold mt-4 text-center text-red-600">{data.price} BDT</p>
-                  <div className='my-4'><CartButton prodId={data._id} ></CartButton></div>
-                  <div className='border border-gray-300 my-4'></div>
-                </div>
+<div className='border border-gray-300 mt-4'></div>
+                            <div className='flex gap-4  justify-between items-center'>
+                            <p className=" font-semibold text-xl   text-gray-600">{data.price} </p>
+                            <div className='mt-4'><CartButton prodId={data._id} ></CartButton></div>
+                            </div>
+                          
+                        </div>
               </div>
             ))}
           </div>
