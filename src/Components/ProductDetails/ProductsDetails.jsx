@@ -130,7 +130,7 @@ const ProductsDetails = () => {
                             </>
                         ) : (
                             <>
-                                <div className='flex gap-4'>
+                                <div className='flex flex-wrap gap-4'>
                                     {/* SKU Display */}
                                     <div className='flex flex-wrap gap-2'>
                                         <p className="border hover:border-primary text-gray-600 p-1 rounded-lg hover:text-primary">
@@ -199,7 +199,7 @@ const ProductsDetails = () => {
             <div>
                 <DetailsTab reviewId={product._id} productDescription={product.description} />
             </div>
-
+            <h1 className='pl-4 text-xl md:text-2xl uppercase'>Related Products</h1>
             <div className='grid grid-cols-1  items-center p-4 md:grid-cols-2 lg:grid-cols-4'>
                 {
                     similarProducts.map(product => <SimilarData key={product._id} product={product} ></SimilarData>)
