@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     const banners = [
@@ -69,9 +70,11 @@ const Banner = () => {
                         <p className="text-lg lg:text-2xl font-medium mb-6 drop-shadow-md">
                             {banner.subtitle}
                         </p>
-                        <button className="px-6 py-2 mt-2 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
-                            Shop Now
-                        </button>
+                        <Link to={'/contact'}>
+                            <button className="px-6 py-2 mt-2 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
+                                Contact
+                            </button>
+                        </Link>
                     </div>
                 </div>
             ))}

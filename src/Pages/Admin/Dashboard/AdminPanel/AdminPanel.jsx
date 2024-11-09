@@ -46,8 +46,6 @@ const AdminPanel = () => {
     const data = [
         { name: 'Laptops', value: totalLaptopQuantity * 1000000 }, 
         { name: 'Mobiles', value: totalMobileQuantity * 1000000 },
-        { name: 'Mobile Accessories', value: totalMobileAccessoryQuantity * 50000 }, 
-        { name: 'Laptop Accessories', value: totalLaptopAccessoryQuantity * 50000 }, 
     ];
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];

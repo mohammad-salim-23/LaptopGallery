@@ -5,7 +5,8 @@ import axios from "axios";
 import { AuthContext } from "../Auth/Provider/AuthProvider";
 
 const axiosSecure = axios.create({
-    baseURL:"https://laptop-gallery-server-nine.vercel.app",
+    // baseURL:"https://laptop-gallery-server-nine.vercel.app",
+    baseURL:"http://localhost:5000",
 });
 const useAxiosSecure=()=>{
     const navigate = useNavigate();

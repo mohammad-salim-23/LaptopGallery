@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import useCart from "../../hooks/useCart";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const Checkout = ({ subTotal, setIsModalVisible }) => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
+    const { user } = useAuth();
 
     const {
         register,
@@ -15,7 +17,7 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
 
     const productIds = cart.map((item) => item._id);
     // console.log(productIds);
-    
+
     const onSubmit = async (data) => {
         // Add productIds to the data object
         data.productIds = productIds;
@@ -27,47 +29,29 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
         })
 
             .then(res => res.json())
-            .then(result=>{
+            .then(result => {
                 window.location.replace(result.url)
                 console.log(result)
             })
     };
-    
+
 
     return (
         <div className="mx-auto container">
             <div className="items-center justify-center">
                 <div className="animate-fadeIn">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="flex justify-between gap-4 mt-4">
+                        <div className="flex flex-col md:flex-row justify-between gap-4 mt-4">
                             <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">First Name</span>
                                 </label>
                                 <input
                                     type="text"
-                                    {...register("firstName", { required: true })}
-                                    placeholder="First Name"
+                                    {...register("firstName")}
+                                    defaultValue={user.displayName}
                                     className="input input-bordered w-full"
                                 />
-                                {errors.firstName && (
-                                    <span className="text-red-500">First Name is required</span>
-                                )}
-                            </div>
-
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">Last Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    {...register("lastName", { required: true })}
-                                    placeholder="Last Name"
-                                    className="input input-bordered w-full"
-                                />
-                                {errors.lastName && (
-                                    <span className="text-red-500">Last Name is required</span>
-                                )}
                             </div>
                         </div>
 
@@ -78,14 +62,14 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
                             <textarea
                                 {...register("streetAddress", { required: true })}
                                 placeholder="Street Address"
-                                className="textarea textarea-bordered"
+                                className="textarea textarea-bordered w-full"
                             />
                             {errors.streetAddress && (
                                 <span className="text-red-500">Street Address is required</span>
                             )}
                         </div>
 
-                        <div className="flex justify-between items-center gap-4">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Division</span>
@@ -130,7 +114,7 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
                             </div>
                         </div>
 
-                        <div className="flex justify-between items-center gap-4">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">Phone</span>
@@ -159,13 +143,10 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
                             </label>
                             <input
                                 type="email"
-                                {...register("email", { required: true })}
-                                placeholder="Email"
+                                {...register("email")}
+                                defaultValue={user.email}
                                 className="input input-bordered w-full"
                             />
-                            {errors.email && (
-                                <span className="text-red-500">Email is required</span>
-                            )}
                         </div>
 
                         <div className="flex justify-end">
@@ -189,6 +170,7 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
                 </div>
             </div>
         </div>
+
     );
 };
 
