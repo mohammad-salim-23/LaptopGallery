@@ -21,22 +21,24 @@ const Registration = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password, data.name)
       .then(result => {
+        // console.log(result)
         updateUserProfile(data.name)
           .then(() => {
             const userInfo = {
               name: data.name,
               email: data.email,
               password: data.password,
+              createdDate: new Date().toISOString(),
             };
             axiosPublic.post('/users', userInfo).then(res => {
-              if (res.data.insertedId) {
-                Swal.fire({
-                  title: "Registration Success!",
-                  text: "You clicked the button!",
-                  icon: "success",
-                });
-                navigate('/');
-              }
+              // if (res.data.insertedId) {
+              // }
+              Swal.fire({
+                title: "Registration Success!",
+                text: "You clicked the button!",
+                icon: "success",
+              });
+              navigate('/');
             });
           })
           .catch((error) => console.error(error));

@@ -4,7 +4,7 @@ import ShopLayout from '../../Components/ReUseComponents/ShopLayout/ShopLayout';
 
 const Phone = () => {
     const [products, refetch] = useProducts();
-    console.log(products);
+    // console.log(products);
     const Phone = products.filter(item => item.type === "mobile")
     return (
         <div>
