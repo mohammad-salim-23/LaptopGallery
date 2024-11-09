@@ -122,8 +122,8 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
           </div>
 
           {/* Card design */}
-          <div className='container mx-auto px-4'>
-            <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
+          <div className='container mx-auto'>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
               {paginatedItems.map(data => (
                 <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col">
                   <Link to={`/productDetails/${data._id}`} className="block">
