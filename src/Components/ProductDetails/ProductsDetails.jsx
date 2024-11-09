@@ -96,7 +96,7 @@ const ProductsDetails = () => {
                 <div className="w-full md:w-1/2 lg:mt-20 md:14 mt-6">
                     <div className="">
 
-                        <p className="text-indigo-500 text-2xl hover:underline hover:cursor-pointer hover:text-indigo-600 mb-2">{product.title}</p>
+                        <p className="text-2xl mb-2">{product.title}</p>
                         {product.type === "accessories" ? (
                             <>
                                 <div className='flex gap-4'>
@@ -168,7 +168,7 @@ const ProductsDetails = () => {
                         <div className='flex gap-4 mt-4'>
                             {/* Price */}
                             <div className='text-xl font-semibold flex flex-wrap mt-2'>
-                                <p className="border hover:border-primary text-blue-600 p-1 rounded-lg hover:text-primary">
+                                <p className="border hover:border-primary text-rose-600 p-1 rounded-lg hover:text-primary">
                                     <span className="font-semibold">Price:</span> {product.price || "N/A"}
                                 </p>
                             </div>
@@ -181,7 +181,7 @@ const ProductsDetails = () => {
                         </div>
 
                         <div className='flex gap-4 mt-6'>
-                            <div className='btn hover:outline text-[16px] bg-primary hover:bg-transparent text-white hover:text-black'>
+                            <div>
                                 <CartButton prodId={product._id} />
                             </div>
 
