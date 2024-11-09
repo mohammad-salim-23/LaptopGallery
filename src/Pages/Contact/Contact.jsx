@@ -19,7 +19,7 @@ const Contact = () => {
                         <div className="bg-white absolute flex flex-wrap py-2 lg:py-6 rounded shadow-md ml-20">
                             <div className="lg:w-1/2 px-6">
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">ADDRESS</h2>
-                                <p className="mt-1">Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter</p>
+                                <p className="mt-1">shop-no:23/2, 2nd floor, Kudratullah Market, BondorBazar, Sylhet</p>
                             </div>
                             <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">EMAIL</h2>
