@@ -215,12 +215,14 @@ const ProductsDetails = () => {
                 <DetailsTab reviewId={product._id} productDescription={product.description} />
             </div>
             <h1 className='pl-4 text-xl md:text-2xl uppercase'>Related Products</h1>
-            <div className='grid grid-cols-1  items-center p-4 md:grid-cols-2 lg:grid-cols-4 '>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-center p-4">
                 {
-                    similarProducts.map(product => <SimilarData key={product._id} product={product} ></SimilarData>)
+                    similarProducts.map(product => (
+                        <SimilarData key={product._id} product={product} />
+                    ))
                 }
-
             </div>
+
         </div>
     );
 };

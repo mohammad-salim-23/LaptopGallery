@@ -31,6 +31,7 @@ import Faq from "../Pages/Home/Faq/Faq";
 import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
 import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
+import Contact from "../Pages/Contact/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -125,6 +126,10 @@ export const router = createBrowserRouter([
             {
                 path: '/payment/fail/:tranId',
                 element: <PaymentFail></PaymentFail>
+            },
+            {
+                path: '/contact',
+                element: <Contact></Contact>
             }
 
         ]

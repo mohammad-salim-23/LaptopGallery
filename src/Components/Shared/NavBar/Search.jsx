@@ -7,8 +7,8 @@ const Search = () => {
 
     const [products] = useProducts();
 
-    console.log(products)
-    
+    // console.log(products)
+
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleChange = (event) => {
@@ -19,7 +19,7 @@ const Search = () => {
         prod.brand.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    console.log(filteredProducts)
+    // console.log(filteredProducts)
 
     const handleClick = () => {
         setSearchTerm("");
@@ -27,7 +27,7 @@ const Search = () => {
 
     return (
         <div>
-            <div className="hidden w-[400px] lg:flex">
+            <div className="hidden w-[500px]  lg:flex">
                 <input
                     type="text"
                     placeholder="Search..."
@@ -35,13 +35,14 @@ const Search = () => {
                     onChange={handleChange}
                     className="w-full text-gray-500 pl-8 pr-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
+
                 <span className="absolute cursor-pointer inset-y-0 left-2 flex items-center text-gray-500">
                     <CiSearch size={18} />
                 </span>
             </div>
 
             {searchTerm && (
-                <div className="absolute top-full p-2 space-y-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-96 overflow-auto z-50">
+                <div className="absolute top-full p-2 space-y-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-96 overflow-auto z-50 mt-8">
                     {filteredProducts.length > 0 ? (
                         <>
                             {filteredProducts.map((result) => {
@@ -63,7 +64,7 @@ const Search = () => {
                                             <img
                                                 src={result.image}
                                                 alt={result.brand}
-                                                className="w-full h-24 object-cover rounded-md"
+                                                className="w-full  object-cover rounded-lg  h-24 duration-1000 hover:scale-105"
                                             />
                                         </section>
 

@@ -61,14 +61,7 @@ const Cart = () => {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {/* Quantity Controls */}
-                                        <button className="text-2xl hover:text-gray-600 border-gray-300">
-                                            <CiSquareMinus />
-                                        </button>
-                                        <span className="text-gray-700 text-xl font-semibold">{item.quantity}</span>
-                                        <button className="text-2xl hover:text-gray-600 border-gray-300">
-                                            <CiSquarePlus />
-                                        </button>
-                                        <button onClick={() => handleRemoveItem(item._id)} className='text-2xl text-red-500 hover:text-red-700 ml-2'>
+                                        <button onClick={() => handleRemoveItem(item._id)} className='text-2xl text-red-500 hover:text-red-700 ml-2 border p-2 rounded-full hover:bg-red-300'>
                                             <RxCross1 />
                                         </button>
                                     </div>
