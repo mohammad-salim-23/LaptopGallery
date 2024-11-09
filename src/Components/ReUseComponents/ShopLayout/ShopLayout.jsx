@@ -121,55 +121,51 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4">
-            {paginatedItems.map(data => (
-              <div key={data._id} className="w-full  bg-white shadow-lg rounded-lg  ">
-                <Link to={`/productDetails/${data._id}`} className="block">
-                  <img src={data.image} alt={data.model} className="w-full h-80 object-cover mb-2" />
-                </Link>
-                <div className="p-4">
-                  <Link to={`/productDetails/${data._id}`}>
-                    <h3 className="text-indigo-500 text-xl hover:underline hover:cursor-pointer hover:text-indigo-600 mb-2">{data.title}</h3>
+          {/* Card design */}
+          <div className='container mx-auto px-4'>
+            <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
+              {paginatedItems.map(data => (
+                <div key={data._id} className="w-full bg-white shadow-lg rounded-lg flex flex-col">
+                  <Link to={`/productDetails/${data._id}`} className="block">
+                    <img src={data.image} alt={data.model} className="w-full h-80 object-cover mb-2" />
                   </Link>
-                  <div class="flex items-center">
-                    <ul className='list-disc ml-4  '>
-                      <li><span className="text-gray-600">Model -</span> {data.model || "N/A"}</li>
-                      <li><span className="text-gray-600">Brand -</span> {data.brand || "N/A"}</li>
-                    </ul>
-                  </div>
-
-                  <div className=''>
-                    {/* Price */}
-                    <div className='  font-semibold flex flex-wrap mt-2'>
-                      <p className="border hover:border-primary text-blue-600 p-1 rounded-lg hover:text-primary">
-                        <span className="font-semibold">Price:</span> {data.price || "N/A"}
-                      </p>
-                    </div>
-                    {/* Regular Price */}
-                    <div className='  font-semibold flex flex-wrap mt-2'>
-                      <p className="border text-gray-500 p-1 rounded-lg">
-                        <span className="font-semibold">Regular Price:</span><span className='line-through'> {data.regularPrice || "N/A"}</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className='flex gap-4 mt-3 justify-center'>
+                  {/* Fixed height for content area */}
+                  <div className="flex-grow flex flex-col justify-between">
                     <div>
-                      <NavLink to={`/productDetails/${data._id}`} className="btn hover:outline text-[16px] bg-primary hover:bg-transparent text-white hover:text-black">
+                      <Link to={`/productDetails/${data._id}`}>
+                        <h3 className="text-xl hover:underline hover:cursor-pointer mb-2">
+                          {data.title}
+                        </h3>
+                      </Link>
+                      <div className="flex items-center">
+                        <ul className="list-disc ml-4">
+                          <li><span className="text-gray-600">Model -</span> {data.model || "N/A"}</li>
+                          <li><span className="text-gray-600">Brand -</span> {data.brand || "N/A"}</li>
+                        </ul>
+                      </div>
+                      <div className="mt-2">
+                        <p className="border text-rose-600 p-1 rounded-lg font-semibold">
+                          <span className="font-semibold">Price:</span> {data.price || "N/A"}
+                        </p>
+                        <p className="border text-gray-500 p-1 rounded-lg font-semibold mt-1">
+                          <span className="font-semibold">Regular Price:</span>
+                          <span className="line-through"> {data.regularPrice || "N/A"}</span>
+                        </p>
+                      </div>
+                    </div>
+                    {/* Buttons container */}
+                    <div className="flex gap-4 mt-4 justify-between">
+                      <NavLink to={`/productDetails/${data._id}`} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary">
                         See More
                       </NavLink>
+                      <CartButton prodId={data._id} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-gray-700" />
                     </div>
-
-                    <div className='btn hover:outline text-[16px] bg-primary hover:bg-transparent text-white hover:text-black'>
-                      <CartButton prodId={data._id} />
-                    </div>
-
-
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
 
           {/* Pagination */}
           <div className="flex justify-center mt-8 gap-2">

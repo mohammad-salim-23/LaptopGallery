@@ -10,13 +10,13 @@ const Banner = () => {
         },
         {
             id: 2,
-            url: "https://via.placeholder.com/1600x600?text=Laptop+Gallery+Banner+2",
+            url: "https://png.pngtree.com/background/20231017/original/pngtree-web-development-banner-enhances-creative-3d-rendered-mobile-mockup-with-laptop-picture-image_5592245.jpg",
             title: "Top Brands for Every Need",
             subtitle: "Find your next laptop with ease and confidence.",
         },
         {
             id: 3,
-            url: "https://via.placeholder.com/1600x600?text=Laptop+Gallery+Banner+3",
+            url: "https://png.pngtree.com/background/20231017/original/pngtree-innovative-3d-mobile-mockup-paired-with-web-development-banner-and-laptop-picture-image_5592791.jpg",
             title: "Experience Ultimate Power",
             subtitle: "Push your limits with next-gen technology.",
         },

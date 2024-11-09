@@ -31,7 +31,6 @@ import Faq from "../Pages/Home/Faq/Faq";
 import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
 import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
-import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
 
 export const router = createBrowserRouter([
     {
@@ -58,26 +57,20 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             }
             ,
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
-            },
-            {
-                path: "/category/:category",
-                element: <CategoryPage></CategoryPage>,
-                loader: ({ params }) => fetch(`http://localhost:3000/products/category/${params.category}`),
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             },
             ,
             {
                 path: '/dashboard/totalAccessories/:id',
                 element: <UpdateProductAccessories></UpdateProductAccessories>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
-            }
-            ,
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
+            },
             {
 
                 path: '/laptop',
@@ -96,14 +89,14 @@ export const router = createBrowserRouter([
                 path: '/products/:brand',
                 element: <Brand></Brand>
             },
-           
+
             {
                 path: '/cart',
                 element: <Cart></Cart>
             },
             {
                 path: '/profile',
-                element:  <Profile></Profile> 
+                element: <Profile></Profile>
             },
             {
                 path: '/terms',

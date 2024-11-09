@@ -33,7 +33,7 @@ const Faq = () => {
     ];
 
     return (
-        <section className="faq-section bg-gray-100 p-8 rounded-lg shadow-md my-8">
+        <section className="faq-section container mx-auto px-4 bg-gray-100 p-8 rounded-lg shadow-md my-8">
             <h2 className="text-3xl font-bold text-center mb-6">Frequently Asked Questions</h2>
             <div className="space-y-4">
                 {faqs.map((faq, index) => (
