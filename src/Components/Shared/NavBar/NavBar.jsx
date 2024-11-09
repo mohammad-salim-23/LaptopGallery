@@ -8,7 +8,7 @@ import useAuth from "../../../hooks/useAuth";
 import { IoIosLogOut } from "react-icons/io";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import Search from "./Search";
 // import useProducts from "../../../hooks/useProducts";
@@ -19,6 +19,7 @@ const NavBar = () => {
     const { user, logOut } = useAuth();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isAdmin] = useAdmin()
+    const navigate = useNavigate();
     // console.log(user)
 
     // Handle Logout
@@ -30,7 +31,7 @@ const NavBar = () => {
                     text: "Logged out successfully!",
                     icon: "success"
                 });
-                navigation('/');
+                navigate('/');
             })
             .catch(error => console.log(error));
     };

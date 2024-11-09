@@ -125,7 +125,7 @@ const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://wa.me/01325798939"
+              href="https://wa.me/+8801325798939"
               target="_blank"
               rel="noreferrer"
             >

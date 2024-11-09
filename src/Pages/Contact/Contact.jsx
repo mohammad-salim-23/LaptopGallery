@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
     return (
@@ -24,7 +25,7 @@ const Contact = () => {
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">EMAIL</h2>
                                 <a href="mailto:example@email.com" className="text-indigo-500 leading-relaxed">example@email.com</a>
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
-                                <p className="leading-relaxed">123-456-7890</p>
+                                <Link to={'https://wa.me/+8801325798939'}><p className="leading-relaxed text-primary hover:underline">01325798939</p></Link>
                             </div>
                         </div>
                     </div>

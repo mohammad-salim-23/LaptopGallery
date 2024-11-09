@@ -90,7 +90,7 @@ const Accessories = () => {
                 throw new Error("Image upload failed");
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

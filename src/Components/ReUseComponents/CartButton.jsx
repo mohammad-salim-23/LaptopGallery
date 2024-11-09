@@ -20,7 +20,7 @@ const CartButton = ({ prodId }) => {
                 const response = await axiosPublic.get(`/products/${prodId}`);
                 setProductInfo(response.data);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 toast.error("Failed to fetch product information");
             } finally {
                 setLoading(false);
@@ -33,7 +33,7 @@ const CartButton = ({ prodId }) => {
                     const response = await axiosPublic.get(`/cart?email=${user.email}`);
                     setCartItems(response.data);
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                     toast.error("Failed to fetch cart items");
                 }
             }
@@ -82,7 +82,7 @@ const CartButton = ({ prodId }) => {
                 toast.error("Failed to add to cart");
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             toast.error("Error adding to cart");
         }
     };

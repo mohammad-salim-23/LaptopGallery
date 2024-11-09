@@ -32,6 +32,9 @@ import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
 import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
 import Contact from "../Pages/Contact/Contact";
+// import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -136,42 +139,42 @@ export const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <Dashboard></Dashboard> ,
         children: [
             {
                 path: 'adminPanel',
-                element: <AdminPanel></AdminPanel>
+                element:   <PrivateRoute><AdminRoute><AdminPanel></AdminPanel> </AdminRoute></PrivateRoute>
             }
             ,
             {
                 path: 'addLaptop',
-                element: <AddLaptop></AddLaptop>
+                element: <PrivateRoute><AdminRoute><AddLaptop></AddLaptop></AdminRoute></PrivateRoute>
             },
             {
                 path: 'addMobile',
-                element: <AddMobile></AddMobile>,
+                element: <PrivateRoute><AdminRoute><AddMobile></AddMobile></AdminRoute></PrivateRoute>,
             },
             {
                 path: 'accessories',
-                element: <Accessories></Accessories>,
+                element: <PrivateRoute><AdminRoute><Accessories></Accessories></AdminRoute></PrivateRoute>,
             },
             {
                 path: 'totalLaptop',
-                element: <TotalLaptop></TotalLaptop>
+                element: <PrivateRoute><AdminRoute><TotalLaptop></TotalLaptop></AdminRoute></PrivateRoute>
             },
             {
                 path: 'totalMobile',
-                element: <TotalMobile></TotalMobile>
+                element:<PrivateRoute><AdminRoute> <TotalMobile></TotalMobile></AdminRoute></PrivateRoute>
             }
             ,
             {
                 path: 'totalAccessories',
-                element: <TotalAccessories></TotalAccessories>
+                element: <PrivateRoute><AdminRoute><TotalAccessories></TotalAccessories></AdminRoute></PrivateRoute>
             }
             ,
             {
                 path: 'totalUsers',
-                element: <TotalUsers></TotalUsers>
+                element:<PrivateRoute> <AdminRoute><TotalUsers></TotalUsers></AdminRoute></PrivateRoute>
             }
         ]
     }

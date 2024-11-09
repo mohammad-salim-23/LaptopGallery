@@ -1,3 +1,4 @@
+import { PulseLoader } from "react-spinners"
 
 const Loader = () => {
     return (

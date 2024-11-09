@@ -11,12 +11,12 @@ export const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   // create user
   const createUser = (name, email, password) => {
     setLoading(true)
-    return createUserWithEmailAndPassword(auth,name, email, password)
+    return createUserWithEmailAndPassword(auth, name, email, password)
   }
 
   // signIn With Email Password
@@ -49,15 +49,26 @@ export const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-      // console.log("test user ", currentUser)
-      setLoading(false)
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      // if (currentUser) {
+      //   const userInfo = { email: currentUser.email };
+      //   // console.log(userInfo)
+      //   axiosPublic.post('/jwt').then((res) => {
+      //     if (res.data.token) {
+      //       localStorage.setItem("access-token", res.data.token);
+      //       // console.log("access-token", res.data.token)
+      //     }
+      //   });
+      // } else {
+      //   localStorage.removeItem("access-token");
+      // }
+      setLoading(false);
     });
     return () => {
-      unSubscribe()
-    }
-  }, [])
+      unsubscribe();
+    };
+  }, [axiosPublic]);
 
 
   const authInfo = {

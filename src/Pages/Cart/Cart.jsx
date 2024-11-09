@@ -11,7 +11,7 @@ const Cart = () => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    console.log(cart);
+    // console.log(cart);
 
     // Calculate total price
     const totalPrice = cart.reduce((total, item) => {
@@ -31,7 +31,7 @@ const Cart = () => {
             await refetch();
             toast.success("Product removed successfully");
         } catch (error) {
-            console.error("Error removing item:", error);
+            // console.error("Error removing item:", error);
             toast.error("Error removing item");
         }
     };
