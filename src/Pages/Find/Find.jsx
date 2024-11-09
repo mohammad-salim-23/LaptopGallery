@@ -18,7 +18,7 @@ const Find = () => {
                         <div className="flex flex-col md:flex-row items-start justify-between w-full">
                             {/* Text Section */}
                             <div className="text-left">
-                                <h1 className="text-2xl md:text-3xl font-semibold">20+ Physical Stores</h1>
+                                <h1 className="text-2xl md:text-3xl font-semibold">Physical Stores</h1>
                                 <p className="text-lg md:text-xl">Visit Our Store & Get Your Desired IT Product!</p>
                             </div>
 

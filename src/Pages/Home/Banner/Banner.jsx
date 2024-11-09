@@ -71,7 +71,7 @@ const Banner = () => {
                             {banner.subtitle}
                         </p>
                         <Link to={'/contact'}>
-                            <button className="px-6 py-2 mt-2 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
+                            <button className="px-6 py-2 mt-2 bg-gradient-to-r from-primary to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
                                 Contact
                             </button>
                         </Link>
