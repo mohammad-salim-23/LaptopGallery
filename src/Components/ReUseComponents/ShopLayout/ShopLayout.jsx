@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import CartButton from '../CartButton';
 import { CiFilter } from "react-icons/ci";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { AiOutlineClose } from "react-icons/ai"; // Importing cross icon
+import { AiOutlineClose } from "react-icons/ai";
 import { DiGitCompare } from 'react-icons/di';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
@@ -125,7 +125,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
           <div className='container mx-auto px-4'>
             <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
               {paginatedItems.map(data => (
-                <div key={data._id} className="w-full bg-white shadow-lg rounded-lg flex flex-col">
+                <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col">
                   <Link to={`/productDetails/${data._id}`} className="block">
                     <img src={data.image} alt={data.model} className="w-full h-80 object-cover mb-2" />
                   </Link>
@@ -154,11 +154,11 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       </div>
                     </div>
                     {/* Buttons container */}
-                    <div className="flex gap-4 mt-4 justify-between">
+                    <div className="flex gap-4 px-4 mt-4 justify-between">
                       <NavLink to={`/productDetails/${data._id}`} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary">
                         See More
                       </NavLink>
-                      <CartButton prodId={data._id} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-gray-700" />
+                      <CartButton prodId={data._id} />
                     </div>
                   </div>
                 </div>
