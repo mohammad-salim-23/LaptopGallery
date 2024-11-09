@@ -7,7 +7,8 @@ const Search = () => {
 
     const [products] = useProducts();
 
-
+    console.log(products)
+    
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleChange = (event) => {
@@ -18,10 +19,10 @@ const Search = () => {
         prod.brand.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // console.log(filteredProducts)
+    console.log(filteredProducts)
 
     const handleClick = () => {
-      setSearchTerm("");
+        setSearchTerm("");
     };
 
     return (

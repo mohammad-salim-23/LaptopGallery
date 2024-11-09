@@ -28,14 +28,15 @@ const AdminPanel = () => {
 
            
             const subCategory = item.subCategory;
+            const category = item.type;
 
             if (subCategory === 'laptop') {
                 totalLaptopQuantity += quantity;
-            } else if (subCategory === 'mobile') {
+            } else if (category === 'mobile') {
                 totalMobileQuantity += quantity;
-            } else if (subCategory === 'mobile accessories') {
+            } else if (subCategory === 'Mobile Accessories') {
                 totalMobileAccessoryQuantity += quantity;
-            } else if (subCategory === 'laptop accessories') {
+            } else if (subCategory === 'Laptop Accessories') {
                 totalLaptopAccessoryQuantity += quantity;
             }
         });
@@ -54,42 +55,42 @@ const AdminPanel = () => {
     return (
         <div className="flex flex-col items-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
-                <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
+                <div className="bg-gray-800 p-6 rounded-lg flex items-center text-white">
                     <FaDollarSign className="text-3xl mr-4" />
                     <div>
                         <h3 className="text-lg font-semibold">Total Order Amount</h3>
                         <p>{totalOrderAmount.toFixed(2)} BDT</p>
                     </div>
                 </div>
-                <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
+                <div className="bg-gray-800 p-6 rounded-lg flex items-center text-white">
                     <FaShoppingCart className="text-3xl mr-4" />
                     <div>
                         <h3 className="text-lg font-semibold">Total Order Quantity</h3>
                         <p>{totalOrderQuantity}</p>
                     </div>
                 </div>
-                <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
+                <div className="bg-gray-800 p-6 rounded-lg flex items-center text-white">
                     <FaLaptop className="text-3xl mr-4" />
                     <div>
                         <h3 className="text-lg font-semibold">Total Laptop Quantity</h3>
                         <p>{totalLaptopQuantity}</p>
                     </div>
                 </div>
-                <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
+                <div className="bg-gray-800 p-6 rounded-lg flex items-center text-white">
                     <FaMobileAlt className="text-3xl mr-4" />
                     <div>
                         <h3 className="text-lg font-semibold">Total Mobile Quantity</h3>
                         <p>{totalMobileQuantity}</p>
                     </div>
                 </div>
-                <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
+                <div className="bg-gray-800 p-6 rounded-lg flex items-center text-white">
                     <FaHeadphones className="text-3xl mr-4" />
                     <div>
                         <h3 className="text-lg font-semibold">Total Mobile Accessory Quantity</h3>
                         <p>{totalMobileAccessoryQuantity}</p>
                     </div>
                 </div>
-                <div className="bg-teal-200 p-4 rounded-lg flex items-center text-white">
+                <div className="bg-gray-800 p-6 rounded-lg flex items-center text-white">
                     <FaTabletAlt className="text-3xl mr-4" />
                     <div>
                         <h3 className="text-lg font-semibold">Total Laptop Accessory Quantity</h3>

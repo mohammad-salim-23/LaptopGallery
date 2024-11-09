@@ -41,7 +41,7 @@ const SocialComponent = () => {
             <div className="divider ">OR</div>
 
             <button onClick={handleGoogleSignIn} className="btn 
-            btn-wide bg-orange-400 text-white">
+            btn-wide bg-orange-400 text-white hover:text-black">
                 <FcGoogle />
                 GOOGLE</button>
         </div>

@@ -63,7 +63,7 @@ const Login = () => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <input className="btn bg-orange-400 text-white w-full" type="submit" value="Login" />
+                            <input className="btn bg-orange-400 text-white w-full hover:text-black" type="submit" value="Login" />
                         </div>
                     </form>
                     <p className='text-center mt-4'><small>New here? </small> <Link className='font-bold' to="/registration">Create a new account</Link></p>

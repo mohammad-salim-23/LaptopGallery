@@ -123,14 +123,14 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
           {/* Card design */}
           <div className='container mx-auto'>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4 ">
               {paginatedItems.map(data => (
-                <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col">
+                <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col border">
                   <Link to={`/productDetails/${data._id}`} className="block">
-                    <img src={data.image} alt={data.model} className="w-full h-80 object-cover mb-2" />
+                    <img src={data.image} alt={data.model} className="rounded-xl h-56 duration-1000 hover:scale-105 mb-2" />
                   </Link>
                   {/* Fixed height for content area */}
-                  <div className="flex-grow flex flex-col justify-between">
+                  < div className="flex-grow flex flex-col justify-between p-4" >
                     <div>
                       <Link to={`/productDetails/${data._id}`}>
                         <h3 className="text-xl hover:underline hover:cursor-pointer mb-2">
@@ -154,7 +154,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       </div>
                     </div>
                     {/* Buttons container */}
-                    <div className="flex gap-4 px-4 mt-4 justify-between">
+                    < div className="flex gap-4 px-4 mt-4 justify-between" >
                       <NavLink to={`/productDetails/${data._id}`} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary">
                         See More
                       </NavLink>
@@ -181,9 +181,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
               <GrNext />
             </button>
           </div>
-        </div>
-      </div>
-    </div>
+        </div >
+      </div >
+    </div >
   );
 };
 

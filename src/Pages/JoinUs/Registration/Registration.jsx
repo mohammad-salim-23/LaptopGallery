@@ -66,7 +66,7 @@ const Registration = () => {
         {/* Form section */}
         <div className="flex-1  h-full">
           <div className="bg-base-100 p-6">
-          
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="form-control">
                 <label className="label">
@@ -113,7 +113,7 @@ const Registration = () => {
               </div>
 
               <div className="form-control mt-6">
-                <input className="btn bg-orange-400 text-white w-full" type="submit" value="Sign Up" />
+                <input className="btn bg-orange-400 text-white w-full hover:text-black" type="submit" value="Sign Up" />
               </div>
             </form>
             <p className="text-center mt-4">
