@@ -5,11 +5,9 @@ import Faq from "./Faq/Faq";
 import FeaturedCard from "./FeaturedCard/FeaturedCard";
 import MarqueeText from "./Marquee/MarqueeText";
 import Marquee from "react-fast-marquee";
-import Category from "./Category/Category";
+import PhoneSection from "./PhonSection/PhoneSection";
 
 const Home = () => {
-
-
     const [showButton, setShowButton] = useState(false);
 
     useEffect(() => {
@@ -37,8 +35,16 @@ const Home = () => {
                 <MarqueeText></MarqueeText>
             </Marquee>
             <Banner></Banner>
-            <Category></Category>
-            <FeaturedCard></FeaturedCard>
+            <div>
+                <h2 className="container border-b-2 mx-auto px-4 text-xl uppercase py-6 mt-5 md:text-2xl ">Choose your desired laptop</h2>
+
+                <FeaturedCard></FeaturedCard>
+            </div>
+            <div>
+                <h2 className="container border-b-2 mx-auto px-4 text-xl uppercase py-6  mt-5 md:text-2xl ">Choose your desired Mobile</h2>
+
+                <PhoneSection></PhoneSection>
+            </div>
             <Faq></Faq>
             <Find></Find>
 

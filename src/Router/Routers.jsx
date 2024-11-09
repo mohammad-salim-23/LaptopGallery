@@ -30,7 +30,7 @@ import DeliveryPolicy from "../Pages/FooterPages/DeliveryPolicy";
 import Faq from "../Pages/Home/Faq/Faq";
 import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
-import CategoryPage from "../Pages/Home/Category/CategoryPage/CategoryPage";
+import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
 
 export const router = createBrowserRouter([
     {
@@ -57,20 +57,20 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             }
             ,
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
-            },
-            {
-                path: "/category/:category",
-                element: <CategoryPage></CategoryPage>,
-                loader: ({ params }) => fetch(`http://localhost:3000/products/subCategory/${params.category}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             },
             ,
+            {
+                path: '/dashboard/totalAccessories/:id',
+                element: <UpdateProductAccessories></UpdateProductAccessories>,
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
+            },
             {
 
                 path: '/laptop',

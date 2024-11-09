@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaLaptopCode, FaLaptopHouse } from "react-icons/fa";
 import { FaBarsStaggered, FaMobileScreenButton } from "react-icons/fa6";
 import { HiUserGroup } from "react-icons/hi";
@@ -40,6 +40,46 @@ const Dashboard = () => {
 
   }
 
+
+  // Date & Time
+  const [time, setTime] = useState("");
+
+  // Function to update the time
+  const updateTime = () => {
+    const currentDate = new Date();
+
+    // Format options for 12-hour time with AM/PM and date as DD/MM/YYYY
+    const options = {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true, // 12-hour clock format with AM/PM
+      day: '2-digit', // Day as 2 digits
+      month: '2-digit', // Month as 2 digits
+      year: 'numeric', // Full year
+      timeZone: 'Asia/Dhaka', // Bangladesh time zone (BST)
+    };
+
+    // Get the formatted date and time
+    const bangladeshTime = currentDate.toLocaleString('en-US', options);
+
+    // Format the output to match the desired pattern
+    const formattedDateTime = `${bangladeshTime.slice(11)}, ${bangladeshTime.slice(0, 10)}`;
+
+    setTime(formattedDateTime);
+  };
+
+  // Update time every second
+  useEffect(() => {
+    const interval = setInterval(updateTime, 1000);
+    updateTime(); // Call immediately to set the initial time
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(interval);
+  }, []);
+
+
+  
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -125,6 +165,7 @@ const Dashboard = () => {
 
           {/* Search input */}
           <input className="mx-4 w-full md:72 lg:w-60 border rounded-md px-4 py-2 hidden lg:flex" type="text" placeholder="Search" />
+          <p className="font-bold">{time}</p>
 
           <div className="flex flex-col items-center justify-center">
             {/* User Profile */}

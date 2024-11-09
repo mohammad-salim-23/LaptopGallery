@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white pt-10">
+    <footer className="bg-gray-800 text-white pt-10  ">
       <div className="container px-4 mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
         <div>
           <h2 className="font-bold text-lg mb-4">Support</h2>
@@ -60,11 +60,11 @@ const Footer = () => {
         <div>
           <h2 className="font-bold text-lg mb-4">Customer Service</h2>
           <ul>
-            <li className="my-8 hover:underline hover:text-red-500">  <a 
-  href="https://wa.me/01325798939" 
-  target="_blank" 
-  rel="noreferrer"
->Support Center</a></li>
+            <li className="my-8 hover:underline hover:text-red-500">  <a
+              href="https://api.whatsapp.com/send?phone=8801325798939"
+              target="_blank"
+              rel="noreferrer"
+            >Support Center</a></li>
             <li className="my-8"><Link to="/faq">FAQ</Link></li>
             <li className="my-8"><Link to="/returns">Return Policy</Link></li>
           </ul>
@@ -96,11 +96,11 @@ const Footer = () => {
             <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
               <FaInstagram />
             </a>
-            <a 
-  href="https://wa.me/01325798939" 
-  target="_blank" 
-  rel="noreferrer"
->
+            <a
+              href="https://wa.me/01325798939"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaWhatsapp />
             </a>
           </div>
@@ -113,9 +113,9 @@ const Footer = () => {
             <span className="text-red-600 font-semibold flex">
               <IoLocationOutline />Shylet OutLet:
             </span>
-            <a 
-              href="https://maps.app.goo.gl/iMQSgiUeieT959G39" 
-              target="_blank" 
+            <a
+              href="https://maps.app.goo.gl/iMQSgiUeieT959G39"
+              target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >

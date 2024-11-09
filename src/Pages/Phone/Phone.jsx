@@ -1,5 +1,3 @@
-import React from 'react';
-
 
 import useProducts from '../../hooks/useProducts';
 import ShopLayout from '../../Components/ReUseComponents/ShopLayout/ShopLayout';

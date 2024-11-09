@@ -10,6 +10,8 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import Search from "./Search";
+// import useProducts from "../../../hooks/useProducts";
 import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
@@ -144,7 +146,7 @@ const NavBar = () => {
 
                 <header className="h-10 bg-gray-100 lg:border-b-2 text-[15px] sticky z-40 inset-0 text-black lg:flex-center hidden">
                     <nav className="px-3.5 flex-center w-full max-w-7xl mx-auto">
-                        <ul className="gap-x-1 lg:flex-center hidden font-mono">
+                        <ul className="gap-x-1 lg:flex-center hidden">
                             {Navlinks.map((menu) => (
                                 <DesktopMenu menu={menu} key={menu.name} />
                             ))}
