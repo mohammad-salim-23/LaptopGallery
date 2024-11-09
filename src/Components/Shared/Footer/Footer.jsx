@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import { IoMdCall } from 'react-icons/io';
 import { IoLocationOutline } from 'react-icons/io5';
 import { MdOutlineMail } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Footer = () => {
+
+  const { user, logOut } = useAuth();
+
+  // Handle Logout
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Logout Success!",
+          text: "Logged out successfully!",
+          icon: "success"
+        });
+        navigation('/');
+      })
+      .catch(error => console.log(error));
+  };
+
+
   return (
     <footer className="bg-gray-800 text-white pt-10  ">
       <div className="container px-4 mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
@@ -49,10 +68,10 @@ const Footer = () => {
         {/* Company Section */}
         <div>
           <h2 className="font-bold text-lg mb-4">Company</h2>
-          <ul>
-            <li className="my-8"><Link to="/about">About Us</Link></li>
-            <li className="my-8"><Link to="/delivery">Delivery Policy</Link></li>
-            <li className="my-8"><Link to="/terms">Terms & Conditions</Link></li>
+          <ul className=''>
+            <li className="my-8 hover:underline hover:text-red-500"><Link to="/about">About Us</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500"><Link to="/delivery">Delivery Policy</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500"><Link to="/terms">Terms & Conditions</Link></li>
           </ul>
         </div>
 
@@ -65,8 +84,8 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
             >Support Center</a></li>
-            <li className="my-8"><Link to="/faq">FAQ</Link></li>
-            <li className="my-8"><Link to="/returns">Return Policy</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500"><Link to="/faq">FAQ</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500"><Link to="/returns">Return Policy</Link></li>
           </ul>
         </div>
 
@@ -74,9 +93,18 @@ const Footer = () => {
         <div>
           <h2 className="font-bold text-lg mb-4">My Account</h2>
           <ul>
-            <li className="my-8"><Link to="/login">Login</Link></li>
-            <li className="my-8"><Link to="/registration">Register</Link></li>
-            <li className="my-8"><Link to="/orders">My Orders</Link></li>
+            {
+              user ? (<>
+                <li className="my-8 hover:underline hover:text-red-500"><Link to="/profile">Profile</Link></li>
+                <li className="my-8 hover:underline hover:text-red-500" onClick={handleLogOut}><Link>Logout</Link></li>
+              </>)
+                :
+                (<>
+                  <li className="my-8 hover:underline hover:text-red-500"><Link to="/login">Login</Link></li>
+                  <li className="my-8 hover:underline hover:text-red-500"><Link to="/registration">Register</Link></li>
+                </>)
+            }
+
           </ul>
         </div>
       </div>
@@ -111,7 +139,7 @@ const Footer = () => {
           <h2 className="font-bold text-lg mb-2">LapTop Gallery</h2>
           <p className="my-2">
             <span className="text-red-600 font-semibold flex">
-              <IoLocationOutline />Shylet OutLet:
+              <IoLocationOutline className='mt-1' />Shylet OutLet:
             </span>
             <a
               href="https://maps.app.goo.gl/iMQSgiUeieT959G39"
@@ -124,7 +152,7 @@ const Footer = () => {
           </p>
           <p className="my-2">
             <span className="text-red-600 font-semibold flex">
-              <IoLocationOutline />Chittagong OutLet:
+              <IoLocationOutline className='mt-1' />Chittagong OutLet:
             </span>
             MohammodPur, MuradPur
           </p>

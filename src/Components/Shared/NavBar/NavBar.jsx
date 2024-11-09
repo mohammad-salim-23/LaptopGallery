@@ -103,18 +103,21 @@ const NavBar = () => {
                                     user ? <>
                                         <div className="flex flex-col items-center justify-center">
                                             {/* User Profile */}
-                                            <div className="dropdown dropdown-start ml-8 lg:dropdown-end">
-                                                <div tabIndex={0} role="button" className=" btn-circle avatar tooltip tooltip-right lg:tooltip-left" data-tip={user?.displayName} >
+                                            <div className="dropdown dropdown-end ml-8  ">
+                                                <div tabIndex={0} role="button" className=" btn-circle avatar tooltip tooltip-left" data-tip={user?.displayName} >
                                                     <div className="w-10 rounded-full " >
                                                         <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
                                                     </div>
                                                 </div>
-                                                <ul tabIndex={0} className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52">
 
-                                                    <button className=" border btn " onClick={handleLogOut}>
-                                                        LogOut
-                                                        <IoIosLogOut></IoIosLogOut>
-                                                    </button>
+                                                <ul tabIndex={0} className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box   mr-8">
+                                                    <Link to={'/profile'}>
+                                                        <li className="btn hover:outline text-xs lg:text-[16px] bg-primary hover:bg-transparent text-white hover:text-black w-32">Profile</li>
+                                                    </Link>
+
+                                                    <Link>
+                                                        <li className="btn hover:outline text-xs lg:text-[16px] bg-primary hover:bg-transparent text-white hover:text-black mt-1 w-32" onClick={handleLogOut}>Logout</li>
+                                                    </Link>
                                                 </ul>
                                             </div>
                                         </div>

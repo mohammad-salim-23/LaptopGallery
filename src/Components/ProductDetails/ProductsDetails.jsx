@@ -11,11 +11,13 @@ import { DiGitCompare } from "react-icons/di";
 import { FaStar } from 'react-icons/fa'
 import Rating from 'react-rating';
 import SimilarData from './SimilarData';
+import Loader from '../Shared/Loader/Loader';
+import { PulseLoader } from 'react-spinners';
 
 
 const ProductsDetails = () => {
     const { id } = useParams();
-    const [products, refetch] = useProducts();
+    const [products, refetch, isPending] = useProducts();
     const { user } = useAuth();
     const product = products.find(p => p._id === id);
     const axiosSecure = useAxiosSecure();
@@ -24,9 +26,6 @@ const ProductsDetails = () => {
     const time = date.toLocaleTimeString();
     const [compare] = useCompare();
 
-    if (!product) {
-        return <div>Product not found.</div>;
-    }
 
     const handleCompare = () => {
         const info = {
@@ -60,6 +59,22 @@ const ProductsDetails = () => {
 
     // console.log(similarProducts)
 
+    if (isPending) {
+        return <div className='flex justify-center h-[100vh] items-center'><PulseLoader
+            color={'#2C3E50'}
+            loading={true}
+            size={30}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+        /></div>
+    }
+
+
+    if (!product) {
+        return <div className='text-center my-10 text-2xl font-bold'>Product not found.</div>;
+    }
+
+
 
     return (
         <div className='mx-auto container my-10 p-4'>
@@ -87,7 +102,7 @@ const ProductsDetails = () => {
                         <img
                             src={product.image}
                             alt={product.model}
-                            className="w-full h-auto object-cover rounded-lg"
+                            className="w-full  object-cover rounded-lg  h-full duration-1000 hover:scale-105"
                         />
                     </div>
                 </div>
@@ -200,7 +215,7 @@ const ProductsDetails = () => {
                 <DetailsTab reviewId={product._id} productDescription={product.description} />
             </div>
             <h1 className='pl-4 text-xl md:text-2xl uppercase'>Related Products</h1>
-            <div className='grid grid-cols-1  items-center p-4 md:grid-cols-2 lg:grid-cols-4'>
+            <div className='grid grid-cols-1  items-center p-4 md:grid-cols-2 lg:grid-cols-4 '>
                 {
                     similarProducts.map(product => <SimilarData key={product._id} product={product} ></SimilarData>)
                 }

@@ -5,7 +5,7 @@ import ShopLayout from '../../Components/ReUseComponents/ShopLayout/ShopLayout';
 const AccessoriesInHome = () => {
     const [products,refetch] = useProducts();
     const filteredproduct= products?.filter(item=>item.type==='accessories');
-    console.log(filteredproduct)
+    // console.log(filteredproduct)
     return (
         <div>
            <ShopLayout items={filteredproduct} title="Accessories"></ShopLayout>
