@@ -20,7 +20,7 @@ const NavBar = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isAdmin] = useAdmin()
     const navigate = useNavigate();
-    // console.log(user)
+    console.log(user)
 
     // Handle Logout
     const handleLogOut = () => {

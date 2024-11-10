@@ -37,7 +37,7 @@ const SocialComponent = () => {
 
     }
     return (
-        <div className="px-32">
+        <div className=" ">
             <div className="divider ">OR</div>
 
             <button onClick={handleGoogleSignIn} className="btn 

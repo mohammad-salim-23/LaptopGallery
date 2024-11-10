@@ -4,8 +4,6 @@ import Loader from "../../Components/Shared/Loader/Loader";
 import useAuth from "../../hooks/useAuth";
 
 
-
-
 const AdminRoute = ({ children }) => {
 
     const { user, loading } = useAuth();

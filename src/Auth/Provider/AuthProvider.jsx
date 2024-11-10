@@ -48,25 +48,51 @@ export const AuthProvider = ({ children }) => {
   }
 
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     if (currentUser) {
+  //       const userInfo = { email: currentUser.email };
+  //       console.log(userInfo)
+  //       axiosPublic.post('/jwt').then((res) => {
+  //         if (res.data.token) {
+  //           localStorage.setItem("access-token", res.data.token);
+  //           console.log("access-token", res.data.token)
+  //         }
+  //       });
+  //     } 
+  //     else {
+  //       localStorage.removeItem("access-token");
+  //     }
+  //     setLoading(false);
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [axiosPublic]);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // if (currentUser) {
-      //   const userInfo = { email: currentUser.email };
-      //   // console.log(userInfo)
-      //   axiosPublic.post('/jwt').then((res) => {
-      //     if (res.data.token) {
-      //       localStorage.setItem("access-token", res.data.token);
-      //       // console.log("access-token", res.data.token)
-      //     }
-      //   });
-      // } else {
-      //   localStorage.removeItem("access-token");
-      // }
-      setLoading(false);
+      if (currentUser) {
+        //  get token and store client
+        const userInfo = {
+          email: currentUser.email,
+        };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
+          }
+        });
+      }
+      else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
     });
     return () => {
-      unsubscribe();
+      unSubscribe();
     };
   }, [axiosPublic]);
 
