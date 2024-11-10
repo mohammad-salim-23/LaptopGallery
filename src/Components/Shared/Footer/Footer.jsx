@@ -69,9 +69,9 @@ const Footer = () => {
         <div>
           <h2 className="font-bold text-lg mb-4">Company</h2>
           <ul className=''>
-            <li className="my-8 hover:underline hover:text-red-500"><Link to="/about">About Us</Link></li>
-            <li className="my-8 hover:underline hover:text-red-500"><Link to="/delivery">Delivery Policy</Link></li>
-            <li className="my-8 hover:underline hover:text-red-500"><Link to="/terms">Terms & Conditions</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/about">About Us</a></li>
+            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="delivery">Delivery Policy</a></li>
+            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/terms">Terms & Conditions</a></li>
           </ul>
         </div>
 
@@ -84,8 +84,8 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
             >Support Center</a></li>
-            <li className="my-8 hover:underline hover:text-red-500"><Link to="/faq">FAQ</Link></li>
-            <li className="my-8 hover:underline hover:text-red-500"><Link to="/returns">Return Policy</Link></li>
+            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/faq">FAQ</a></li>
+            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/returns">Return Policy</a></li>
           </ul>
         </div>
 

@@ -8,6 +8,7 @@ import Marquee from "react-fast-marquee";
 import PhoneSection from "./PhonSection/PhoneSection";
 
 const Home = () => {
+    document.title = `Laptop Gallery || Home`;
     const [showButton, setShowButton] = useState(false);
 
     useEffect(() => {

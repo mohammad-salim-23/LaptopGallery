@@ -13,8 +13,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 
 const Accessories = () => {
-
-
+   
     const [preview, setPreview] = useState("https://i.ibb.co.com/dfNgcGy/accessories.jpg");
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();

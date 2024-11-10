@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../../Components/Shared/NavBar/NavBar";
 import Footer from "../../Components/Shared/Footer/Footer";
-import { ToastContainer } from "react-toastify";
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react";
 import { PulseLoader } from 'react-spinners';
@@ -15,7 +14,7 @@ const Main = () => {
         setTimeout(() => {
             SetLoading(false)
         }
-            , 1900)
+            , 500)
     }, [])
     return (
 

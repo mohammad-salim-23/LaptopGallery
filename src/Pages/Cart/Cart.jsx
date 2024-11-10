@@ -1,4 +1,3 @@
-import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import useCart from '../../hooks/useCart';
 import { TbCurrencyTaka } from "react-icons/tb";
 import { RxCross1 } from "react-icons/rx";
@@ -12,9 +11,9 @@ const Cart = () => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    // console.log(cart);
 
-    // Calculate total price
+    console.log(cart)
+
     const totalPrice = cart.reduce((total, item) => {
         const itemPrice = parseFloat(item.price) || 0;
         const itemQuantity = item.quantity || 0;
