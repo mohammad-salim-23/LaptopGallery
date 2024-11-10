@@ -22,7 +22,6 @@ import TotalAccessories from "../Pages/Admin/Dashboard/Accessories/TotalAccessor
 import Cart from "../Pages/Cart/Cart";
 import PaymentSuccess from "../Pages/Checkout/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/Checkout/PaymentFail/PaymentFail";
-
 import AccessoriesInHome from "../Pages/AccessoriesInHome/AccessoriesInHome";
 import Terms from "../Pages/FooterPages/Terms";
 import AboutUs from "../Pages/FooterPages/AboutUs";
@@ -32,7 +31,6 @@ import ReturnPolicy from "../Pages/FooterPages/ReturnPollicy";
 import Profile from "../Components/Shared/Profile/Profile";
 import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateProductAccessories";
 import Contact from "../Pages/Contact/Contact";
-// import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
@@ -61,19 +59,19 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
             }
             ,
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
             },
             ,
             {
                 path: '/dashboard/totalAccessories/:id',
                 element: <UpdateProductAccessories></UpdateProductAccessories>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
             },
             {
 
@@ -96,7 +94,7 @@ export const router = createBrowserRouter([
 
             {
                 path: '/cart',
-                element: <Cart></Cart>
+                element: <PrivateRoute><Cart></Cart></PrivateRoute>
             },
             {
                 path: '/profile',
@@ -139,11 +137,11 @@ export const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard> ,
+        element: <Dashboard></Dashboard>,
         children: [
             {
                 path: 'adminPanel',
-                element:   <PrivateRoute><AdminRoute><AdminPanel></AdminPanel> </AdminRoute></PrivateRoute>
+                element: <PrivateRoute><AdminRoute><AdminPanel></AdminPanel> </AdminRoute></PrivateRoute>
             }
             ,
             {
@@ -164,7 +162,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'totalMobile',
-                element:<PrivateRoute><AdminRoute> <TotalMobile></TotalMobile></AdminRoute></PrivateRoute>
+                element: <PrivateRoute><AdminRoute> <TotalMobile></TotalMobile></AdminRoute></PrivateRoute>
             }
             ,
             {
@@ -174,7 +172,7 @@ export const router = createBrowserRouter([
             ,
             {
                 path: 'totalUsers',
-                element:<PrivateRoute> <AdminRoute><TotalUsers></TotalUsers></AdminRoute></PrivateRoute>
+                element: <PrivateRoute> <AdminRoute><TotalUsers></TotalUsers></AdminRoute></PrivateRoute>
             }
         ]
     }
