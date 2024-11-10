@@ -69,7 +69,7 @@ const Accessories = () => {
                     status: data.status,
                     type: "accessories ",
                     warranty: data.warranty,
-                    productSKU: `LG-${data.brand.split(" ")[0]}-${data.name.split(" ")[0]}-${randomNumber}`
+                    productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
 
                 };
 
