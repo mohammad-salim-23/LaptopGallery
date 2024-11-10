@@ -154,7 +154,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       </div>
                     </div>
                     {/* Buttons container */}
-                    < div className="flex mt-4 justify-between" >
+                    < div className="flex mt-4 gap-x-2" >
                       <NavLink to={`/productDetails/${data._id}`}>
                         <button className="btn text-[12px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary"> See More </button>
 

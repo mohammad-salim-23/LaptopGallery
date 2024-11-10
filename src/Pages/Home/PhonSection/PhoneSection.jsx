@@ -39,9 +39,10 @@ const PhoneSection = () => {
                             </div>
                         </div>
                         {/* Buttons container */}
-                        <div className="flex gap-4 mt-4 justify-between">
-                            <NavLink to={`/productDetails/${data._id}`} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary">
-                                See More
+                        <div className="flex gap-x-2 mt-4">
+                            <NavLink to={`/productDetails/${data._id}`}>
+                                <button className="btn text-[12px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary"> See More </button>
+
                             </NavLink>
                             <CartButton prodId={data._id} className="btn text-[16px] bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700" />
                         </div>
