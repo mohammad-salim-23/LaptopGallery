@@ -63,7 +63,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
     <div className="p-6 bg-base-200 my-24">
       <div className="flex flex-wrap md:flex-nowrap">
         {/* Sidebar - Desktop and larger */}
-        <div className={`fixed inset-y-0 left-0 z-30 w-64 bg-white transform transition-transform duration-300 ease-in-out 
+        <div className={`fixed inset-y-0 left-0 z-30 w-60 bg-white transform transition-transform duration-300 ease-in-out 
           ${sidebarVisible ? 'translate-x-0' : '-translate-x-full'} 
           md:translate-x-0 md:relative md:flex md:flex-col mt-20 md:mt-0  lg:mt-0 overflow-auto`}>
 
@@ -154,9 +154,10 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       </div>
                     </div>
                     {/* Buttons container */}
-                    < div className="flex gap-4 px-4 mt-4 justify-between" >
-                      <NavLink to={`/productDetails/${data._id}`} className="btn text-[16px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary">
-                        See More
+                    < div className="flex mt-4 justify-between" >
+                      <NavLink to={`/productDetails/${data._id}`}>
+                        <button className="btn text-[12px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary"> See More </button>
+
                       </NavLink>
                       <CartButton prodId={data._id} />
                     </div>

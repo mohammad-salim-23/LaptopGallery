@@ -89,7 +89,7 @@ const CartButton = ({ prodId }) => {
 
     return (
         <div className='flex lg:justify-center lg:items-center'>
-            <button className='btn hover:bg-transparent hover:text-black text-[16px] bg-primary text-white py-2 px-2 rounded-lg hover:bg-gray-700' onClick={handleAddToCart}>
+            <button className='btn hover:bg-transparent hover:text-black text-[12px] bg-primary text-white py-2 px-2 rounded-lg hover:bg-gray-700' onClick={handleAddToCart}>
                 <span className=''><MdShoppingCartCheckout className='mt-1' /> </span> Add To Cart
             </button>
         </div>
