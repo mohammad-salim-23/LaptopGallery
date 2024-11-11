@@ -203,9 +203,9 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                     )}
 
 <div className='border border-gray-300 mt-4'></div>
-                            <div className='flex gap-4  justify-between items-center'>
+                            <div className='flex gap-4 mb-4  justify-between items-center'>
                             <p className=" font-semibold text-xl   text-gray-600">{data.price} </p>
-                            <div className='mt-4'><CartButton prodId={data._id} ></CartButton></div>
+                            <div className='m-4'><CartButton prodId={data._id} ></CartButton></div>
                             </div>
                           
                         </div>

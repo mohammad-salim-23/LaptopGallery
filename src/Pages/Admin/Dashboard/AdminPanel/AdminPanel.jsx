@@ -5,8 +5,7 @@ import { PieChart, Pie, Tooltip, Cell, Legend } from 'recharts';
 
 const AdminPanel = () => {
     const [payments] = usePayments();
-    
-   
+
     let totalOrderAmount = 0;
     let totalOrderQuantity = 0;
     let totalLaptopQuantity = 0;
@@ -14,39 +13,42 @@ const AdminPanel = () => {
     let totalMobileAccessoryQuantity = 0;
     let totalLaptopAccessoryQuantity = 0;
 
-   
+    let totalLaptopSales = 0;
+    let totalMobileSales = 0;
+    let totalMobileAccessorySales = 0;
+    let totalLaptopAccessorySales = 0;
+
     payments.forEach(payment => {
         payment.cart.forEach(item => {
             const price = parseFloat(item.price.replace(" BDT", ""));
             const quantity = item.quantity;
-
-           
-            totalOrderAmount += price * quantity;
-
-           
-            totalOrderQuantity += quantity;
-
-           
+            const salesAmount = price * quantity;
             const subCategory = item.subCategory;
+
+            totalOrderAmount += salesAmount;
+            totalOrderQuantity += quantity;
 
             if (subCategory === 'laptop') {
                 totalLaptopQuantity += quantity;
+                totalLaptopSales += salesAmount;
             } else if (subCategory === 'mobile') {
                 totalMobileQuantity += quantity;
+                totalMobileSales += salesAmount;
             } else if (subCategory === 'mobile accessories') {
                 totalMobileAccessoryQuantity += quantity;
+                totalMobileAccessorySales += salesAmount;
             } else if (subCategory === 'laptop accessories') {
                 totalLaptopAccessoryQuantity += quantity;
+                totalLaptopAccessorySales += salesAmount;
             }
         });
     });
 
-    // Data for the pie chart
     const data = [
-        { name: 'Laptops', value: totalLaptopQuantity * 1000000 }, 
-        { name: 'Mobiles', value: totalMobileQuantity * 1000000 },
-        { name: 'Mobile Accessories', value: totalMobileAccessoryQuantity * 50000 }, 
-        { name: 'Laptop Accessories', value: totalLaptopAccessoryQuantity * 50000 }, 
+        { name: 'Laptops', value: totalLaptopSales },
+        { name: 'Mobiles', value: totalMobileSales },
+        { name: 'Mobile Accessories', value: totalMobileAccessorySales },
+        { name: 'Laptop Accessories', value: totalLaptopAccessorySales },
     ];
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -107,7 +109,6 @@ const AdminPanel = () => {
                             cx={300} 
                             cy={200} 
                             labelLine={false}
-                           
                             outerRadius={120} 
                             fill="#8884d8"
                             dataKey="value"

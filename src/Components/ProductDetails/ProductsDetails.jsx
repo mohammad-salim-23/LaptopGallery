@@ -156,7 +156,7 @@ const ProductsDetails = () => {
             <DetailsTab reviewId={product._id} productDescription={product.description} />
         </div>
        </div>
-    );
-};
-
-export default ProductsDetails;
+        );
+    };
+    
+    export default ProductsDetails;
