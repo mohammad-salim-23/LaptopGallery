@@ -20,7 +20,7 @@ const CartButton = ({ prodId }) => {
                 const response = await axiosPublic.get(`/products/${prodId}`);
                 setProductInfo(response.data);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 toast.error("Failed to fetch product information");
             } finally {
                 setLoading(false);
@@ -33,7 +33,7 @@ const CartButton = ({ prodId }) => {
                     const response = await axiosPublic.get(`/cart?email=${user.email}`);
                     setCartItems(response.data);
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                     toast.error("Failed to fetch cart items");
                 }
             }
@@ -48,12 +48,12 @@ const CartButton = ({ prodId }) => {
     }
 
     const { email, displayName } = user || {};
-    const { brand, price, image, model, productId, color,type,subCategory } = productInfo || {};
-    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color,type,subCategory};
+    const { brand, price, image, model, productId, color, type, subCategory } = productInfo || {};
+    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color, type, subCategory };
 
     const handleAddToCart = async () => {
         if (!user) {
-            
+
             navigate('/login');
             Swal.fire({
                 icon: "error",
@@ -64,32 +64,32 @@ const CartButton = ({ prodId }) => {
             return;
         }
 
-        
+
         const isProductInCart = cartItems.some(item => item.productId === productId);
         if (isProductInCart) {
             toast.error(`${model} is already in your cart.`);
             return;
         }
 
-        
+
         try {
             const res = await axiosPublic.post("/cart", cartInfo);
             if (res.status === 200) {
                 toast.success(`${model} added to the cart`);
-               
+
                 setCartItems(prevItems => [...prevItems, cartInfo]);
             } else {
                 toast.error("Failed to add to cart");
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             toast.error("Error adding to cart");
         }
     };
 
     return (
         <div className='flex lg:justify-center lg:items-center'>
-            <button className=' bg-gray-800 text-white rounded-lg gap-2 p-2 flex justify-center items-centers' onClick={handleAddToCart}>
+            <button className='btn hover:bg-transparent hover:text-black text-[12px] bg-primary text-white py-2 px-2 rounded-lg hover:bg-gray-700' onClick={handleAddToCart}>
                 <span className=''><MdShoppingCartCheckout className='mt-1' /> </span> Add To Cart
             </button>
         </div>

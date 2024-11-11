@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import CartButton from '../CartButton';
 import { CiFilter } from "react-icons/ci";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { AiOutlineClose } from "react-icons/ai";
+import { DiGitCompare } from 'react-icons/di';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
   const [sortOrder, setSortOrder] = useState("");
@@ -13,141 +16,95 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   const [selectedSubcategory, setSelectedSubcategory] = useState([]);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const isAccessory = selectedSubcategory.includes("Laptop Accessories") || selectedSubcategory.includes("Mobile Accessories");
+  const itemsPerPage = 8;
 
-  const sortedItems = [...items]
-    .filter(item =>
-      (!inStockOnly || item.status) &&
-      (selectedBrand.length === 0 || selectedBrand.includes(item.brand)) &&
-      (isAccessory || selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
-      (isAccessory || selectedStorage.length === 0 || selectedStorage.includes(item.storage)) &&
-      (isAccessory || selectedOs.length === 0 || selectedOs.includes(item.os)) &&
-      (isAccessory || selectedProcessor.length === 0 || selectedProcessor.includes(item.processor)) &&
-      (selectedSubcategory.length === 0 || selectedSubcategory.includes(item.subCategory))
-    )
-    .sort((a, b) => {
-      if (sortOrder === "lowToHigh") return a.price - b.price;
-      if (sortOrder === "highToLow") return b.price - a.price;
+  const filteredItems = items.filter(item =>
+    (!inStockOnly || item.status) &&
+    (selectedBrand.length === 0 || selectedBrand.includes(item.brand)) &&
+    (isAccessory || selectedRam.length === 0 || selectedRam.includes(item.ram)) &&
+    (isAccessory || selectedStorage.length === 0 || selectedStorage.includes(item.storage)) &&
+    (isAccessory || selectedOs.length === 0 || selectedOs.includes(item.os)) &&
+    (isAccessory || selectedProcessor.length === 0 || selectedProcessor.includes(item.processor)) &&
+    (selectedSubcategory.length === 0 || selectedSubcategory.includes(item.subCategory))
+  );
+
+  const sortedItems = filteredItems.sort((a, b) => {
+    if (sortOrder === "lowToHigh") {
+      return a.price - b.price;
+    } else if (sortOrder === "highToLow") {
+      return b.price - a.price;
+    } else {
       return 0;
-    });
+    }
+  });
 
-  const toggleFilter = (setter, value) => {
-    setter(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
+  const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+  const paginatedItems = sortedItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const toggleFilter = (setter, value) => setter(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
+  const handlePageClick = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePreviousPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
+
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 3;
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    if (endPage - startPage < maxVisiblePages - 1) startPage = Math.max(1, endPage - (maxVisiblePages - 1));
+    for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
+    return pageNumbers;
   };
-
-  const brands = [...new Set(items.map(item => item.brand))];
-  const subcategories = [...new Set(items.map(item => item.subCategory))];
-  const ram = [...new Set(items.map(item => item.ram))];
-  const storage = [...new Set(items.map(item => item.storage))];
-  const os = [...new Set(items.map(item => item.os))];
-  const processor = [...new Set(items.map(item => item.processor))];
 
   return (
     <div className="p-6 bg-base-200 my-24">
-      <div className="flex">
-        {/* Sidebar */}
-        <div className={`${sidebarVisible ? 'translate-x-0' : '-translate-x-full'}
-          fixed inset-y-0 left-0 z-30 w-64 bg-white transform md:translate-x-0 transition-transform duration-300 ease-in-out md:flex md:relative md:flex-col`}>
+      <div className="flex flex-wrap md:flex-nowrap">
+        {/* Sidebar - Desktop and larger */}
+        <div className={`fixed inset-y-0 left-0 z-30 w-60 bg-white transform transition-transform duration-300 ease-in-out 
+          ${sidebarVisible ? 'translate-x-0' : '-translate-x-full'} 
+          md:translate-x-0 md:relative md:flex md:flex-col mt-20 md:mt-0  lg:mt-0 overflow-auto`}>
+
+          {/* Cross button inside the drawer when open */}
+          {sidebarVisible && (
+            <button
+              onClick={() => setSidebarVisible(false)}
+              className="absolute top-4 right-4 p-2 text-xl text-black"
+            >
+              <AiOutlineClose className='border border-blue-400  text-3xl rounded-2xl' />
+            </button>
+          )}
+
           <div className="p-4">
             <h2>Availability</h2>
-            <input
-              type="checkbox"
-              checked={inStockOnly}
-              onChange={() => setInStockOnly(prev => !prev)}
-            />
+            <input type="checkbox" checked={inStockOnly} onChange={() => setInStockOnly(!inStockOnly)} />
             <label>In Stock</label>
           </div>
-
-          <div className="p-4">
-            <h2>Subcategory</h2>
-            {subcategories.map((subcat, index) => (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  onChange={() => toggleFilter(setSelectedSubcategory, subcat)}
-                  checked={selectedSubcategory.includes(subcat)}
-                />
-                <label>{subcat}</label>
-              </div>
-            ))}
-          </div>
-
-          <div className="p-4">
-            <h2>Brand</h2>
-            {brands.map((brand, index) => (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  onChange={() => toggleFilter(setSelectedBrand, brand)}
-                  checked={selectedBrand.includes(brand)}
-                />
-                <label>{brand}</label>
-              </div>
-            ))}
-          </div>
-
-          {!isAccessory && (
-            <>
-              <div className="p-4">
-                <h2>RAM</h2>
-                {ram.map((ramOption, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      onChange={() => toggleFilter(setSelectedRam, ramOption)}
-                      checked={selectedRam.includes(ramOption)}
-                    />
-                    <label>{ramOption}</label>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-4">
-                <h2>Storage</h2>
-                {storage.map((storageOption, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      onChange={() => toggleFilter(setSelectedStorage, storageOption)}
-                      checked={selectedStorage.includes(storageOption)}
-                    />
-                    <label>{storageOption}</label>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-4">
-                <h2>Operating System</h2>
-                {os.map((osOption, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      onChange={() => toggleFilter(setSelectedOs, osOption)}
-                      checked={selectedOs.includes(osOption)}
-                    />
-                    <label>{osOption}</label>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-4">
-                <h2>Processor</h2>
-                {processor.map((processorOption, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      onChange={() => toggleFilter(setSelectedProcessor, processorOption)}
-                      checked={selectedProcessor.includes(processorOption)}
-                    />
-                    <label>{processorOption}</label>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
+          {/* Filter sections */}
+          {[{
+            title: "Brand", options: [...new Set(items.map(item => item.brand))], state: selectedBrand, setter: setSelectedBrand
+          }, {
+            title: "RAM", options: isAccessory ? [] : [...new Set(items.map(item => item.ram))], state: selectedRam, setter: setSelectedRam
+          }, {
+            title: "Storage", options: isAccessory ? [] : [...new Set(items.map(item => item.storage))], state: selectedStorage, setter: setSelectedStorage
+          }, {
+            title: "Processor", options: isAccessory ? [] : [...new Set(items.map(item => item.processor))], state: selectedProcessor, setter: setSelectedProcessor
+          }].map(({ title, options, state, setter }) => options.length > 0 && (
+            <div key={title} className="p-4">
+              <h2>{title}</h2>
+              {options.map(option => (
+                <div key={option}>
+                  <input type="checkbox" onChange={() => toggleFilter(setter, option)} checked={state.includes(option)} />
+                  <label>{option}</label>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
 
+        {/* Main Content */}
         <div className="flex-1 px-4">
           <div className="navbar flex flex-col md:flex-row gap-2 bg-base-100 rounded-lg md:p-4 justify-between">
             <button className="md:hidden" onClick={() => setSidebarVisible(!sidebarVisible)}>
@@ -156,11 +113,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             <p className='text-xl hidden md:block'>{title}</p>
             <div className='flex-row gap-2'>
               <p>Sort By:</p>
-              <select
-                className="select select-ghost w-1/2 max-w-xs border border-gray-400"
-                value={sortOrder}
-                onChange={(e) => setSortOrder(e.target.value)}
-              >
+              <select className="select select-ghost w-full sm:w-1/2 max-w-xs border border-gray-400" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
                 <option disabled value="">Default</option>
                 <option value="lowToHigh">Price Low To High</option>
                 <option value="highToLow">Price High To Low</option>
@@ -168,53 +121,70 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            {sortedItems.map((data) => (
-              <div key={data._id} className=" bg-white shadow-lg rounded-lg overflow-hidden">
-                <Link to={`/productDetails/${data._id}`}>
-                  <img src={data.image} alt={data.model} className="w-full h-1/2 object-cover" />
-                </Link>
-                <div className="p-4">
-                  <Link to={`/productDetails/${data._id}`}>
-                    <h3 className="text-lg font-bold mb-2 hover:text-red-500 hover:underline">
-                      {data.brand} - {data.model}
-                    </h3>
+          {/* Card design */}
+          <div className='container mx-auto'>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4 ">
+              {paginatedItems.map(data => (
+                <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col border">
+                  <Link to={`/productDetails/${data._id}`} className="block">
+                    <img src={data.image} alt={data.model} className="rounded-xl h-56 duration-1000 hover:scale-105 mb-2" />
                   </Link>
+                  {/* Fixed height for content area */}
+                  < div className="flex-grow flex flex-col justify-between p-4" >
+                    <div>
+                      <Link to={`/productDetails/${data._id}`}>
+                        <h3 className="text-xl hover:underline hover:cursor-pointer mb-2">
+                          {data.title}
+                        </h3>
+                      </Link>
+                      <div className="flex items-center">
+                        <ul className="list-disc ml-4">
+                          <li><span className="text-gray-600">Model -</span> {data.model || "N/A"}</li>
+                          <li><span className="text-gray-600">Brand -</span> {data.brand || "N/A"}</li>
+                        </ul>
+                      </div>
+                      <div className="mt-2">
+                        <p className="border text-rose-600 p-1 rounded-lg font-semibold">
+                          <span className="font-semibold">Price:</span> {data.price || "N/A"}
+                        </p>
+                        <p className="border text-gray-500 p-1 rounded-lg font-semibold mt-1">
+                          <span className="font-semibold">Regular Price:</span>
+                          <span className="line-through"> {data.regularPrice || "N/A"}</span>
+                        </p>
+                      </div>
+                    </div>
+                    {/* Buttons container */}
+                    < div className="flex mt-4 gap-x-2" >
+                      <NavLink to={`/productDetails/${data._id}`}>
+                        <button className="btn text-[12px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary"> See More </button>
 
-
-                  {/* Conditional Display */}
-                  {title === "Accessories" ? (
-                        <>
-                           <p className="text-gray-600 mb-2"><span className="font-semibold">Sub-Category:</span> {data.subCategory}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">SKU:</span> {data.productSKU}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Stock:</span> {data.stock}</p>
-                           
-                        </>
-                    ) : (
-                        <>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Processor:</span> {data.processor}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">RAM:</span> {data.ram}</p>
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Storage:</span> {data.storage}</p>
-                            
-                            <p className="text-gray-600 mb-2"><span className="font-semibold">Display:</span> {data.display}</p>
-                   
-                         
-                        </>
-                    )}
-
-<div className='border border-gray-300 mt-4'></div>
-                            <div className='flex gap-4 mb-4  justify-between items-center'>
-                            <p className=" font-semibold text-xl   text-gray-600">{data.price} </p>
-                            <div className='m-4'><CartButton prodId={data._id} ></CartButton></div>
-                            </div>
-                          
-                        </div>
-              </div>
-            ))}
+                      </NavLink>
+                      <CartButton prodId={data._id} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-8 gap-2">
+            <button onClick={handlePreviousPage} className={`px-4 py-2 text-white bg-primary rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`} disabled={currentPage === 1}>
+              <GrPrevious />
+            </button>
+            {getPageNumbers().map(pageNumber => (
+              <button key={pageNumber} onClick={() => handlePageClick(pageNumber)} className={`px-4 py-2 ${currentPage === pageNumber ? "bg-primary text-white" : "bg-white text-black"} border border-gray-400 rounded`}>
+                {pageNumber}
+              </button>
+            ))}
+            <button onClick={handleNextPage} className={`px-4 py-2 text-white bg-primary rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`} disabled={currentPage === totalPages}>
+              <GrNext />
+            </button>
+          </div>
+        </div >
+      </div >
+    </div >
   );
 };
 

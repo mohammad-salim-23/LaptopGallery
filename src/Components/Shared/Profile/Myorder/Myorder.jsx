@@ -10,7 +10,7 @@ const Myorder = () => {
     // Filter payments for the current user by email
     const myPayments = payment?.filter(p => p.cusEmail === user?.email);
 
-    console.log(myPayments); // Debugging step to check data structure
+    // console.log(myPayments); // Debugging step to check data structure
 
     return (
         <div className="md:container md:mx-auto md:p-4">

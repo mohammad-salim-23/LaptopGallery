@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     const banners = [
@@ -10,13 +11,13 @@ const Banner = () => {
         },
         {
             id: 2,
-            url: "https://via.placeholder.com/1600x600?text=Laptop+Gallery+Banner+2",
+            url: "https://png.pngtree.com/background/20231017/original/pngtree-web-development-banner-enhances-creative-3d-rendered-mobile-mockup-with-laptop-picture-image_5592245.jpg",
             title: "Top Brands for Every Need",
             subtitle: "Find your next laptop with ease and confidence.",
         },
         {
             id: 3,
-            url: "https://via.placeholder.com/1600x600?text=Laptop+Gallery+Banner+3",
+            url: "https://png.pngtree.com/background/20231017/original/pngtree-innovative-3d-mobile-mockup-paired-with-web-development-banner-and-laptop-picture-image_5592791.jpg",
             title: "Experience Ultimate Power",
             subtitle: "Push your limits with next-gen technology.",
         },
@@ -69,9 +70,11 @@ const Banner = () => {
                         <p className="text-lg lg:text-2xl font-medium mb-6 drop-shadow-md">
                             {banner.subtitle}
                         </p>
-                        <button className="px-6 py-2 mt-2 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
-                            Shop Now
-                        </button>
+                        <Link to={'/contact'}>
+                            <button className="px-6 py-2 mt-2 bg-gradient-to-r from-primary to-green-500 text-white font-semibold rounded-lg shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
+                                Contact
+                            </button>
+                        </Link>
                     </div>
                 </div>
             ))}

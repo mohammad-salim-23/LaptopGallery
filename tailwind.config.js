@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        fontFamily: {
+          poppins: "'Poppins', sans-serif ",
+          opensans: "'Open Sans',sans-serif",
+          gabarito: "'Gabarito','sans-serif'",
+        },
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -13,13 +21,11 @@ export default {
       {
         mytheme: {
           primary: "#2C3E50",
-          secondary: "#F8F9F9",
+          secondary: "#4A30FF",
           accent: "#eceef2",
           neutral: "#f7f8fd",
         },
       },
-      "light",
-      "synthwave",
     ],
   },
 }

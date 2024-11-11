@@ -3,15 +3,16 @@ import useProducts from '../../../hooks/useProducts'
 import { Link, NavLink } from 'react-router-dom'
 import CartButton from '../../../Components/ReUseComponents/CartButton'
 
-const FeaturedCard = () => {
+const PhoneSection = () => {
     const [product] = useProducts();
-    const products = product.slice(1, 9)
+    const Phone = product.filter(item => item.type === "mobile")
+    const products = Phone.slice(1, 9)
     return (
         <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
             {products.map(data => (
                 <div key={data._id} className="w-full bg-white shadow-lg rounded-lg flex flex-col border">
                     <Link to={`/productDetails/${data._id}`} className="block">
-                        <img src={data.image} alt={data.model} className="rounded-xl h-56 duration-1000 hover:scale-105 mb-2 mt-4 p-4" />
+                        <img src={data.image} alt={data.model} className="rounded-xl h-72 duration-1000 hover:scale-105 mb-2 p-4 mt-4" />
                     </Link>
                     {/* Fixed height for content area */}
                     <div className="p-4 flex-grow flex flex-col justify-between">
@@ -28,7 +29,7 @@ const FeaturedCard = () => {
                                 </ul>
                             </div>
                             <div className="mt-2">
-                                <p className="border text-rose-700 p-1 rounded-lg font-semibold">
+                                <p className="border text-rose-600 p-1 rounded-lg font-semibold">
                                     <span className="font-semibold">Price:</span> {data.price || "N/A"}
                                 </p>
                                 <p className="border text-gray-500 p-1 rounded-lg font-semibold mt-1">
@@ -53,4 +54,4 @@ const FeaturedCard = () => {
     )
 }
 
-export default FeaturedCard
+export default PhoneSection

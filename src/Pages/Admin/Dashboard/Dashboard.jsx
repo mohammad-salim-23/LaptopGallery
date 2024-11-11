@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaLaptopCode, FaLaptopHouse } from "react-icons/fa";
 import { FaBarsStaggered, FaMobileScreenButton } from "react-icons/fa6";
 import { HiUserGroup } from "react-icons/hi";
@@ -39,6 +39,46 @@ const Dashboard = () => {
       .catch(error => console.log(error))
 
   }
+
+
+  // Date & Time
+  const [time, setTime] = useState("");
+
+  // Function to update the time
+  const updateTime = () => {
+    const currentDate = new Date();
+
+    // Format options for 12-hour time with AM/PM and date as DD/MM/YYYY
+    const options = {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true, // 12-hour clock format with AM/PM
+      day: '2-digit', // Day as 2 digits
+      month: '2-digit', // Month as 2 digits
+      year: 'numeric', // Full year
+      timeZone: 'Asia/Dhaka', // Bangladesh time zone (BST)
+    };
+
+    // Get the formatted date and time
+    const bangladeshTime = currentDate.toLocaleString('en-US', options);
+
+    // Format the output to match the desired pattern
+    const formattedDateTime = `${bangladeshTime.slice(11)}, ${bangladeshTime.slice(0, 10)}`;
+
+    setTime(formattedDateTime);
+  };
+
+  // Update time every second
+  useEffect(() => {
+    const interval = setInterval(updateTime, 1000);
+    updateTime(); // Call immediately to set the initial time
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(interval);
+  }, []);
+
+
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -125,22 +165,29 @@ const Dashboard = () => {
 
           {/* Search input */}
           <input className="mx-4 w-full md:72 lg:w-60 border rounded-md px-4 py-2 hidden lg:flex" type="text" placeholder="Search" />
+          <p className="font-bold">{time}</p>
 
           <div className="flex flex-col items-center justify-center">
             {/* User Profile */}
-            <div className="dropdown dropdown-start lg:dropdown-end">
-              <div tabIndex={0} role="button" className=" btn-circle avatar tooltip tooltip-right lg:tooltip-left" data-tip={user?.displayName} >
-                <div className="w-10 rounded-full " >
-                  <img alt="Tailwind CSS Navbar component" src={'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1730209706~exp=1730213306~hmac=275a4f7190f0c069c53dc29ab35ca3919adf0cab2a689c3d4da629b884d55a18&w=1380'} />
+            <div className="flex flex-col items-center justify-center">
+              {/* User Profile */}
+              <div className="dropdown dropdown-end ml-8  ">
+                <div tabIndex={0} role="button" className=" btn-circle avatar tooltip tooltip-left" data-tip={user?.displayName} >
+                  <div className="w-10 rounded-full " >
+                    <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+                  </div>
                 </div>
-              </div>
-              <ul tabIndex={0} className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52">
 
-                <button className=" border btn " onClick={handleLogOut}>
-                  LogOut
-                  <IoIosLogOut></IoIosLogOut>
-                </button>
-              </ul>
+                <ul tabIndex={0} className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box   mr-8">
+                  <Link to={'/profile'}>
+                    <li className="btn   text-xs lg:text-[16px] bg-primary hover:bg-transparent text-white hover:text-black w-32">Profile</li>
+                  </Link>
+
+                  <Link>
+                    <li className="btn   text-xs lg:text-[16px] bg-primary hover:bg-transparent text-white hover:text-black mt-1 w-32" onClick={handleLogOut}>Logout</li>
+                  </Link>
+                </ul>
+              </div>
             </div>
           </div>
 

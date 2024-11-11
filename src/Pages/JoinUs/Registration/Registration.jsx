@@ -21,22 +21,24 @@ const Registration = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password, data.name)
       .then(result => {
+        // console.log(result)
         updateUserProfile(data.name)
           .then(() => {
             const userInfo = {
               name: data.name,
               email: data.email,
               password: data.password,
+              createdDate: new Date().toISOString(),
             };
             axiosPublic.post('/users', userInfo).then(res => {
-              if (res.data.insertedId) {
-                Swal.fire({
-                  title: "Registration Success!",
-                  text: "You clicked the button!",
-                  icon: "success",
-                });
-                navigate('/');
-              }
+              // if (res.data.insertedId) {
+              // }
+              Swal.fire({
+                title: "Registration Success!",
+                text: "You clicked the button!",
+                icon: "success",
+              });
+              navigate('/');
             });
           })
           .catch((error) => console.error(error));
@@ -66,7 +68,7 @@ const Registration = () => {
         {/* Form section */}
         <div className="flex-1  h-full">
           <div className="bg-base-100 p-6">
-          
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="form-control">
                 <label className="label">
@@ -113,7 +115,7 @@ const Registration = () => {
               </div>
 
               <div className="form-control mt-6">
-                <input className="btn bg-orange-400 text-white w-full" type="submit" value="Sign Up" />
+                <input className="btn bg-orange-400 text-white w-full hover:text-black" type="submit" value="Sign Up" />
               </div>
             </form>
             <p className="text-center mt-4">

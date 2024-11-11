@@ -1,4 +1,3 @@
-import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import useCart from '../../hooks/useCart';
 import { TbCurrencyTaka } from "react-icons/tb";
 import { RxCross1 } from "react-icons/rx";
@@ -6,14 +5,15 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import Checkout from '../Checkout/Checkout';
+import Empty from './Empty/Empty';
 
 const Cart = () => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    console.log(cart);
 
-    // Calculate total price
+    console.log(cart)
+
     const totalPrice = cart.reduce((total, item) => {
         const itemPrice = parseFloat(item.price) || 0;
         const itemQuantity = item.quantity || 0;
@@ -31,7 +31,7 @@ const Cart = () => {
             await refetch();
             toast.success("Product removed successfully");
         } catch (error) {
-            console.error("Error removing item:", error);
+            // console.error("Error removing item:", error);
             toast.error("Error removing item");
         }
     };
@@ -39,7 +39,9 @@ const Cart = () => {
     const handleCheckout = () => {
         setIsModalVisible(true);
     };
-
+    if (cart < 1) {
+        return <Empty message={'Your cart is empty'} address={'/shop'} label={'Go To Shop'}></Empty>
+    }
     return (
         <div className="min-h-screen bg-gray-100 p-4 lg:p-6">
             <div className="container mx-auto">
@@ -61,14 +63,7 @@ const Cart = () => {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {/* Quantity Controls */}
-                                        <button className="text-2xl hover:text-gray-600 border-gray-300">
-                                            <CiSquareMinus />
-                                        </button>
-                                        <span className="text-gray-700 text-xl font-semibold">{item.quantity}</span>
-                                        <button className="text-2xl hover:text-gray-600 border-gray-300">
-                                            <CiSquarePlus />
-                                        </button>
-                                        <button onClick={() => handleRemoveItem(item._id)} className='text-2xl text-red-500 hover:text-red-700 ml-2'>
+                                        <button onClick={() => handleRemoveItem(item._id)} className='text-2xl text-red-500 hover:text-red-700 ml-2 border p-2 rounded-full hover:bg-red-300'>
                                             <RxCross1 />
                                         </button>
                                     </div>
@@ -93,8 +88,8 @@ const Cart = () => {
                             <span className="text-xl flex items-center font-bold text-gray-900"><TbCurrencyTaka />{subTotal.toFixed(2)}</span>
                         </div>
 
-                        <button 
-                            onClick={handleCheckout} 
+                        <button
+                            onClick={handleCheckout}
                             className="w-full bg-gray-800 text-white font-semibold py-3 rounded-lg hover:bg-gray-900 transition-colors duration-300"
                             disabled={cart.length === 0}
                         >

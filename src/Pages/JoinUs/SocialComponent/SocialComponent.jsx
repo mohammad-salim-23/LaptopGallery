@@ -16,14 +16,14 @@ const SocialComponent = () => {
     const handleGoogleSignIn = () => {
         singWithGoogle()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 const userInfo = {
                     email: result.user?.email,
                     name: result.user?.displayName
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         Swal.fire({
                             title: "Google LogIn Success!",
                             text: "You clicked the button!",
@@ -37,11 +37,11 @@ const SocialComponent = () => {
 
     }
     return (
-        <div className="px-32">
+        <div className=" ">
             <div className="divider ">OR</div>
 
             <button onClick={handleGoogleSignIn} className="btn 
-            btn-wide bg-orange-400 text-white">
+            btn-wide bg-orange-400 text-white hover:text-black">
                 <FcGoogle />
                 GOOGLE</button>
         </div>
