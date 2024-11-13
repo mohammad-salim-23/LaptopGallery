@@ -38,7 +38,7 @@ const Footer = () => {
               </div>
               <div className="border border-y-white h-full"></div>
               <div>
-                <p className="text-gray-500">9 AM - 8 PM</p>
+                <p className="text-gray-400">9 AM - 8 PM</p>
                 <h3 className="text-white hover:text-green-500">
                   <a href="https://api.whatsapp.com/send?phone=8801325798939" target='_blank' className="hover:underline">
                     01325798939
@@ -54,7 +54,7 @@ const Footer = () => {
               </div>
               <div className="border border-y-white h-full"></div>
               <div>
-                <p className="text-gray-500">Email Us</p>
+                <p className="text-gray-400">Email Us</p>
                 <h3 className="text-white hover:text-green-500">
                   <a href="mailto:support@laptopgallery24.com" className="hover:underline">
                   laptopgallery61@gmail.com
