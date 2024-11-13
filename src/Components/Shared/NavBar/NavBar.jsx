@@ -7,16 +7,19 @@ import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 import Search from "./Search";
 import useAdmin from "../../../hooks/useAdmin";
 import useProducts from "../../../hooks/useProducts";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import useCart from "../../../hooks/useCart";
+
 
 const NavBar = () => {
     const { user, logOut } = useAuth();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isAdmin] = useAdmin()
     const navigate = useNavigate();
+    const [cart, refetch] = useCart();
     // console.log(user)
 
     // Handle Logout
@@ -108,12 +111,16 @@ const NavBar = () => {
                                     </>
                                         :
                                         <>
-                                            <Link to={'/cart'}>
-                                                <button className="text-2xl">
+                                            <section className="flex justify-between items-baseline gap-4">
+                                                <Link to="/cart" className="relative">
+                                                    <p className="text-2xl">
                                                     <FaCartPlus />
-
-                                                </button>
-                                            </Link>
+                                                    </p>
+                                                    <div className="bg-green-300 absolute top-0 -right-1 transform translate-x-1 -translate-y-1 rounded-full w-4 h-4 flex items-center justify-center text-black text-xs">
+                                                        {cart?.length}
+                                                    </div>
+                                                </Link>
+                                            </section>
                                         </>
                                 }
 

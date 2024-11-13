@@ -65,7 +65,7 @@ const CartButton = ({ prodId }) => {
         }
 
 
-        const isProductInCart = cartItems.some(item => item.productId === productId);
+        const isProductInCart = cartItems.some(item => item.productId === productId && item.email === user.email);
         if (isProductInCart) {
             toast.error(`${model} is already in your cart.`);
             return;

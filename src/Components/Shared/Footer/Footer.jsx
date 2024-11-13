@@ -30,17 +30,17 @@ const Footer = () => {
       <div className="container px-4 mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
         <div>
           <h2 className="font-bold text-lg mb-4">Support</h2>
-          <div className="contact-info-container space-y-4">
+          <div className="contact-info-container space-y-4 ">
             {/* Contact Number Section */}
-            <div className="border border-red-600 rounded-s-full rounded-e-full flex p-4 gap-4 items-center my-4">
-              <div className="text-2xl flex justify-center items-center text-red-600">
+            <div className="border border-green-500 rounded-s-full rounded-e-full flex p-4 gap-4 items-center my-4">
+              <div className="text-2xl flex justify-center items-center text-green-500">
                 <IoMdCall />
               </div>
               <div className="border border-y-white h-full"></div>
               <div>
                 <p className="text-gray-500">9 AM - 8 PM</p>
-                <h3 className="text-red-600">
-                  <a href="tel:01325798939" className="hover:underline">
+                <h3 className="text-white hover:text-green-500">
+                  <a href="https://api.whatsapp.com/send?phone=8801325798939" target='_blank' className="hover:underline">
                     01325798939
                   </a>
                 </h3>
@@ -48,16 +48,16 @@ const Footer = () => {
             </div>
 
             {/* Email Section */}
-            <div className="border border-red-600 rounded-s-full rounded-e-full flex p-4 gap-4 items-center">
-              <div className="text-2xl flex justify-center items-center text-red-600">
+            <div className="border border-green-500 rounded-s-full rounded-e-full flex p-4 gap-4 items-center">
+              <div className="text-2xl flex justify-center items-center text-green-500">
                 <MdOutlineMail />
               </div>
               <div className="border border-y-white h-full"></div>
               <div>
                 <p className="text-gray-500">Email Us</p>
-                <h3 className="text-red-600">
+                <h3 className="text-white hover:text-green-500">
                   <a href="mailto:support@laptopgallery24.com" className="hover:underline">
-                    support@laptopgallery24.com
+                  laptopgallery61@gmail.com
                   </a>
                 </h3>
               </div>
@@ -69,9 +69,9 @@ const Footer = () => {
         <div>
           <h2 className="font-bold text-lg mb-4">Company</h2>
           <ul className=''>
-            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/about">About Us</a></li>
-            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="delivery">Delivery Policy</a></li>
-            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/terms">Terms & Conditions</a></li>
+            <li className="my-8 hover:underline hover:text-green-500"><a className='cursor-pointer' href="/about">About Us</a></li>
+            <li className="my-8 hover:underline hover:text-green-500"><a className='cursor-pointer' href="delivery">Delivery Policy</a></li>
+            <li className="my-8 hover:underline hover:text-green-500"><a className='cursor-pointer' href="/terms">Terms & Conditions</a></li>
           </ul>
         </div>
 
@@ -79,13 +79,13 @@ const Footer = () => {
         <div>
           <h2 className="font-bold text-lg mb-4">Customer Service</h2>
           <ul>
-            <li className="my-8 hover:underline hover:text-red-500">  <a
+            <li className="my-8 hover:underline hover:text-green-500">  <a
               href="https://api.whatsapp.com/send?phone=8801325798939"
               target="_blank"
               rel="noreferrer"
             >Support Center</a></li>
-            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/faq">FAQ</a></li>
-            <li className="my-8 hover:underline hover:text-red-500"><a className='cursor-pointer' href="/returns">Return Policy</a></li>
+            <li className="my-8 hover:underline hover:text-green-500"><a className='cursor-pointer' href="/faq">FAQ</a></li>
+            <li className="my-8 hover:underline hover:text-green-500"><a className='cursor-pointer' href="/returns">Return Policy</a></li>
           </ul>
         </div>
 
@@ -95,13 +95,13 @@ const Footer = () => {
           <ul>
             {
               user ? (<>
-                <li className="my-8 hover:underline hover:text-red-500"><Link to="/profile">Profile</Link></li>
-                <li className="my-8 hover:underline hover:text-red-500" onClick={handleLogOut}><Link>Logout</Link></li>
+                <li className="my-8 hover:underline hover:text-green-500"><Link to="/profile">Profile</Link></li>
+                <li className="my-8 hover:underline hover:text-green-500" onClick={handleLogOut}><Link>Logout</Link></li>
               </>)
                 :
                 (<>
-                  <li className="my-8 hover:underline hover:text-red-500"><Link to="/login">Login</Link></li>
-                  <li className="my-8 hover:underline hover:text-red-500"><Link to="/registration">Register</Link></li>
+                  <li className="my-8 hover:underline hover:text-green-500"><Link to="/login">Login</Link></li>
+                  <li className="my-8 hover:underline hover:text-green-500"><Link to="/registration">Register</Link></li>
                 </>)
             }
 
@@ -136,10 +136,10 @@ const Footer = () => {
 
         {/* Location Section */}
         <div>
-          <h2 className="font-bold text-lg mb-2">LapTop Gallery</h2>
+          <h2 className="font-bold text-lg mb-2">Laptop Gallery</h2>
           <p className="my-2">
-            <span className="text-red-600 font-semibold flex">
-              <IoLocationOutline className='mt-1' />Shylet OutLet:
+            <span className="text-green-500 font-semibold flex">
+              <IoLocationOutline className='mt-1' />Sylhet Outlet:
             </span>
             <a
               href="https://maps.app.goo.gl/iMQSgiUeieT959G39"
@@ -151,7 +151,7 @@ const Footer = () => {
             </a>
           </p>
           <p className="my-2">
-            <span className="text-red-600 font-semibold flex">
+            <span className="text-green-500 font-semibold flex">
               <IoLocationOutline className='mt-1' />Chittagong OutLet:
             </span>
             MohammodPur, MuradPur
