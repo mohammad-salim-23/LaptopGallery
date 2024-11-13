@@ -34,30 +34,45 @@ const AddLaptop = () => {
 
   // React hook From
   const { register, handleSubmit, formState: { errors }, } = useForm();
+  const uploadImageToImgBB = async (imageFile) => {
+    const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    const formData = new FormData();
+    formData.append("image", imageFile);
 
+    const response = await fetch(
+      `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+    if (data.success) {
+      return data.data.url;
+    } else {
+      throw new Error("Image upload failed");
+    }
+  };
 
   const onSubmit = async (data) => {
     // console.log(data)
     setLoading(true);  // Start loading
     try {
-      // Image upload to imgbb
-      const imageFile = new FormData();
-      console.log(data.image[0]);
-      imageFile.append("image", data.image[0]);
+      const images = {};
+      for (let i = 0; i < 4; i++) {
+        images[`img${i + 1}`] = data.images[i]
+          ? await uploadImageToImgBB(data.images[i][0]) // Adjust indexing if needed
+          : null;
+      }
+      // console.log('Uploaded Image URLs:', images);
 
-      const res = await axiosPublic.post(image_hosting_api, imageFile, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
-      // console.log(res);
-
-      if (res.data.success) {
+      if (Object.values(images).some((url) => url !== null)) {
         const randomNumber = Math.floor(1000 + Math.random() * 9000);
         const productsInfo = {
           title: data.title,
           brand: data.brand,
-          category: "mobile",
+          category: "laptop",
           model: data.model,
           processor: data.processor,
           ram: data.ram,
@@ -67,27 +82,25 @@ const AddLaptop = () => {
           operating_System: data.operating_System,
           price: `${data.price} BDT`,
           regularPrice: `${data.regularPrice} BDT`,
-          image: res.data.data.display_url,
+          image: images,
           status: data.status,
           description: data.description,
           warranty: data.warranty,
-          type: "mobile",
+          type: "laptop",
           productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
         };
 
-
-        // Store the laptop data in MongoDB
+        // Store laptop data in MongoDB
         const response = await axiosSecure.post("/products", productsInfo);
-        // console.log(response)
+
         if (response.data.insertedId) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `Mobile "${data.brand}" has been added successfully`,
+            title: `Laptop "${data.brand}" has been added successfully`,
             showConfirmButton: false,
             timer: 1500,
           });
-
         }
       } else {
         throw new Error("Image upload failed");
@@ -323,37 +336,38 @@ const AddLaptop = () => {
                 </div>
 
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {/* Laptop image */}
-                  <div className="form-control w-full ">
-                    <label className="label">
-                      <span className="label-text font-medium">Laptop Image</span>
-                    </label>
-                    <input
-                      id="file-upload"
-                      type="file"
-                      accept="image/*"
-                      className="file-input file-input-bordered w-full  cursor-pointer"
-                      htmlFor="file-upload"
-                      {...register('image', { onChange: handleInputChange })}
-                    />
-                  </div>
+                <div className="grid grid-cols-2 gap-4 mt-2">
 
-                  {/* warranty */}
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text font-medium">Warranty</span>
-                    </label>
-                    <input
-                      type="text"
-                      className="input input-bordered w-full"
-                      placeholder="1 Year International Warranty"
-                      {...register("warranty")}
-                    />
-                  </div>
-
-
+                  {[1, 2, 3, 4].map((num) => (
+                    <div key={num} className="form-control w-full">
+                      <input
+                        type="file"
+                        className="file-input file-input-bordered w-full"
+                        {...register(`images.${num - 1}`, {
+                          required: num === 1,
+                        })}
+                      />
+                      {errors.images?.[num - 1] && (
+                        <p className="text-red-600">Product Image {num} is required.</p>
+                      )}
+                    </div>
+                  ))}
                 </div>
+
+                {/* warranty */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text font-medium">Warranty</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="input input-bordered w-full"
+                    placeholder="1 Year International Warranty"
+                    {...register("warranty")}
+                  />
+                </div>
+
+
 
 
 
