@@ -177,7 +177,7 @@ const UpdateProductAccessories = () => {
                                         </div>
 
                                         {/* regularPrice */}
-                                        <div className="form-control w-full">
+                                        {updateProduct.regularPrice && (<div className="form-control w-full">
                                             <label className="label">
                                                 <span className="label-text font-medium">Regular Price</span>
                                             </label>
@@ -185,10 +185,9 @@ const UpdateProductAccessories = () => {
                                                 type="text"
                                                 className="input input-bordered w-full"
                                                 defaultValue={updateProduct.regularPrice}
-                                                {...register("regularPrice", { required: true })}
+                                                {...register("regularPrice")}
                                             />
-                                            {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
-                                        </div>
+                                        </div>)}
 
                                     </div>
 

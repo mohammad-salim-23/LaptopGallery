@@ -59,19 +59,19 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             }
             ,
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             },
             ,
             {
                 path: '/dashboard/totalAccessories/:id',
                 element: <UpdateProductAccessories></UpdateProductAccessories>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             },
             {
 
@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
 
             {
                 path: '/cart',
-                element: <PrivateRoute><Cart></Cart></PrivateRoute>
+                element:  <Cart></Cart> 
             },
             {
                 path: '/profile',

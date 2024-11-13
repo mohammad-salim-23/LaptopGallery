@@ -3,6 +3,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const TotalUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -35,6 +36,32 @@ const TotalUsers = () => {
                     });
             }
         });
+    };
+
+    const handleTypeChange = (user, newType) => {
+        const userDetails = {
+            ...user,
+            status: newType,
+        };
+        axiosSecure.patch(`/users/${user._id}`, userDetails)
+            .then((res) => {
+                if (res.data.modifiedCount > 0) {
+                    // Show SweetAlert success modal after the update is successful
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "User Type Updated Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    toast.error("Failed to update user type.");
+                }
+            })
+            .catch((error) => {
+                // Handle error (optional)
+                toast.error("An error occurred while updating user type.");
+            });
     };
 
     // Pagination calculations
@@ -90,7 +117,17 @@ const TotalUsers = () => {
                             <tr key={user._id} className="border hover:bg-blue-200">
                                 <td className="font-semibold">{user.name}</td>
                                 <td className="font-semibold">{user.email}</td>
-                                <td className="font-semibold">{user.status}</td>
+                                {/* // Make Admin / user */}
+                                <select
+                                    value={user.type}
+                                    onChange={(e) => handleTypeChange(user, e.target.value)}
+                                    defaultValue={user.status}
+                                    className="select select-bordered mt-1"
+                                >
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+
                                 <td>
                                     <TiDeleteOutline
                                         className="text-4xl cursor-pointer"

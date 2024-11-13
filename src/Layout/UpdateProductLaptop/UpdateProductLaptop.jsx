@@ -227,7 +227,7 @@ const UpdateProductLaptop = () => {
                                         <input
                                             type="text"
                                             className="input input-bordered w-full"
-                                            defaultValue={updateProduct.os}
+                                            defaultValue={updateProduct.operating_System}
                                             {...register("operating_System", { required: true })}
                                         />
                                         {errors.operating_System && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -267,18 +267,17 @@ const UpdateProductLaptop = () => {
                                     </div>
 
                                     {/* regularPrice */}
-                                    <div className="form-control w-full">
+                                    {updateProduct.regularPrice && (<div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text font-medium">Regular Price</span>
                                         </label>
                                         <input
                                             type="text"
                                             className="input input-bordered w-full"
-                                            defaultValue={updateProduct.re}
-                                            {...register("regularPrice", { required: true })}
+                                            defaultValue={updateProduct.price}
+                                            {...register("regularPrice")}
                                         />
-                                        {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
-                                    </div>
+                                    </div>)}
 
 
 

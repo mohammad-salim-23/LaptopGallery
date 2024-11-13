@@ -188,11 +188,13 @@ const ProductsDetails = () => {
                                 </p>
                             </div>
                             {/* Regular Price */}
-                            <div className='text-xl font-semibold flex flex-wrap mt-2'>
-                                <p className="border text-gray-500 p-1 rounded-lg">
-                                    <span className="font-semibold">Regular Price:</span><span className='line-through'> {product.regularPrice || "N/A"}</span>
-                                </p>
-                            </div>
+                            {product.regularPrice && (
+                                <div className='text-xl font-semibold flex flex-wrap mt-2'>
+                                    <p className="border text-gray-500 p-1 rounded-lg">
+                                        <span className="font-semibold">Regular Price:</span><span className='line-through'> {product.regularPrice || "N/A"}</span>
+                                    </p>
+                                </div>
+                            )}
                         </div>
 
                         <div className='flex gap-4 mt-6'>
