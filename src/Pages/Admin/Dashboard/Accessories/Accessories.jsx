@@ -99,7 +99,7 @@ const Accessories = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `Laptop "${data.brand}" has been added successfully`,
+                        title: `Accessories "${data.brand}" has been added successfully`,
                         showConfirmButton: false,
                         timer: 1500,
                     });

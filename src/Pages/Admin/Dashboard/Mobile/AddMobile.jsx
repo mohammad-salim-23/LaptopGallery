@@ -97,7 +97,7 @@ const AddLaptop = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `Laptop "${data.brand}" has been added successfully`,
+            title: `Mobile "${data.brand}" has been added successfully`,
             showConfirmButton: false,
             timer: 1500,
           });
