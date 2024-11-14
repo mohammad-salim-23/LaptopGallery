@@ -72,7 +72,7 @@ const AddLaptop = () => {
         const productsInfo = {
           title: data.title,
           brand: data.brand,
-          category: "laptop",
+          category: "mobile",
           model: data.model,
           processor: data.processor,
           ram: data.ram,
@@ -86,7 +86,7 @@ const AddLaptop = () => {
           status: data.status,
           description: data.description,
           warranty: data.warranty,
-          type: "laptop",
+          type: "mobile",
           productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
         };
 
