@@ -31,7 +31,7 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
             .then(res => res.json())
             .then(result => {
                 window.location.replace(result.url)
-                console.log(result)
+                // console.log(result)
             })
     };
 

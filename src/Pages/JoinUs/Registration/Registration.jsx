@@ -49,7 +49,7 @@ const Registration = () => {
           title: "Oops...",
           text: "Something went wrong!",
         });
-        console.error(error);
+        // console.error(error);
       });
   };
 

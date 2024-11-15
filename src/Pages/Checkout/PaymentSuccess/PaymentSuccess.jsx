@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const PaymentSuccess = () => {
     const { tranId } = useParams();
-    console.log(tranId)
+    // console.log(tranId)
     useEffect(() => {
         // Show alert when the component mounts
         Swal.fire({

@@ -67,7 +67,7 @@ const TotalAccessories = () => {
     };
 
     if (isLoading) return <span className="loading loading-ring loading-lg text-red-400 text-center"></span>;
-    console.log(productsTypes)
+    // console.log(productsTypes)
     return (
         <div className="mx-auto container">
             <h1 className="text-center text-3xl font-bold my-10">Total Accessories {productsTypes.length}</h1>
