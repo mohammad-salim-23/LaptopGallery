@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import { IoHome } from "react-icons/io5";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import { TiBatteryCharge } from "react-icons/ti";
-
+import { FaHistory } from "react-icons/fa";
 
 
 const Dashboard = () => {
@@ -139,7 +139,7 @@ const Dashboard = () => {
             </Link>
             {/* Total Users */}
             <Link to={"/dashboard/allPayment"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
-              <HiUserGroup className="h-6 w-6 mr-2" />
+            <FaHistory className="h-6 w-6 mr-2" />
               Total Payment
             </Link>
             {/* Go Home */}

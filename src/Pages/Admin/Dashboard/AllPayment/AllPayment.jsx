@@ -1,12 +1,16 @@
 import usePayments from "../../../../hooks/usePayments";
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { FcOk } from "react-icons/fc";
+import { FcCancel } from "react-icons/fc";
 const AllPayment = () => {
     const [payment] = usePayments();
-    const [activeComplain, setActiveComplain] = useState(null);
-
+    const [activePayment, setActivePayment] = useState(null);
+ 
     return (
         <div className="md:container md:mx-auto md:p-4">
-            <h2 className="text-2xl font-semibold my-10 text-gray-700 flex justify-center items-center">----Orders----</h2>
+            <h2 className="text-2xl font-semibold my-10 text-gray-700 flex justify-center items-center">
+                ----Payment History----
+            </h2>
             <div className="overflow-x-auto lg:flex justify-center space-y-4 gap-4">
                 {payment?.length === 0 ? (
                     <div className="text-center my-4 lg:w-[60%]">
@@ -20,11 +24,21 @@ const AllPayment = () => {
                             {/* Table Head */}
                             <thead className="bg-base-200 text-gray-600">
                                 <tr>
-                                    <th className="border border-gray-300 px-4 py-2 text-center">Transaction ID</th>
-                                    <th className="border border-gray-300 px-4 py-2 text-center">Product</th>
-                                    <th className="border border-gray-300 px-4 py-2 text-center">Status</th>
-                                    <th className="border border-gray-300 px-4 py-2 text-center">Total Amount</th>
-                                    <th className="border border-gray-300 px-4 py-2 text-center">Date</th>
+                                    <th className="border border-gray-300 px-4 py-2 text-center">
+                                        User Email
+                                    </th>
+                                    <th className="border border-gray-300 px-4 py-2 text-center">
+                                        Product
+                                    </th>
+                                    <th className="border border-gray-300 px-4 py-2 text-center">
+                                        Status
+                                    </th>
+                                    <th className="border border-gray-300 px-4 py-2 text-center">
+                                        Total Amount
+                                    </th>
+                                    <th className="border border-gray-300 px-4 py-2 text-center">
+                                        Details
+                                    </th>
                                 </tr>
                             </thead>
                             {/* Table Body */}
@@ -37,30 +51,64 @@ const AllPayment = () => {
                                             {order.cart.map((product, productIndex) => (
                                                 <tr key={`product-${productIndex}`}>
                                                     {productIndex === 0 && (
-                                                        <td rowSpan={numberOfProducts} className="border border-gray-300 px-4 py-2 text-center">
-                                                            {order.transactionId}
+                                                        <td
+                                                            rowSpan={numberOfProducts}
+                                                            className="border border-gray-300 px-4 py-2 text-center"
+                                                        >
+                                                            {order.cusEmail}
                                                         </td>
                                                     )}
                                                     <td className="border border-gray-300 px-4 py-2 text-center">
                                                         {product.model} ({product.brand})
                                                     </td>
+                                                    {/* <td
+                            className={`border border-gray-300 px-4 py-2 text-center font-bold ${
+                              order.paidStatues
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
+                          >
+                            {order.paidStatues ? "Paid" : "Unpaid"}
+                          </td> */}
                                                     <td className={`border border-gray-300 px-4 py-2 text-center font-bold ${order.paidStatues ? 'text-green-500' : 'text-red-500'}`}>
-                                                        {order.paidStatues ? "Paid" : "Unpaid"}
+                                                        {order.paidStatues ? (
+                                                            <>
+                                                                <div className='flex ml-10'>
+                                                                    Paid
+                                                                    <FcOk className='mt-1 ml-2' />
+                                                                </div>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                            <div className='flex ml-10'>
+                                                                Unpaid
+                                                                <FcCancel className="mt-1 ml-1" />
+                                                            </div>
+                                                        </>
+
+                                                        )}
                                                     </td>
                                                     {productIndex === 0 && (
                                                         <>
-                                                            <td rowSpan={numberOfProducts} className="border border-gray-300 px-4 py-2 text-center">
+                                                            <td
+                                                                rowSpan={numberOfProducts}
+                                                                className="border border-gray-300 px-4 py-2 text-center"
+                                                            >
                                                                 {order.totalAmount} BDT
                                                             </td>
-                                                            <td rowSpan={numberOfProducts} className="border border-gray-300 px-4 py-2 text-center">
-                                                                {/* {date} */}
-                                                            </td>
+                                                            <th
+                                                                rowSpan={numberOfProducts}
+                                                                className="border border-gray-300 px-4 py-2 text-center"
+                                                            >
+                                                                <button
+                                                                    className="rounded-lg btn py-2 px-4 border bg-primary text-white hover:text-black"
+                                                                    onClick={() => setActivePayment(order)}
+                                                                >
+                                                                    Details
+                                                                </button>
+                                                            </th>
                                                         </>
                                                     )}
-
-                                                    <th>
-                                                        <button className="btn btn-ghost border border-black hover:bg-primary" onClick={() => setActiveComplain(order)}>details</button>
-                                                    </th>
                                                 </tr>
                                             ))}
                                         </React.Fragment>
@@ -73,31 +121,83 @@ const AllPayment = () => {
             </div>
 
             {/* Modal */}
-            {activeComplain && (
+            {activePayment && (
                 <div className="fixed inset-0 flex items-center justify-center z-10">
-                    <div className="fixed inset-0 bg-white bg-opacity-40 backdrop-blur-sm animate-fadeIn "></div>
-                    <div className="relative w-[900px] bg-white text-black rounded-2xl border-none shadow-lg z-20 animate-fadeIn">
+                    {/* Overlay */}
+                    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
 
-                        <div className="text-3xl mt-4 text-center font-bold">Complain Details</div>
-
-                        <div className="p-6">
-                            <p className="mb-4">Dear Admin,</p>
-                            {/* <p>{activeComplain.complainDescription}</p> */}
-                            <div className="mt-6">
-                                {/* <h1>{activeComplain.customerName}</h1> */}
-                                {/* <p>{activeComplain.customerEmail}</p> */}
-                                {/* <h1>Date: {activeComplain.submitDate}</h1> */}
-                                {/* <h2>Time: {activeComplain.submitTime}</h2> */}
+                    {/* Modal Content */}
+                    <div className="relative w-[90%] md:w-[700px] bg-white rounded-lg shadow-lg z-20">
+                        {/* Header */}
+                        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                            <div>
+                                
                             </div>
+                            <button
+                                onClick={() => setActivePayment(null)}
+                                className="text-gray-500 text-2xl hover:text-red-600 transition-transform transform hover:scale-110"
+                                aria-label="close"
+                            >
+                                ❌
+                            </button>
                         </div>
 
-                        <button
-                            onClick={() => setActiveComplain(null)}
-                            aria-label="close"
-                            className="absolute top-5 text-xl right-5   p-2 rounded-2xl   text-gray-500   transition-transform transform hover:scale-110"
-                        >
-                            ❌
-                        </button>
+
+                        <div className="p-6 space-y-4">
+                            {/* Customer Info */}
+                            <h3 className="text-3xl text-center font-semibold text-gray-800">
+                                Payment Details
+                            </h3>
+                            <div className="space-y-2">
+                                <h4 className="text-lg font-medium text-gray-700">
+                                    Customer Information
+                                </h4>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Name:</strong> {activePayment.cusName}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Email:</strong> {activePayment.cusEmail}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Phone:</strong> {activePayment.cusPhone}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Address:</strong> {activePayment.streetAddress},{" "}
+                                    {activePayment.district}, {activePayment.division} -{" "}
+                                    {activePayment.zipCode}
+                                </p>
+                            </div>
+
+                            {/* Order Info */}
+                            <div className="space-y-2">
+                                <h4 className="text-lg font-medium text-gray-700">
+                                    Order Information
+                                </h4>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Transaction ID:</strong> {activePayment.transactionId}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Date:</strong> {activePayment.date}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Total Amount:</strong> {activePayment.totalAmount} BDT
+                                </p>
+                            </div>
+
+                            {/* Product Details */}
+                            <div className="space-y-2">
+                                <h4 className="text-lg font-medium text-gray-700">
+                                    Products
+                                </h4>
+                                <ul className="text-sm text-gray-600 list-disc pl-6">
+                                    {activePayment.cart.map((product, index) => (
+                                        <li key={index}>
+                                            {product.model} ({product.brand}) - {product.price}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
