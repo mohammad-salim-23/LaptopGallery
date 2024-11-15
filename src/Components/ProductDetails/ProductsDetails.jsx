@@ -168,10 +168,10 @@ const ProductsDetails = () => {
 
                                 <ul className='list-disc ml-10'>
                                     <li><span className="text-gray-600">Model -</span> {product.model || "N/A"}</li>
-                                    <li><span className="text-gray-600">Brand -</span> {product.brand || "N/A"}</li>
-                                    <li><span className="text-gray-600">RAM -</span> {product.ram || "N/A"}</li>
+                                    <li><span className="text-gray-600">Brand -</span> <span className='capitalize'>{product.brand || "N/A"}</span></li>
+                                    <li><span className="text-gray-600">RAM -</span> <span className='capitalize'>{product.ram || "N/A"}</span></li>
                                     <li><span className="text-gray-600">Storage -</span> {product.storage || "N/A"}</li>
-                                    <li><span className="text-gray-600">Color -</span> {product.color || "N/A"}</li>
+                                    <li><span className="text-gray-600">Color -</span> <span className='capitalize'>{product.color || "N/A"}</span></li>
                                     <li><span className="text-gray-600">Operating System -</span> {product.os || "N/A"}</li>
                                     <li><span className="text-gray-600">Display -</span> {product.display || "N/A"}</li>
                                     <li><span className="text-gray-600">Warranty -</span> {product.warranty || "N/A"}</li>

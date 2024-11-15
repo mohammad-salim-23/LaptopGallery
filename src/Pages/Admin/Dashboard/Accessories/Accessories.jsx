@@ -73,12 +73,12 @@ const Accessories = () => {
                 const randomNumber = Math.floor(1000 + Math.random() * 9000);
                 const productsInfo = {
                     title: data.title,
-                    brand: data.brand,
-                    category: "accessories",
-                    model: data.model,
-                    processor: data.processor,
+                    brand: data.brand.toLowerCase(),
+                    category: "Accessories",
+                    model: data.model.toLowerCase(),
+                    processor: data.processor.toLowerCase(),
                     ram: data.ram,
-                    storage: data.storage,
+                    storage: data.storage.toLowerCase(),
                     display: data.display,
                     color: data.color,
                     operating_System: data.operating_System,
