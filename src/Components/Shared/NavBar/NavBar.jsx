@@ -192,7 +192,7 @@ const NavBar = () => {
                                                     >
                                                         <section className="w-1/3">
                                                             <img
-                                                                src={result.image}
+                                                                src={result.images.img1}
                                                                 alt={result.brand}
                                                                 className="w-full  object-cover rounded-lg  h-24 duration-1000 hover:scale-105"
                                                             />

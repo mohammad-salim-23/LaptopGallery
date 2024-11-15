@@ -7,7 +7,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 
 const TotalAccessories = () => {
-    const [productsTypes, isLoading, refetch] = useProductsType("accessories");
+    const [productsTypes, isLoading, refetch] = useProductsType("Accessories");
     const axiosPublic = useAxiosPublic();
 
     // Pagination state
@@ -67,7 +67,7 @@ const TotalAccessories = () => {
     };
 
     if (isLoading) return <span className="loading loading-ring loading-lg text-red-400 text-center"></span>;
-
+    console.log(productsTypes)
     return (
         <div className="mx-auto container">
             <h1 className="text-center text-3xl font-bold my-10">Total Accessories {productsTypes.length}</h1>
@@ -92,7 +92,7 @@ const TotalAccessories = () => {
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle h-12 w-12">
-                                                <img src={product.image} alt={product.name} />
+                                                <img src={product.images.img1} alt={product.name} />
                                             </div>
                                         </div>
                                         <div>

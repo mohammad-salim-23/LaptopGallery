@@ -19,6 +19,7 @@ const Cart = () => {
         const price = parseInt(item.price.replace(' BDT', '').replace(',', ''));  
         return total + price;
     }, 0);
+    console.log(totalPrice)
 
     const shipping = 120;
     const subTotal = totalPrice + shipping;
@@ -56,7 +57,7 @@ const Cart = () => {
                         <div className="space-y-4">
                             {cart.map(item => (
                                 <div key={item._id} className="flex items-center gap-4 p-4 border-b border-gray-200">
-                                    <img src={item.image} alt={item.name} className="w-24 h-24 rounded" />
+                                    <img src={item.images.img1} alt={item.name} className="w-24 h-24 rounded" />
                                     <div className="flex-1">
                                         <h3 className="text-lg font-semibold text-gray-700">{item.model}</h3>
                                         <p className="text-gray-500">Color: {item.color}</p>
