@@ -16,7 +16,7 @@ const Cart = () => {
     // console.log(cart)
 
     const totalPrice = cart.reduce((total, item) => {
-        const price = parseInt(item.price.replace(' BDT', '').replace(',', ''));  
+        const price = parseInt(item.price);  
         return total + price;
     }, 0);
     console.log(totalPrice)

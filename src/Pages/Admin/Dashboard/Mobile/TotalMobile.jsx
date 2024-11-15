@@ -93,7 +93,7 @@ const TotalMobile = () => {
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle h-12 w-12">
-                                                <img src={productsType.images.img1} alt={productsType.brand} />
+                                                <img src={productsType?.images?.img1} alt={productsType.brand} />
                                             </div>
                                         </div>
                                         <div>
