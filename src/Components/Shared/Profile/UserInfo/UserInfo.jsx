@@ -2,7 +2,7 @@ import useAuth from "../../../../hooks/useAuth";
 
 const UserInfo = () => {
 
-    const {user} = useAuth();
+    const { user } = useAuth();
 
     return (
 
@@ -15,6 +15,9 @@ const UserInfo = () => {
                     <h1 className="text-2xl text-gray-500 font-bold mt-6">
                         {user.displayName}
                     </h1>
+                    <h2 className="text-base md:text-xl text-gray-500 font-bold mt-2">
+                        {user.email}
+                    </h2>
                     <h2 className="text-base md:text-xl text-gray-500 font-bold mt-2">
                         {user.email}
                     </h2>

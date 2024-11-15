@@ -28,6 +28,7 @@ const Registration = () => {
               name: data.name,
               email: data.email,
               password: data.password,
+              number: data.phone,
               createdDate: new Date().toISOString(),
             };
             axiosPublic.post('/users', userInfo).then(res => {
@@ -94,6 +95,24 @@ const Registration = () => {
                   className="input input-bordered"
                 />
                 {errors.email && <span className="text-red-600">Email is required</span>}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Phone</span>
+                </label>
+                <input
+                  type="number"
+                  placeholder="Enter Your Number"
+                  className="input input-bordered"
+                  {...register("phone", {
+                    required: "Phone number is required",
+                    pattern: {
+                      value: /^(01[3-9]\d{8})$/,
+                      message: "Phone number must be a valid 11-digit Bangladeshi number",
+                    },
+                  })}
+                />
+                {errors.phone && <span className="text-red-600">Phone Number is required</span>}
               </div>
 
               <div className="form-control">
