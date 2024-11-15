@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom';
 const Error = () => {
   return (
     <div
-      className="min-h-screen flex flex-col justify-end items-center bg-cover bg-center pb-10"
+      className="min-h-screen flex flex-col justify-end items-center pb-10 overflow-hidden"
       style={{
-        backgroundImage: `url('https://i.ibb.co.com/1vq0BmY/modern-vector-illustration-404-error-page-vector-website-electric-plug-socket-unplugged-599740-712.jpg')`,
+        backgroundImage: `url('https://i.ibb.co/bdppy7z/error-colored-isometric-composition-signs-tools-materials-solving-problems-errors-computer-vector-il.jpg')`,
+        backgroundSize: 'contain', 
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <div className="text-center">
         <Link to="/">
-          <button className="btn btn-wide bg-amber-400  text-black  border border-black">
-           Go Home
+          <button className="btn btn-wide bg-amber-400 text-black border border-black">
+            Go Home
           </button>
         </Link>
       </div>
