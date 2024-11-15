@@ -71,13 +71,13 @@ const AddLaptop = () => {
         const randomNumber = Math.floor(1000 + Math.random() * 9000);
         const productsInfo = {
           title: data.title,
-          brand: data.brand,
+          brand: data.brand.toLowerCase(),
           category: "mobile",
           subCategory: "mobile",
-          model: data.model,
-          processor: data.processor,
+          model: data.model.toLowerCase(),
+          processor: data.processor.toLowerCase(),
           ram: data.ram,
-          storage: data.storage,
+          storage: data.storage.toLowerCase(),
           display: data.display,
           color: data.color,
           operating_System: data.operating_System,

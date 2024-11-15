@@ -1,7 +1,7 @@
 
 const SimilarData = ({ product }) => {
     return (
-        <div className="w-80 h-[500px] p-4 bg-white shadow-md rounded-xl hover:shadow-xl mt-6 md:mt-3 lg:mt-0 flex flex-col">
+        <div className="w-80 h-[500px] p-4 bg-white rounded-xl mt-6 md:mt-3 lg:mt-0 flex flex-col">
             <a href={`/productDetails/${product._id}`}>
                 <img
                     src={product.images.img1 || "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"}
@@ -28,9 +28,9 @@ const SimilarData = ({ product }) => {
                 </div>
             </div>
             {/* Button at the bottom */}
-            <div className="mt-auto">
+            <div className="flex justify-center">
                 <a href={`/productDetails/${product._id}`}>
-                    <div className="btn hover:outline text-[16px] bg-primary hover:bg-transparent text-white hover:text-black text-center py-2 rounded-lg">
+                    <div className="btn text-[16px] bg-primary hover:bg-transparent text-white hover:text-black text-center py-2 rounded-lg">
                         View Details
                     </div>
                 </a>

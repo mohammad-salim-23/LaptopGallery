@@ -1,7 +1,7 @@
 import React from 'react';
 import usePayments from '../../../../hooks/usePayments';
 import useAuth from '../../../../hooks/useAuth';
-import { FcOk } from "react-icons/fc";
+import { FcCancel, FcOk } from "react-icons/fc";
 
 const Myorder = () => {
     const [payment] = usePayments();
@@ -57,12 +57,18 @@ const Myorder = () => {
                                                         {order.paidStatues ? (
                                                             <>
                                                                 <div className='flex ml-10'>
-                                                                    Paid 
+                                                                    Paid
                                                                     <FcOk className='mt-1 ml-2' />
                                                                 </div>
                                                             </>
                                                         ) : (
-                                                            "Unpaid"
+                                                            <>
+                                                                <div className='flex ml-10'>
+                                                                    Unpaid
+                                                                    <FcCancel className="mt-1 ml-1" />
+                                                                </div>
+                                                            </>
+
                                                         )}
                                                     </td>
                                                     {productIndex === 0 && (

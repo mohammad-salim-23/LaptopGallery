@@ -70,13 +70,13 @@ const AddLaptop = () => {
         const randomNumber = Math.floor(1000 + Math.random() * 9000);
         const productsInfo = {
           title: data.title,
-          brand: data.brand,
-          category: "laptop",
-          subCategory: "laptop",
-          model: data.model,
-          processor: data.processor,
+          brand: data.brand.toLowerCase(),
+          category: "laptop", 
+          subCategory: "laptop", 
+          model: data.model.toLowerCase(),
+          processor: data.processor.toLowerCase(),
           ram: data.ram,
-          storage: data.storage,
+          storage: data.storage.toLowerCase(),
           display: data.display,
           color: data.color,
           operating_System: data.operating_System,
@@ -89,6 +89,7 @@ const AddLaptop = () => {
           type: "laptop",
           productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
         };
+
 
         // Store laptop data in MongoDB
         const response = await axiosSecure.post("/products", productsInfo);
@@ -171,7 +172,7 @@ const AddLaptop = () => {
                       placeholder="Apple"
                       {...register("brand", { required: true })}
                     />
-                    {errors.brand && <span className="text-red-500 font-semibold mt-1">Brand field is required</span>}
+                    {errors.brand && <span className="text-red-500 font-semibold mt-1">Brand field is re quired</span>}
                   </div>
 
                 </div>
