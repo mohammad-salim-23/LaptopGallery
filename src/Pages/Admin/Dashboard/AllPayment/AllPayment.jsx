@@ -46,7 +46,7 @@ const AllPayment = () => {
 
     return (
         <div className="md:container md:mx-auto md:p-4">
- 
+
             <h2 className="text-2xl font-semibold my-10 text-gray-700 flex justify-center items-center">
                 ----Payment History----
             </h2>
@@ -112,7 +112,7 @@ const AllPayment = () => {
                                                         ) : (
                                                             <>
                                                                 <div className='flex ml-10'>
-                                                                    Cancel
+                                                                    Failed
                                                                     <FcCancel className="mt-1 ml-1" />
                                                                 </div>
                                                             </>
