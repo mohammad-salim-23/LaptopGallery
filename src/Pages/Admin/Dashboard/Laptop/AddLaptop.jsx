@@ -314,7 +314,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="17500 BDT"
+                      placeholder="17500"
                       {...register("price", { required: true })}
                     />
                     {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -328,7 +328,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="18500 BDT"
+                      placeholder="18500"
                       {...register("regularPrice")}
                     />
                   </div>
@@ -342,20 +342,6 @@ const AddLaptop = () => {
                     <span className="label-text font-medium">Laptop Images</span>
                   </label>
                   {/* Laptop image */}
-                  {/* <div className="form-control w-full ">
-                    <label className="label">
-                      <span className="label-text font-medium">Laptop Image</span>
-                    </label>
-                    <input
-                      id="file-upload"
-                      type="file"
-                      accept="image/*"
-                      className="file-input file-input-bordered w-full  cursor-pointer"
-                      htmlFor="file-upload"
-                      {...register('image', { onChange: handleInputChange })}
-                    />
-                  </div> */}
-
                   <div className="grid grid-cols-2 gap-4 mt-2">
 
                     {[1, 2, 3, 4].map((num) => (

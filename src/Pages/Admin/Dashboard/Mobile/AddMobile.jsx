@@ -83,7 +83,7 @@ const AddLaptop = () => {
           operating_System: data.operating_System,
           price: `${data.price} BDT`,
           regularPrice: `${data.regularPrice} BDT`,
-          image: images,
+          images: images,
           status: data.status,
           description: data.description,
           warranty: data.warranty,
@@ -313,7 +313,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="17500 BDT"
+                      placeholder="17500"
                       {...register("price", { required: true })}
                     />
                     {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -327,7 +327,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="18500 BDT"
+                      placeholder="18500"
                       {...register("regularPrice")}
                     />
                   </div>

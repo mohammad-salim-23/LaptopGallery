@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const Image = ({ images }) => {
-
-    const imagesArray = Object.values(images);   
+console.log(images)
+    const imagesArray = Object.values(images ?? {}); 
 
     const [currentImage, setCurrentImage] = useState(0);
 
@@ -14,7 +14,7 @@ const Image = ({ images }) => {
         <div className="mx-auto container h-full flex flex-col-reverse md:flex-row items-center">
             {/* Left Side - Thumbnails */}
             <div className="flex md:flex-col space-x-4 md:space-y-4 md:space-x-0">
-                {imagesArray.map((img, index) => (
+                {imagesArray?.map((img, index) => (
                     <button
                         key={index}
                         onClick={() => handleImageChange(index)}
