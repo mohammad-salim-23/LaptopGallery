@@ -13,6 +13,7 @@ import Rating from 'react-rating';
 import SimilarData from './SimilarData';
 import Loader from '../Shared/Loader/Loader';
 import { PulseLoader } from 'react-spinners';
+import Image from './Image';
 
 
 const ProductsDetails = () => {
@@ -99,11 +100,9 @@ const ProductsDetails = () => {
                                 />
                             </div>
                         </div>
-                        <img
-                            src={product.image}
-                            alt={product.model}
-                            className="w-full  object-cover rounded-lg  h-full duration-1000 hover:scale-105"
-                        />
+
+                        <Image images={product.images}></Image>
+
                     </div>
                 </div>
 
@@ -188,11 +187,13 @@ const ProductsDetails = () => {
                                 </p>
                             </div>
                             {/* Regular Price */}
-                            <div className='text-xl font-semibold flex flex-wrap mt-2'>
-                                <p className="border text-gray-500 p-1 rounded-lg">
-                                    <span className="font-semibold">Regular Price:</span><span className='line-through'> {product.regularPrice || "N/A"}</span>
-                                </p>
-                            </div>
+                            {product.regularPrice && (
+                                <div className='text-xl font-semibold flex flex-wrap mt-2'>
+                                    <p className="border text-gray-500 p-1 rounded-lg">
+                                        <span className="font-semibold">Regular Price:</span><span className='line-through'> {product.regularPrice || "N/A"}</span>
+                                    </p>
+                                </div>
+                            )}
                         </div>
 
                         <div className='flex gap-4 mt-6'>

@@ -82,8 +82,6 @@ export const AuthProvider = ({ children }) => {
     logOut,
     singWithGoogle,
     updateUserProfile
-
-
   }
 
 

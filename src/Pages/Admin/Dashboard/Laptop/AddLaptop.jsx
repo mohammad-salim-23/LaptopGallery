@@ -34,22 +34,39 @@ const AddLaptop = () => {
   // React hook From
   const { register, handleSubmit, formState: { errors }, } = useForm();
 
+  const uploadImageToImgBB = async (imageFile) => {
+    const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    const response = await fetch(
+      `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+    if (data.success) {
+      return data.data.url;
+    } else {
+      throw new Error("Image upload failed");
+    }
+  };
 
   const onSubmit = async (data) => {
-    setLoading(true);  // Start loading
+    setLoading(true);
     try {
-      // Prepare the image file for upload
-      const imageFile = new FormData();
-      imageFile.append("image", data.image[0]);
+      const images = {};
+      for (let i = 0; i < 4; i++) {
+        images[`img${i + 1}`] = data.images[i]
+          ? await uploadImageToImgBB(data.images[i][0]) // Adjust indexing if needed
+          : null;
+      }
+      // console.log('Uploaded Image URLs:', images);
 
-      // Upload image to imgbb
-      const res = await axiosPublic.post(image_hosting_api, imageFile, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
-
-      if (res.data.success) {
+      if (Object.values(images).some((url) => url !== null)) {
         const randomNumber = Math.floor(1000 + Math.random() * 9000);
         const productsInfo = {
           title: data.title,
@@ -64,7 +81,7 @@ const AddLaptop = () => {
           operating_System: data.operating_System,
           price: `${data.price} BDT`,
           regularPrice: `${data.regularPrice} BDT`,
-          image: res.data.data.display_url,
+          images: images,
           status: data.status,
           description: data.description,
           warranty: data.warranty,
@@ -304,25 +321,26 @@ const AddLaptop = () => {
                   {/* regularPrice */}
                   <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text font-medium">Regular Price</span>
+                      <span className="label-text font-medium">Regular Price (Optional)</span>
                     </label>
                     <input
                       type="text"
                       className="input input-bordered w-full"
                       placeholder="18500 BDT"
-                      {...register("regularPrice", { required: true })}
+                      {...register("regularPrice")}
                     />
-                    {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
                   </div>
-
 
 
                 </div>
 
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
+                  <label className="label">
+                    <span className="label-text font-medium">Laptop Images</span>
+                  </label>
                   {/* Laptop image */}
-                  <div className="form-control w-full ">
+                  {/* <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text font-medium">Laptop Image</span>
                     </label>
@@ -334,6 +352,24 @@ const AddLaptop = () => {
                       htmlFor="file-upload"
                       {...register('image', { onChange: handleInputChange })}
                     />
+                  </div> */}
+
+                  <div className="grid grid-cols-2 gap-4 mt-2">
+
+                    {[1, 2, 3, 4].map((num) => (
+                      <div key={num} className="form-control w-full">
+                        <input
+                          type="file"
+                          className="file-input file-input-bordered w-full"
+                          {...register(`images.${num - 1}`, {
+                            required: num === 1,
+                          })}
+                        />
+                        {errors.images?.[num - 1] && (
+                          <p className="text-red-600">Product Image {num} is required.</p>
+                        )}
+                      </div>
+                    ))}
                   </div>
 
                   {/* warranty */}

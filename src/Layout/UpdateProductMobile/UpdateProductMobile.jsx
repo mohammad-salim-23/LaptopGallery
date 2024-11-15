@@ -263,7 +263,7 @@ const UpdateProductMobile = () => {
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
-                                                defaultValue={updateProduct.os}
+                                                defaultValue={updateProduct.operating_System}
                                                 {...register("operating_System",)}
                                             />
                                         </div>
@@ -303,7 +303,7 @@ const UpdateProductMobile = () => {
                                         </div>
 
                                         {/* regularPrice */}
-                                        <div className="form-control w-full">
+                                        {updateProduct.regularPrice && (<div className="form-control w-full">
                                             <label className="label">
                                                 <span className="label-text font-medium">Regular Price</span>
                                             </label>
@@ -311,10 +311,9 @@ const UpdateProductMobile = () => {
                                                 type="text"
                                                 className="input input-bordered w-full"
                                                 defaultValue={updateProduct.regularPrice}
-                                                {...register("regularPrice", { required: true })}
+                                                {...register("regularPrice")}
                                             />
-                                            {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
-                                        </div>
+                                        </div>)}
 
 
 

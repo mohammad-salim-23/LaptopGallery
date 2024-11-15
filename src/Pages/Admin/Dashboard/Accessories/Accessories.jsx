@@ -13,7 +13,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 
 const Accessories = () => {
-   
+
     const [preview, setPreview] = useState("https://i.ibb.co.com/dfNgcGy/accessories.jpg");
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -35,55 +35,74 @@ const Accessories = () => {
 
     // React hook From
     const { register, handleSubmit, formState: { errors }, } = useForm();
+    const uploadImageToImgBB = async (imageFile) => {
+        const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+        const formData = new FormData();
+        formData.append("image", imageFile);
+
+        const response = await fetch(
+            `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
+
+        const data = await response.json();
+        if (data.success) {
+            return data.data.url;
+        } else {
+            throw new Error("Image upload failed");
+        }
+    };
 
 
     const onSubmit = async (data) => {
         // console.log(data)
         setLoading(true);  // Start loading
         try {
-            // Image upload to imgbb
-            const imageFile = new FormData();
-            console.log(data.image[0]);
-            imageFile.append("image", data.image[0]);
+            const images = {};
+            for (let i = 0; i < 4; i++) {
+                images[`img${i + 1}`] = data.images[i]
+                    ? await uploadImageToImgBB(data.images[i][0]) // Adjust indexing if needed
+                    : null;
+            }
+            // console.log('Uploaded Image URLs:', images);
 
-            const res = await axiosPublic.post(image_hosting_api, imageFile, {
-                headers: {
-                    "content-type": "multipart/form-data",
-                },
-            });
-            // console.log(res);
-
-            if (res.data.success) {
+            if (Object.values(images).some((url) => url !== null)) {
                 const randomNumber = Math.floor(1000 + Math.random() * 9000);
                 const productsInfo = {
                     title: data.title,
                     brand: data.brand,
-                    model: data.model,
-                    color: data.color,
                     category: "accessories",
-                    description: data.description,
-                    price: data.price,
-                    regularPrice: data.regularPrice,
-                    image: res.data.data.display_url,
+                    model: data.model,
+                    processor: data.processor,
+                    ram: data.ram,
+                    storage: data.storage,
+                    display: data.display,
+                    color: data.color,
+                    operating_System: data.operating_System,
+                    price: `${data.price} BDT`,
+                    regularPrice: `${data.regularPrice} BDT`,
+                    image: images,
                     status: data.status,
-                    type: "accessories ",
+                    description: data.description,
                     warranty: data.warranty,
+                    type: "accessories",
                     productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
-
                 };
 
-                // Store the laptop data in MongoDB
+                // Store laptop data in MongoDB
                 const response = await axiosSecure.post("/products", productsInfo);
-                // console.log(response)
+
                 if (response.data.insertedId) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `Mobile "${data.brand}" has been added successfully`,
+                        title: `Accessories "${data.brand}" has been added successfully`,
                         showConfirmButton: false,
                         timer: 1500,
                     });
-
                 }
             } else {
                 throw new Error("Image upload failed");
@@ -214,15 +233,14 @@ const Accessories = () => {
                                         {/* regularPrice */}
                                         <div className="form-control w-full">
                                             <label className="label">
-                                                <span className="label-text font-medium">Regular Price</span>
+                                                <span className="label-text font-medium">Regular Price(Optional)</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
                                                 placeholder="18500 BDT"
-                                                {...register("regularPrice", { required: true })}
+                                                {...register("regularPrice")}
                                             />
-                                            {errors.regularPrice && <span className="text-red-500 font-semibold mt-1">RegularPrice field is required</span>}
                                         </div>
 
                                     </div>

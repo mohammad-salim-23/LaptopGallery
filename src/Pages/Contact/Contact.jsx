@@ -78,7 +78,7 @@ const Contact = () => {
                             </div>
                             <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">EMAIL</h2>
-                                <a href="mailto:example@email.com" className="text-indigo-500 leading-relaxed">example@email.com</a>
+                                <a href="mailto:laptopgallery61@gmail.com" className="text-indigo-500 leading-relaxed hover:underline">laptopgallery61@gmail.com</a>
                                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
                                 <Link to={'https://wa.me/+8801325798939'}><p className="leading-relaxed text-primary hover:underline">01325798939</p></Link>
                             </div>

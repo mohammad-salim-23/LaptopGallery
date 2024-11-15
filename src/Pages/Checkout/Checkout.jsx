@@ -22,7 +22,7 @@ const Checkout = ({ subTotal, setIsModalVisible }) => {
         // Add productIds to the data object
         data.productIds = productIds;
 
-        fetch("https://laptop-gallery-server-nine.vercel.app/payment", {
+        fetch("http://localhost:5000/payment", {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(data)

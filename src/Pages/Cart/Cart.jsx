@@ -7,22 +7,24 @@ import { useState } from 'react';
 import Checkout from '../Checkout/Checkout';
 import Empty from './Empty/Empty';
 
+
 const Cart = () => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    console.log(cart)
+    // console.log(cart)
 
     const totalPrice = cart.reduce((total, item) => {
-        const itemPrice = parseFloat(item.price) || 0;
-        const itemQuantity = item.quantity || 0;
-        const itemTotal = itemPrice * itemQuantity;
-        return total + itemTotal;
+        const price = parseInt(item.price.replace(' BDT', '').replace(',', ''));  
+        return total + price;
     }, 0);
+    console.log(totalPrice)
 
     const shipping = 120;
     const subTotal = totalPrice + shipping;
+    console.log(subTotal)
+
 
     // Delete cart item
     const handleRemoveItem = async (cartId) => {
@@ -55,7 +57,7 @@ const Cart = () => {
                         <div className="space-y-4">
                             {cart.map(item => (
                                 <div key={item._id} className="flex items-center gap-4 p-4 border-b border-gray-200">
-                                    <img src={item.image} alt={item.name} className="w-24 h-24 rounded" />
+                                    <img src={item?.images?.img1} alt={item.name} className="w-24 h-24 rounded" />
                                     <div className="flex-1">
                                         <h3 className="text-lg font-semibold text-gray-700">{item.model}</h3>
                                         <p className="text-gray-500">Color: {item.color}</p>
@@ -71,6 +73,8 @@ const Cart = () => {
                             ))}
                         </div>
                     </div>
+
+
 
                     {/* Cart Summary Section */}
                     <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md">

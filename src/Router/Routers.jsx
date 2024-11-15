@@ -33,6 +33,8 @@ import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateP
 import Contact from "../Pages/Contact/Contact";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AllPayment from "../Pages/Admin/Dashboard/AllPayment/AllPayment";
+
 
 export const router = createBrowserRouter([
     {
@@ -59,19 +61,19 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/totalLaptop/:id',
                 element: <UpdateProductLaptop></UpdateProductLaptop>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             }
             ,
             {
                 path: '/dashboard/totalMobile/:id',
                 element: <UpdateProductMobile></UpdateProductMobile>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             },
             ,
             {
                 path: '/dashboard/totalAccessories/:id',
                 element: <UpdateProductAccessories></UpdateProductAccessories>,
-                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-gallery-server-nine.vercel.app/products/${params.id}`)
             },
             {
 
@@ -94,7 +96,7 @@ export const router = createBrowserRouter([
 
             {
                 path: '/cart',
-                element: <PrivateRoute><Cart></Cart></PrivateRoute>
+                element: <Cart></Cart>
             },
             {
                 path: '/profile',
@@ -131,7 +133,7 @@ export const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact></Contact>
-            }
+            },
 
         ]
     },
@@ -173,6 +175,10 @@ export const router = createBrowserRouter([
             {
                 path: 'totalUsers',
                 element: <PrivateRoute> <AdminRoute><TotalUsers></TotalUsers></AdminRoute></PrivateRoute>
+            },
+            {
+                path: 'allPayment',
+                element: <AllPayment></AllPayment>
             }
         ]
     }

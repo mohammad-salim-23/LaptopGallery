@@ -7,6 +7,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { DiGitCompare } from 'react-icons/di';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
+  console.log(items)
   const [sortOrder, setSortOrder] = useState("");
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);
@@ -60,7 +61,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
   };
 
   return (
-    <div className="p-6 bg-base-200 my-24">
+    <div className="lg:p-6 bg-base-200 my-24">
       <div className="flex flex-wrap md:flex-nowrap">
         {/* Sidebar - Desktop and larger */}
         <div className={`fixed inset-y-0 left-0 z-30 w-60 bg-white transform transition-transform duration-300 ease-in-out 
@@ -123,17 +124,17 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
 
           {/* Card design */}
           <div className='container mx-auto'>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4 ">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-6 mt-4 ">
               {paginatedItems.map(data => (
                 <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col border">
                   <Link to={`/productDetails/${data._id}`} className="block">
-                    <img src={data.image} alt={data.model} className="rounded-xl h-56 duration-1000 hover:scale-105 mb-2" />
+                    <img src={data.images.img1} alt={data.model} className="rounded-xl  h-40 lg:h-56  p-4 lg:p-2 lg:duration-1000 lg:hover:scale-105 mb-2" />
                   </Link>
                   {/* Fixed height for content area */}
-                  < div className="flex-grow flex flex-col justify-between p-4" >
+                  < div className="flex-grow flex flex-col justify-between p-2" >
                     <div>
                       <Link to={`/productDetails/${data._id}`}>
-                        <h3 className="text-xl hover:underline hover:cursor-pointer mb-2">
+                        <h3 className="text-[16px] font-semibold lg:text-xl hover:underline hover:cursor-pointer mb-2">
                           {data.title}
                         </h3>
                       </Link>
@@ -149,18 +150,19 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                         </p>
                         <p className="border text-gray-500 p-1 rounded-lg font-semibold mt-1">
                           <span className="font-semibold">Regular Price:</span>
-                          <span className="line-through"> {data.regularPrice || "N/A"}</span>
+                          {data.regularPrice && (<span className="line-through"> {data.regularPrice}</span>)}
                         </p>
                       </div>
                     </div>
                     {/* Buttons container */}
-                    < div className="flex mt-4 gap-x-2" >
-                      <NavLink to={`/productDetails/${data._id}`}>
-                        <button className="btn text-[12px] bg-primary text-white py-2 px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary"> See More </button>
-
-                      </NavLink>
-                      <CartButton prodId={data._id} />
-                    </div>
+                    <div className="flex mt-4 gap-x-2">
+                            <NavLink to={`/productDetails/${data._id}`}>
+                                <button className="btn w-[60px] md:w-auto text-[10px] md:text-[12px] lg:text-[14px] bg-primary text-white py-1 md:py-2 px-2 md:px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary transition-all whitespace-nowrap">
+                                    See More
+                                </button>
+                            </NavLink>
+                            <CartButton prodId={data._id} />
+                        </div>
                   </div>
                 </div>
               ))}

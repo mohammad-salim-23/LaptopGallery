@@ -1,22 +1,14 @@
-import React from 'react';
-import usePayments from '../../../../hooks/usePayments';
-import useAuth from '../../../../hooks/useAuth';
-
-const Myorder = () => {
+import usePayments from "../../../../hooks/usePayments";
+import React, { useState } from 'react';
+const AllPayment = () => {
     const [payment] = usePayments();
-    const { user } = useAuth();
-    const date = new Date().toLocaleDateString();
-
-    // Filter payments for the current user by email
-    const myPayments = payment?.filter(p => p.cusEmail === user?.email);
-
-    // console.log(myPayments); // Debugging step to check data structure
+    const [activeComplain, setActiveComplain] = useState(null);
 
     return (
         <div className="md:container md:mx-auto md:p-4">
             <h2 className="text-2xl font-semibold my-10 text-gray-700 flex justify-center items-center">----Orders----</h2>
             <div className="overflow-x-auto lg:flex justify-center space-y-4 gap-4">
-                {myPayments?.length === 0 ? (
+                {payment?.length === 0 ? (
                     <div className="text-center my-4 lg:w-[60%]">
                         <h3 className="text-lg font-semibold">
                             No products found for your orders.
@@ -37,7 +29,7 @@ const Myorder = () => {
                             </thead>
                             {/* Table Body */}
                             <tbody>
-                                {myPayments.map((order, orderIndex) => {
+                                {payment.map((order, orderIndex) => {
                                     const numberOfProducts = order.cart.length;
 
                                     return (
@@ -61,10 +53,14 @@ const Myorder = () => {
                                                                 {order.totalAmount} BDT
                                                             </td>
                                                             <td rowSpan={numberOfProducts} className="border border-gray-300 px-4 py-2 text-center">
-                                                                {date}
+                                                                {/* {date} */}
                                                             </td>
                                                         </>
                                                     )}
+
+                                                    <th>
+                                                        <button className="btn btn-ghost border border-black hover:bg-primary" onClick={() => setActiveComplain(order)}>details</button>
+                                                    </th>
                                                 </tr>
                                             ))}
                                         </React.Fragment>
@@ -75,8 +71,38 @@ const Myorder = () => {
                     </div>
                 )}
             </div>
+
+            {/* Modal */}
+            {activeComplain && (
+                <div className="fixed inset-0 flex items-center justify-center z-10">
+                    <div className="fixed inset-0 bg-white bg-opacity-40 backdrop-blur-sm animate-fadeIn "></div>
+                    <div className="relative w-[900px] bg-white text-black rounded-2xl border-none shadow-lg z-20 animate-fadeIn">
+
+                        <div className="text-3xl mt-4 text-center font-bold">Complain Details</div>
+
+                        <div className="p-6">
+                            <p className="mb-4">Dear Admin,</p>
+                            {/* <p>{activeComplain.complainDescription}</p> */}
+                            <div className="mt-6">
+                                {/* <h1>{activeComplain.customerName}</h1> */}
+                                {/* <p>{activeComplain.customerEmail}</p> */}
+                                {/* <h1>Date: {activeComplain.submitDate}</h1> */}
+                                {/* <h2>Time: {activeComplain.submitTime}</h2> */}
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={() => setActiveComplain(null)}
+                            aria-label="close"
+                            className="absolute top-5 text-xl right-5   p-2 rounded-2xl   text-gray-500   transition-transform transform hover:scale-110"
+                        >
+                            ❌
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default Myorder;
+export default AllPayment;

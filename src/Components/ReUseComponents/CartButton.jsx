@@ -48,8 +48,8 @@ const CartButton = ({ prodId }) => {
     }
 
     const { email, displayName } = user || {};
-    const { brand, price, image, model, productId, color, type, subCategory } = productInfo || {};
-    const cartInfo = { email, displayName, productId, brand, price, image, model, quantity: 1, color, type, subCategory };
+    const { brand, price, images, model, productId, color, type, subCategory } = productInfo || {};
+    const cartInfo = { email, displayName, productId, brand, price, images, model, quantity: 1, color, type, subCategory };
 
     const handleAddToCart = async () => {
         if (!user) {
@@ -65,7 +65,7 @@ const CartButton = ({ prodId }) => {
         }
 
 
-        const isProductInCart = cartItems.some(item => item.productId === productId);
+        const isProductInCart = cartItems.some(item => item.productId === productId && item.email === user.email);
         if (isProductInCart) {
             toast.error(`${model} is already in your cart.`);
             return;
@@ -88,11 +88,17 @@ const CartButton = ({ prodId }) => {
     };
 
     return (
-        <div className='flex lg:justify-center lg:items-center'>
-            <button className='btn hover:bg-transparent hover:text-black text-[12px] bg-primary text-white py-2 px-2 rounded-lg hover:bg-gray-700' onClick={handleAddToCart}>
-                <span className=''><MdShoppingCartCheckout className='mt-1' /> </span> Add To Cart
+        <div className="flex justify-center items-center lg:justify-center lg:items-center">
+            <button
+                onClick={handleAddToCart}
+                className="btn flex items-center text-[10px] md:text-[12px] lg:text-[14px] text-white py-2 md:py-3 px-2 md:px-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-indigo-500 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg focus:outline-none"
+            >
+                <MdShoppingCartCheckout className="text-[18px] md:text-[20px] lg:text-[22px]" />
+                <span className="font-semibold">Add To Cart</span>
             </button>
         </div>
+
+
     );
 };
 
