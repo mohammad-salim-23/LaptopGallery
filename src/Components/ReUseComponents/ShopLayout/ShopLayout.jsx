@@ -7,7 +7,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import { DiGitCompare } from 'react-icons/di';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
-  // console.log(items)
   const [sortOrder, setSortOrder] = useState("");
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);

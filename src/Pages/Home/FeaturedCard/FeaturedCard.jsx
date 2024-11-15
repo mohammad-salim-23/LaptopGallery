@@ -5,7 +5,9 @@ import CartButton from '../../../Components/ReUseComponents/CartButton'
 
 const FeaturedCard = () => {
     const [product] = useProducts();
-    const products = product.slice(1, 9)
+    const laptops = product.filter(item => item.type === "laptop")
+    const products = laptops.slice(1, 9)
+
     return (
         <div className="container mx-auto p-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-6 mt-4 ">
             {products.map(data => (
