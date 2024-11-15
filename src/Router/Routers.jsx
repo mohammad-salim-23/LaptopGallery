@@ -34,6 +34,7 @@ import Contact from "../Pages/Contact/Contact";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -131,7 +132,7 @@ export const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact></Contact>
-            }
+            },
 
         ]
     },

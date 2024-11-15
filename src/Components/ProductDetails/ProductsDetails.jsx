@@ -13,6 +13,7 @@ import Rating from 'react-rating';
 import SimilarData from './SimilarData';
 import Loader from '../Shared/Loader/Loader';
 import { PulseLoader } from 'react-spinners';
+import Image from './Image';
 
 
 const ProductsDetails = () => {
@@ -99,11 +100,9 @@ const ProductsDetails = () => {
                                 />
                             </div>
                         </div>
-                        <img
-                            src={product.image}
-                            alt={product.model}
-                            className="w-full  object-cover rounded-lg  h-full duration-1000 hover:scale-105"
-                        />
+
+                        <Image images={product.images}></Image>
+
                     </div>
                 </div>
 
