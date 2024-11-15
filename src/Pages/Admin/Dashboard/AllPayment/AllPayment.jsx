@@ -112,7 +112,7 @@ const AllPayment = () => {
                                                         ) : (
                                                             <>
                                                                 <div className='flex ml-10'>
-                                                                    Unpaid
+                                                                    Cancel
                                                                     <FcCancel className="mt-1 ml-1" />
                                                                 </div>
                                                             </>
