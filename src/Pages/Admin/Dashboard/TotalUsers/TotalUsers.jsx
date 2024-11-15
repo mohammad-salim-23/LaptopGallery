@@ -108,6 +108,7 @@ const TotalUsers = () => {
                         <tr className="text-[16px]">
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Role</th>
                             <th>Delete</th>
                         </tr>
@@ -117,6 +118,7 @@ const TotalUsers = () => {
                             <tr key={user._id} className="border hover:bg-blue-200">
                                 <td className="font-semibold">{user.name}</td>
                                 <td className="font-semibold">{user.email}</td>
+                                <td className="font-semibold">{user?.number}</td>
                                 {/* // Make Admin / user */}
                                 <select
                                     value={user.type}
