@@ -33,6 +33,7 @@ import UpdateProductAccessories from "../Layout/UpdateProductAccessories/UpdateP
 import Contact from "../Pages/Contact/Contact";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AllPayment from "../Pages/Admin/Dashboard/AllPayment/AllPayment";
 
 
 export const router = createBrowserRouter([
@@ -95,7 +96,7 @@ export const router = createBrowserRouter([
 
             {
                 path: '/cart',
-                element:  <Cart></Cart> 
+                element: <Cart></Cart>
             },
             {
                 path: '/profile',
@@ -174,6 +175,10 @@ export const router = createBrowserRouter([
             {
                 path: 'totalUsers',
                 element: <PrivateRoute> <AdminRoute><TotalUsers></TotalUsers></AdminRoute></PrivateRoute>
+            },
+            {
+                path: 'allPayment',
+                element: <AllPayment></AllPayment>
             }
         ]
     }
