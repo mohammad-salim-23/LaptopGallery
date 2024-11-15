@@ -137,6 +137,11 @@ const Dashboard = () => {
               <HiUserGroup className="h-6 w-6 mr-2" />
               Total Users
             </Link>
+            {/* Total Users */}
+            <Link to={"/dashboard/allPayment"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700">
+              <HiUserGroup className="h-6 w-6 mr-2" />
+              Total Payment
+            </Link>
             {/* Go Home */}
             <Link to={"/"} className="flex items-center px-4 py-4 space-y-4 rounded-lg text-gray-100 hover:bg-gray-700 my-16">
               <IoHome className="h-6 w-6 mr-2" />
