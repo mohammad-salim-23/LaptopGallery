@@ -73,6 +73,7 @@ const AddLaptop = () => {
           title: data.title,
           brand: data.brand.toLowerCase(),
           category: "mobile",
+          subCategory: "mobile",
           model: data.model.toLowerCase(),
           processor: data.processor.toLowerCase(),
           ram: data.ram,

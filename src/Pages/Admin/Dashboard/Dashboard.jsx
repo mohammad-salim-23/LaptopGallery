@@ -168,8 +168,7 @@ const Dashboard = () => {
 
         <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200 px-4">
 
-          {/* Search input */}
-          <input className="mx-4 w-full md:72 lg:w-60 border rounded-md px-4 py-2 hidden lg:flex" type="text" placeholder="Search" />
+           
           <p className="font-bold">{time}</p>
 
           <div className="flex flex-col items-center justify-center">

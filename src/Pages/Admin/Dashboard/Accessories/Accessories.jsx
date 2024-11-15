@@ -75,6 +75,7 @@ const Accessories = () => {
                     title: data.title,
                     brand: data.brand.toLowerCase(),
                     category: "Accessories",
+                    subCategory: "Accessories",
                     model: data.model.toLowerCase(),
                     processor: data.processor.toLowerCase(),
                     ram: data.ram,

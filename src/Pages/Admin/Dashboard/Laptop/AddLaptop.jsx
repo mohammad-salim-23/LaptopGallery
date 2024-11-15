@@ -71,7 +71,8 @@ const AddLaptop = () => {
         const productsInfo = {
           title: data.title,
           brand: data.brand.toLowerCase(),
-          category: "laptop",
+          category: "laptop", 
+          subCategory: "laptop", 
           model: data.model.toLowerCase(),
           processor: data.processor.toLowerCase(),
           ram: data.ram,
