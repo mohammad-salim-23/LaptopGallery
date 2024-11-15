@@ -10,7 +10,7 @@ const AllPayment = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
 
-    console.log(payment)
+    // console.log(payment)
 
     // Pagination calculations
     const totalPages = Math.ceil(payment.length / itemsPerPage);
