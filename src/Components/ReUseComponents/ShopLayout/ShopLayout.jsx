@@ -7,7 +7,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { DiGitCompare } from 'react-icons/di';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
-  console.log(items)
+  // console.log(items)
   const [sortOrder, setSortOrder] = useState("");
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);
@@ -97,7 +97,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
               <h2>{title}</h2>
               {options.map(option => (
                 <div key={option}>
-                  <input type="checkbox" onChange={() => toggleFilter(setter, option)} checked={state.includes(option)} />
+                  <input type="checkbox" className='mr-2 cursor-pointer' onChange={() => toggleFilter(setter, option)} checked={state.includes(option)} />
                   <label>{option}</label>
                 </div>
               ))}
@@ -141,7 +141,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                       <div className="flex items-center">
                         <ul className="list-disc ml-4">
                           <li><span className="text-gray-600">Model -</span> {data.model || "N/A"}</li>
-                          <li><span className="text-gray-600">Brand -</span> {data.brand || "N/A"}</li>
+                          <li><span className="text-gray-600">Brand -</span> <span className='capitalize'>{data.brand || "N/A"}</span></li>
                         </ul>
                       </div>
                       <div className="mt-2">
@@ -156,13 +156,13 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
                     </div>
                     {/* Buttons container */}
                     <div className="flex mt-4 gap-x-2">
-                            <NavLink to={`/productDetails/${data._id}`}>
-                                <button className="btn w-[60px] md:w-auto text-[10px] md:text-[12px] lg:text-[14px] bg-primary text-white py-1 md:py-2 px-2 md:px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary transition-all whitespace-nowrap">
-                                    See More
-                                </button>
-                            </NavLink>
-                            <CartButton prodId={data._id} />
-                        </div>
+                      <NavLink to={`/productDetails/${data._id}`}>
+                        <button className="btn w-[60px] md:w-auto text-[10px] md:text-[12px] lg:text-[14px] bg-primary text-white py-1 md:py-2 px-2 md:px-4 rounded-lg hover:bg-transparent hover:text-primary border border-primary transition-all whitespace-nowrap">
+                          See More
+                        </button>
+                      </NavLink>
+                      <CartButton prodId={data._id} />
+                    </div>
                   </div>
                 </div>
               ))}
