@@ -5,7 +5,7 @@ import ShopLayout from '../../Components/ReUseComponents/ShopLayout/ShopLayout';
 const AccessoriesInHome = () => {
     document.title = `Laptop Gallery || Accessories`;
     const [products, refetch] = useProducts();
-    const filteredproduct = products?.filter(item => item.type === 'accessories');
+    const filteredproduct = products?.filter(item => item.type === 'Accessories');
     // console.log(filteredproduct)
     return (
         <div>

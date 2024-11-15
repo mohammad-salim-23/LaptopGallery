@@ -81,7 +81,7 @@ const AddLaptop = () => {
           operating_System: data.operating_System,
           price: `${data.price} BDT`,
           regularPrice: `${data.regularPrice} BDT`,
-          image: images,
+          images: images,
           status: data.status,
           description: data.description,
           warranty: data.warranty,
