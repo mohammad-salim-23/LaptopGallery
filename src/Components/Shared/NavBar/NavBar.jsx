@@ -61,7 +61,7 @@ const NavBar = () => {
     const handleClick = () => {
         setSearchTerm("");
     };
-
+    refetch()
 
     return (
         <>

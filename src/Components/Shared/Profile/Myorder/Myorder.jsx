@@ -1,6 +1,7 @@
 import React from 'react';
 import usePayments from '../../../../hooks/usePayments';
 import useAuth from '../../../../hooks/useAuth';
+import { FcOk } from "react-icons/fc";
 
 const Myorder = () => {
     const [payment] = usePayments();
@@ -53,7 +54,16 @@ const Myorder = () => {
                                                         {product.model} ({product.brand})
                                                     </td>
                                                     <td className={`border border-gray-300 px-4 py-2 text-center font-bold ${order.paidStatues ? 'text-green-500' : 'text-red-500'}`}>
-                                                        {order.paidStatues ? "Paid" : "Unpaid"}
+                                                        {order.paidStatues ? (
+                                                            <>
+                                                                <div className='flex ml-10'>
+                                                                    Paid 
+                                                                    <FcOk className='mt-1 ml-2' />
+                                                                </div>
+                                                            </>
+                                                        ) : (
+                                                            "Unpaid"
+                                                        )}
                                                     </td>
                                                     {productIndex === 0 && (
                                                         <>
@@ -61,7 +71,7 @@ const Myorder = () => {
                                                                 {order.totalAmount} BDT
                                                             </td>
                                                             <td rowSpan={numberOfProducts} className="border border-gray-300 px-4 py-2 text-center">
-                                                                {date}
+                                                                {order.date}
                                                             </td>
                                                         </>
                                                     )}

@@ -73,6 +73,7 @@ const AddLaptop = () => {
           title: data.title,
           brand: data.brand,
           category: "mobile",
+          subCategory: "mobile",
           model: data.model,
           processor: data.processor,
           ram: data.ram,
