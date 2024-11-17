@@ -19,11 +19,11 @@ const Cart = () => {
         const price = parseInt(item.price);  
         return total + price;
     }, 0);
-    console.log(totalPrice)
+    // console.log(totalPrice)
 
     const shipping = 120;
     const subTotal = totalPrice + shipping;
-    console.log(subTotal)
+    // console.log(subTotal)
 
 
     // Delete cart item

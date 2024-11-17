@@ -45,7 +45,7 @@ const UpdateProductLaptop = () => {
 
             // Store the laptop data in MongoDB
             const response = await axiosPublic.put(`/products/${data._id}`, productsInfo);
-            console.log(response)
+            // console.log(response)
             if (response.data.modifiedCount > 0) {
                 Swal.fire({
                     position: "top-center",
@@ -58,7 +58,7 @@ const UpdateProductLaptop = () => {
             }
         }
         catch (error) {
-            console.log(error)
+            // console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

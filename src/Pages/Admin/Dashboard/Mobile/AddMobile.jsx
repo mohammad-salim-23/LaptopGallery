@@ -73,6 +73,7 @@ const AddLaptop = () => {
           title: data.title,
           brand: data.brand.toLowerCase(),
           category: "mobile",
+          subCategory: "mobile",
           model: data.model.toLowerCase(),
           processor: data.processor.toLowerCase(),
           ram: data.ram,
@@ -82,7 +83,7 @@ const AddLaptop = () => {
           operating_System: data.operating_System,
           price: `${data.price} BDT`,
           regularPrice: `${data.regularPrice} BDT`,
-          image: images,
+          images: images,
           status: data.status,
           description: data.description,
           warranty: data.warranty,
@@ -106,7 +107,7 @@ const AddLaptop = () => {
         throw new Error("Image upload failed");
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -312,7 +313,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="17500 BDT"
+                      placeholder="17500"
                       {...register("price", { required: true })}
                     />
                     {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -326,7 +327,7 @@ const AddLaptop = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      placeholder="18500 BDT"
+                      placeholder="18500"
                       {...register("regularPrice")}
                     />
                   </div>

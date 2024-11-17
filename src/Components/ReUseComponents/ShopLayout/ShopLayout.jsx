@@ -7,7 +7,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import { DiGitCompare } from 'react-icons/di';
 
 const ShopLayout = ({ items = [], title = "Products" }) => {
-  // console.log(items)
   const [sortOrder, setSortOrder] = useState("");
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedRam, setSelectedRam] = useState([]);
@@ -128,7 +127,7 @@ const ShopLayout = ({ items = [], title = "Products" }) => {
               {paginatedItems.map(data => (
                 <div key={data._id} className="w-full py-4 bg-white shadow-lg rounded-lg flex flex-col border">
                   <Link to={`/productDetails/${data._id}`} className="block">
-                    <img src={data.images.img1} alt={data.model} className="rounded-xl  h-40 lg:h-56  p-4 lg:p-2 lg:duration-1000 lg:hover:scale-105 mb-2" />
+                    <img src={data?.images?.img1} alt={data.model} className="rounded-xl  h-40 lg:h-56  p-4 lg:p-2 lg:duration-1000 lg:hover:scale-105 mb-2" />
                   </Link>
                   {/* Fixed height for content area */}
                   < div className="flex-grow flex flex-col justify-between p-2" >

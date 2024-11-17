@@ -107,10 +107,10 @@ const AdminPanel = () => {
                     <PieChart width={600} height={400}>
                         <Pie
                             data={data}
-                            cx={300} 
-                            cy={200} 
+                            cx={300}
+                            cy={200}
                             labelLine={false}
-                            outerRadius={120} 
+                            outerRadius={120}
                             fill="#8884d8"
                             dataKey="value"
                         >

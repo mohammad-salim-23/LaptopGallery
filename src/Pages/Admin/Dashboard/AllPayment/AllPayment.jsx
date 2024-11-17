@@ -2,12 +2,51 @@ import usePayments from "../../../../hooks/usePayments";
 import React, { useState } from "react";
 import { FcOk } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
+import Search from "../../../../Components/Shared/NavBar/Search";
 const AllPayment = () => {
     const [payment] = usePayments();
     const [activePayment, setActivePayment] = useState(null);
- 
+    const itemsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+    // console.log(payment)
+
+    // Pagination calculations
+    const totalPages = Math.ceil(payment.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentPayment = payment.slice(startIndex, startIndex + itemsPerPage);
+
+    const handlePageClick = (pageNumber) => setCurrentPage(pageNumber);
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    };
+
+    const getPageNumbers = () => {
+        const pageNumbers = [];
+        const maxVisiblePages = 3;
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - (maxVisiblePages - 1));
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pageNumbers.push(i);
+        }
+
+        return pageNumbers;
+    };
+
     return (
         <div className="md:container md:mx-auto md:p-4">
+
             <h2 className="text-2xl font-semibold my-10 text-gray-700 flex justify-center items-center">
                 ----Payment History----
             </h2>
@@ -43,7 +82,7 @@ const AllPayment = () => {
                             </thead>
                             {/* Table Body */}
                             <tbody>
-                                {payment.map((order, orderIndex) => {
+                                {currentPayment.map((order, orderIndex) => {
                                     const numberOfProducts = order.cart.length;
 
                                     return (
@@ -61,15 +100,7 @@ const AllPayment = () => {
                                                     <td className="border border-gray-300 px-4 py-2 text-center">
                                                         {product.model} ({product.brand})
                                                     </td>
-                                                    {/* <td
-                            className={`border border-gray-300 px-4 py-2 text-center font-bold ${
-                              order.paidStatues
-                                ? "text-green-500"
-                                : "text-red-500"
-                            }`}
-                          >
-                            {order.paidStatues ? "Paid" : "Unpaid"}
-                          </td> */}
+
                                                     <td className={`border border-gray-300 px-4 py-2 text-center font-bold ${order.paidStatues ? 'text-green-500' : 'text-red-500'}`}>
                                                         {order.paidStatues ? (
                                                             <>
@@ -80,11 +111,11 @@ const AllPayment = () => {
                                                             </>
                                                         ) : (
                                                             <>
-                                                            <div className='flex ml-10'>
-                                                                Unpaid
-                                                                <FcCancel className="mt-1 ml-1" />
-                                                            </div>
-                                                        </>
+                                                                <div className='flex ml-10'>
+                                                                    Failed
+                                                                    <FcCancel className="mt-1 ml-1" />
+                                                                </div>
+                                                            </>
 
                                                         )}
                                                     </td>
@@ -120,6 +151,34 @@ const AllPayment = () => {
                 )}
             </div>
 
+
+            {/* Pagination */}
+            <div className="flex justify-center mt-8 gap-2">
+                <button
+                    onClick={handlePreviousPage}
+                    className={`px-4 py-2 text-white bg-primary rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                {getPageNumbers().map((number) => (
+                    <button
+                        key={number}
+                        onClick={() => handlePageClick(number)}
+                        className={`px-4 py-2 rounded-full ${number === currentPage ? "bg-primary text-white" : "bg-gray-200 text-black"}`}
+                    >
+                        {number}
+                    </button>
+                ))}
+                <button
+                    onClick={handleNextPage}
+                    className={`px-4 py-2 text-white bg-primary rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
+            </div>
+
             {/* Modal */}
             {activePayment && (
                 <div className="fixed inset-0 flex items-center justify-center z-10">
@@ -131,7 +190,7 @@ const AllPayment = () => {
                         {/* Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
                             <div>
-                                
+
                             </div>
                             <button
                                 onClick={() => setActivePayment(null)}

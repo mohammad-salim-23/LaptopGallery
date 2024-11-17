@@ -75,20 +75,16 @@ const Accessories = () => {
                     title: data.title,
                     brand: data.brand.toLowerCase(),
                     category: "Accessories",
+                    subCategory: "Accessories",
                     model: data.model.toLowerCase(),
-                    processor: data.processor.toLowerCase(),
-                    ram: data.ram,
-                    storage: data.storage.toLowerCase(),
-                    display: data.display,
                     color: data.color,
-                    operating_System: data.operating_System,
                     price: `${data.price} BDT`,
                     regularPrice: `${data.regularPrice} BDT`,
-                    image: images,
+                    images: images,
                     status: data.status,
                     description: data.description,
                     warranty: data.warranty,
-                    type: "accessories",
+                    type: "Accessories",
                     productSKU: `LG-${data.brand.split(" ")[0]}-${data.model.split(" ")[0]}-${randomNumber}`,
                 };
 
@@ -224,7 +220,7 @@ const Accessories = () => {
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
-                                                placeholder="17500 BDT"
+                                                placeholder="17500"
                                                 {...register("price", { required: true })}
                                             />
                                             {errors.price && <span className="text-red-500 font-semibold mt-1">This field is required</span>}
@@ -238,7 +234,7 @@ const Accessories = () => {
                                             <input
                                                 type="text"
                                                 className="input input-bordered w-full"
-                                                placeholder="18500 BDT"
+                                                placeholder="18500"
                                                 {...register("regularPrice")}
                                             />
                                         </div>
@@ -275,22 +271,26 @@ const Accessories = () => {
 
                                     </div>
 
-                                    <div>
-                                        {/* Laptop image */}
-                                        <div className="form-control w-full ">
-                                            <label className="label">
-                                                <span className="label-text font-medium">Laptop Image</span>
-                                            </label>
-                                            <input
-                                                id="file-upload"
-                                                type="file"
-                                                accept="image/*"
-                                                className="file-input file-input-bordered w-full  cursor-pointer"
-                                                htmlFor="file-upload"
-                                                {...register('image', { onChange: handleInputChange })}
-                                            />
-                                        </div>
+
+                                    {/* Laptop image */}
+                                    <div className="grid grid-cols-2 gap-4 mt-2">
+
+                                        {[1, 2, 3, 4].map((num) => (
+                                            <div key={num} className="form-control w-full">
+                                                <input
+                                                    type="file"
+                                                    className="file-input file-input-bordered w-full"
+                                                    {...register(`images.${num - 1}`, {
+                                                        required: num === 1,
+                                                    })}
+                                                />
+                                                {errors.images?.[num - 1] && (
+                                                    <p className="text-red-600">Product Image {num} is required.</p>
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
+
 
 
                                     <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">

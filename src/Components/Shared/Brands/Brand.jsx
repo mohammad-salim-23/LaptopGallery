@@ -13,7 +13,7 @@ const Brand = () => {
         product => product.brand.toLowerCase() === brand.toLowerCase()
     );
 
-    console.log( filteredProducts); 
+    // console.log( filteredProducts); 
     refetch();
     return (
         <div>

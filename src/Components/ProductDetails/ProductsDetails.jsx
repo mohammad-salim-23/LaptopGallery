@@ -75,8 +75,6 @@ const ProductsDetails = () => {
         return <div className='text-center my-10 text-2xl font-bold'>Product not found.</div>;
     }
 
-
-
     return (
         <div className='mx-auto container my-10 p-4'>
             <div className="flex flex-col md:flex-row justify-around gap-8">
@@ -101,7 +99,7 @@ const ProductsDetails = () => {
                             </div>
                         </div>
 
-                        <Image images={product.images}></Image>
+                        <Image images={product?.images}></Image>
 
                     </div>
                 </div>
@@ -111,7 +109,7 @@ const ProductsDetails = () => {
                     <div className="">
 
                         <p className="text-2xl mb-2">{product.title}</p>
-                        {product.type === "accessories" ? (
+                        {product.type === "Accessories" ? (
                             <>
                                 <div className='flex gap-4'>
                                     {/* SKU Display */}
