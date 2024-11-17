@@ -119,7 +119,7 @@ const AdminPanel = () => {
                             ))}
                         </Pie>
                         <Tooltip />
-                        <Legend />
+                        {/* <Legend /> */}
                     </PieChart>
                 </div>
             </div>
