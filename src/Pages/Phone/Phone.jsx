@@ -6,7 +6,7 @@ const Phone = () => {
     document.title = `Laptop Gallery || Phone`;
     const [products, refetch] = useProducts();
     // console.log(products);
-    const Phone = products.filter(item => item.type === "Mobile")
+    const Phone = products.filter(item => item.type === "mobile")
     return (
         <div>
             <ShopLayout items={Phone} title="Mobile"></ShopLayout>
